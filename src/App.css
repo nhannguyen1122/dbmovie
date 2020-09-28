@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  /* background-color:#162E43; */
+  height:100%;
+}
+body{
+ /* background-image: url('./img/bc2.png'); */
+ background-color:#0A1D2D;
+ /* background-image: linear-gradient(to bottom right, #0A1D2D,#2D1A0A); */
+}
+
+
+
