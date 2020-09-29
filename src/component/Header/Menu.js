@@ -44,16 +44,16 @@ SignIn:{
 },
 menuContainer:{
   
-  [theme.breakpoints.up('md')]:{
+  [theme.breakpoints.up('sm')]:{
     textAlign:'center',
   },
-  [theme.breakpoints.down('md')]:{
+  [theme.breakpoints.down('sm')]:{
    display:'none'
   }
   
 },
 mobileContainer:{
-  [theme.breakpoints.up('lg')]:{
+  [theme.breakpoints.up('md')]:{
    display:'none'
   },
 },
