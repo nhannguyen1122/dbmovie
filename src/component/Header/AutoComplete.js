@@ -11,12 +11,12 @@ const useStyles =makeStyles(theme=>({
     AutoContentChild:{
         position:'absolute',
        [theme.breakpoints.up('md')]:{
-        width:'25%',
-        left:'37.5%',
+        width:'40%',
+        left:'30.5%',
        },
        [theme.breakpoints.down('md')]:{
         width:'50%',
-        left:'27.5%',
+        left:'25%',
        },
         height:'100%'
     },
@@ -33,8 +33,14 @@ const useStyles =makeStyles(theme=>({
         display:'block',
         position:'absolute',
         top:'38px',
-        width:'25.22%',
-        left:'37.53%',
+       [theme.breakpoints.up('md')]:{
+        width:'40.2%',
+        left:'30.55%',
+       },
+       [theme.breakpoints.down('md')]:{
+        width:'50.2%',
+        left:'25.1%',
+       },
         boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
         zIndex:100,
     },

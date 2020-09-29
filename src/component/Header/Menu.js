@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-
+import MenuIcon from '@material-ui/icons/Menu';
 import {  Button, makeStyles, Grid } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import Menu from '@material-ui/core/Menu';
@@ -8,17 +8,25 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from "react-router-dom";
-const useStyles=makeStyles({
+const useStyles=makeStyles(theme=>({
   Icon1:{
-    width:'50px',
-    height:'50px',
-    color:'red',
+   
+    [theme.breakpoints.up('md')]:{
+      width:'50px',
+      height:'50px',
+      color:'red',
+    }
+    
 },
 Home:{
-  borderRadius:'50%',
+  [theme.breakpoints.up('md')]:{
+ 
+    borderRadius:'50%',
     "&:hover":{
-        backgroundColor:'white'
-    }
+      backgroundColor:'white'
+  }
+  },
+ 
 },
 SignIn:{
     border:'none',
@@ -32,9 +40,24 @@ SignIn:{
     }
 },
 menuContainer:{
-  textAlign:'center',
+  
+  [theme.breakpoints.up('md')]:{
+    textAlign:'center',
+  },
+  [theme.breakpoints.down('md')]:{
+   display:'none'
+  }
+  
+},
+mobileContainer:{
+  [theme.breakpoints.up('lg')]:{
+   display:'none'
+  },
+},
+menuDrawerIcon:{
+  color:'white'
 }
-})
+}));
 const MenuComponent=props=>{
   const[signInState,setSignIn]=useState(true);
   
@@ -54,9 +77,9 @@ const MenuComponent=props=>{
       const{getTopRatedMovie}=props;
       getTopRatedMovie();
     }
-
-    return <>
-    <Grid container spacing={3} className={classes.menuContainer}>
+    const DesktopMode=()=>{
+      return  <>
+      <Grid container spacing={3} className={classes.menuContainer}>
       <Grid item md={6}>
           <Link to='/homepage'>
           <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
@@ -97,7 +120,16 @@ const MenuComponent=props=>{
       }
       </Grid>
     </Grid>
-     
+      </>
+    }
+    const mobileMode=()=>{
+      return <div className={classes.mobileContainer}>
+      <MenuIcon className={classes.menuDrawerIcon}/>
+      </div>
+    }
+    return <>
+    {DesktopMode()}
+     {mobileMode()}
     </>
 }
 export default MenuComponent;
