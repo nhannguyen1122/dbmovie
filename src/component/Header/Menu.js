@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
-import {  Button, makeStyles, Grid } from '@material-ui/core';
+import {  Button, makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from "react-router-dom";
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import List from '@material-ui/core/List';
+
 const useStyles=makeStyles(theme=>({
   Icon1:{
    
@@ -56,18 +59,40 @@ mobileContainer:{
 },
 menuDrawerIcon:{
   color:'white'
+},
+MenuIconButton:{
+  
+},
+DrawerContainer:{
+  width:'30vh'
+},
+MenuIconButton1:{
+ marginLeft:'25%'
+  
+},
+list:{
+  
 }
 }));
+
 const MenuComponent=props=>{
   const[signInState,setSignIn]=useState(true);
-  
+  const[openDrawer,setStateDrawer]=useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const menuicon=[
+    { name:'Home',
+     
+    },
+    { name:'User',
+    
+  },
+  ]
   const open = Boolean(anchorEl);
   const classes=useStyles();
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
-  
+    
     const handleClose = () => {
       setAnchorEl(null);
     };
@@ -76,6 +101,12 @@ const MenuComponent=props=>{
       
       const{getTopRatedMovie}=props;
       getTopRatedMovie();
+    }
+    const setDrawerClose=()=>{
+      setStateDrawer(false);
+    }
+    const handleOpenDrawer=()=>{
+      setStateDrawer(true);
     }
     const DesktopMode=()=>{
       return  <>
@@ -123,13 +154,43 @@ const MenuComponent=props=>{
       </>
     }
     const mobileMode=()=>{
-      return <div className={classes.mobileContainer}>
+      return<> <Container className={classes.mobileContainer}>
+      <IconButton  className={classes.MenuIconButton} 
+      onClick={handleOpenDrawer}
+      >
+
       <MenuIcon className={classes.menuDrawerIcon}/>
-      </div>
+      </IconButton >
+     
+      <Drawer  anchor='left' open={openDrawer} onClose={setDrawerClose}>
+           <div className={classes.DrawerContainer}>
+           <IconButton  className={classes.MenuIconButton1} 
+      onClick={setDrawerClose}>
+      <MenuOpenIcon  />
+      </IconButton >
+      <Divider/>
+         <List className={classes.list}>
+          {menuicon.map((item,index)=>{
+            return <>
+            <ListItem button key={index}>
+            <ListItemIcon>
+              {item.name==='User'?<PersonIcon/>:<HomeIcon/>}
+            </ListItemIcon>
+           
+          </ListItem>
+            </>
+          })}
+         </List>
+
+           </div>
+          </Drawer>
+          </Container>
+      </>
     }
     return <>
     {DesktopMode()}
      {mobileMode()}
+     
     </>
 }
 export default MenuComponent;

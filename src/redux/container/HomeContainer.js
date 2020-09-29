@@ -34,7 +34,7 @@ import { bindActionCreators } from 'redux';
 
        
         return (
-            <div  className="App">
+            <div >
                <Header>
                    <MenuComponent getTopRatedMovie={dispatchaction.getTopRatedMovie} />
                    <AutoCompleteComponent
@@ -69,7 +69,7 @@ import { bindActionCreators } from 'redux';
              
               <br />
               <br />
-               <Footer/>
+              <div  className="App"> <Footer/></div>
             </div>
         )
     }

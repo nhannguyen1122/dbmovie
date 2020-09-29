@@ -58,6 +58,13 @@ const useStyles =makeStyles(theme=>({
             backgroundColor: '#f2f2f2',
             cursor:'pointer',
         }
+    },
+    Title:{
+        textAlign:'center',
+        fontSize:'50px',
+        color:'red',
+        userSelect:'none',
+        fontFamily: ' "Libre Baskerville", serif'
     }
 }))
 const AutoCompleteComponent=props=>{
@@ -141,7 +148,7 @@ const AutoCompleteComponent=props=>{
         return result;
     }
     return <>
-     <Title>MOVIE API</Title>
+     <h1 className={classes.Title}>MOVIE API</h1>
     <div className={classes.root}> 
         
         <div className={classes.AutoContentChild}>
