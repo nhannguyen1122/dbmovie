@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Modal, Backdrop, Fade } from "@material-ui/core";
+import { makeStyles, Modal, Backdrop, Fade, Hidden } from "@material-ui/core";
 import PropTypes from "prop-types";
 import YouTube from "react-youtube";
 
@@ -30,8 +30,13 @@ const VideoModal=props=>{
               e.target.pauseVideo();
             }
             const opts = {
-              height: '390',
-              width: '640',
+              height: '190px',
+              width: '340px',
+              
+            };
+            const opts1 = {
+              height: '390px',
+              width: '640px',
               
             };
     return <>
@@ -50,7 +55,12 @@ const VideoModal=props=>{
       >
         <Fade in={TrailerOpen}>
           <div className={classes.paper}>
+          <Hidden mdUp>
           <YouTube videoId={MovieTrailerid} opts={opts} onReady={_onReady} />
+          </Hidden>
+          <Hidden mdDown>
+          <YouTube videoId={MovieTrailerid} opts={opts1} onReady={_onReady} />
+          </Hidden>
           </div>
         </Fade>
       </Modal>
