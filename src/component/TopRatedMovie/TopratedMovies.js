@@ -8,11 +8,12 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles({
-    container:{
+    root:{
         position:'relative',
         overflow:'hidden',
         height:'300px',
         width:"200px",
+        margin:'0 auto',
         borderRadius:'10%',
     },
     img:{
@@ -78,6 +79,7 @@ const useStyles = makeStyles({
     containerskeleton:{
         height:'100%',
         width:"200px",
+        margin:'0 auto'
     }
 })
 
@@ -106,11 +108,11 @@ const TopRatedMovie=props=>{
        console.log(showDetails(item));
     showDetails(item);
   }
-    return <Grid item md={3}>
+    return <Grid item  sm={6} md={3} xs={12}>
         
        {delay?<>
         <Fade   in={checked} >
-        <div className={classes.container}>
+        <div className={classes.root}>
         
        <img alt="img" className={classes.img} src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}/>
         <div className={classes.contentSection}>

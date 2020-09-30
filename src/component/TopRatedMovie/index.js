@@ -1,14 +1,21 @@
 import React from "react";
 import Pagination from "@material-ui/lab/Pagination";
 import { Container, makeStyles } from "@material-ui/core";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
     pagination:{
         border:'2px solid green',
+      
         backgroundColor: 'white',
-        width:'35%',
+        [theme.breakpoints.up('sm')]:{
+            width:'60%'
+        },
+        [theme.breakpoints.down('xs')]:{
+            width:'100%'
+        },
         borderRadius:'20px'
-    }
-})
+    },
+    
+}))
 const PaginationComponent=props=>{
     const{totalpage,getTopRatePage,current,setCurrentTopRatePage}=props;
     
@@ -19,7 +26,7 @@ const PaginationComponent=props=>{
         setCurrentTopRatePage(page);
     }
     return <Container><div className={classes.pagination}>
-        <Pagination
+        <Pagination className={classes.paginationContent}
     count={totalpage}
      color="primary"
      page={current}

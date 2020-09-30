@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
     root: {
       maxWidth: 255,
+      textAlign:'center',
+      margin:'0 auto'
     },
     media: {
       height: 340,
@@ -63,7 +65,7 @@ const Movie=props=>{
     in={checked}
     style={{ transformOrigin: '0 0 0' }}
     {...(checked ? { timeout: 1000 } : {})}
-  ><Grid item sm={3}>
+  ><Grid item sm={6} md={3} xs={12}>
     <Card className={classes.root}>
       <div >
       <CardActionArea  className={classes.CardContentArea} >

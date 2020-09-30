@@ -13,20 +13,29 @@ const useStyles =makeStyles(theme=>({
        [theme.breakpoints.up('md')]:{
         width:'40%',
         left:'30.5%',
+        height:'100%'
        },
        [theme.breakpoints.down('md')]:{
         width:'50%',
         left:'25%',
-       },
         height:'100%'
+       },
+      
     },
     AutoCompleteInput:{
         height: '100%',
         outline: 'none',
         width:'100%',
         margin:0,
+      [theme.breakpoints.up('sm')]:{
         lineHeight:'40px',
         fontSize: '30px',
+      },
+      [theme.breakpoints.down('sm')]:{
+        lineHeight:'30px',
+        fontSize: '20px',
+      },
+
         padding:0,
     },
     AutoContentULChild:{

@@ -18,6 +18,10 @@ const useStyles=makeStyles(theme=>({
       width:'50px',
       height:'50px',
       color:'red',
+    },
+    [theme.breakpoints.down('md')]:{
+     
+      color:'red',
     }
     
 },
@@ -70,10 +74,10 @@ MenuIconButton1:{
  marginLeft:'25%'
   
 },
-list:{
-  
+menuName:{
+  textDecoration:'none'
 }
-}));
+}))
 
 const MenuComponent=props=>{
   const[signInState,setSignIn]=useState(true);
@@ -96,7 +100,14 @@ const MenuComponent=props=>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-  
+    const handleGoHome1=()=>{
+      setStateDrawer(false);
+      const{getTopRatedMovie}=props;
+      getTopRatedMovie();
+      
+     
+      
+    }
     const handleGoHome=()=>{
       
       const{getTopRatedMovie}=props;
@@ -172,12 +183,29 @@ const MenuComponent=props=>{
          <List className={classes.list}>
           {menuicon.map((item,index)=>{
             return <>
+            
+            {item.name==='User'?
             <ListItem button key={index}>
             <ListItemIcon>
-              {item.name==='User'?<PersonIcon/>:<HomeIcon/>}
+              <PersonIcon className={classes.Icon1}/>
             </ListItemIcon>
+            {item.name}
+            </ListItem>
+            :
+            <Link to='/homepage'  className={classes.menuName}>
+            <ListItem button key={index}onClick={handleGoHome1}>
+            
+            <ListItemIcon>
+            <HomeIcon className={classes.Icon1} />
+            </ListItemIcon>
+            {item.name}
+          
+            </ListItem>
+             </Link>
+    }
            
-          </ListItem>
+          
+            <Divider/>
             </>
           })}
          </List>

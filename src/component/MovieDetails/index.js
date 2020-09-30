@@ -24,6 +24,9 @@ import PropTypes from 'prop-types';
    
    
    const useStyles=makeStyles(theme=>({
+      MovieDetailContent:{
+            margin:'0 auto'
+      },
       containbody:{
          backgroundColor:'white',
          height:'50%',
@@ -32,25 +35,40 @@ import PropTypes from 'prop-types';
          borderRadius:'2%',
          boxShadow:`-moz-box-shadow:    inset 0 0 10px #000000;
          -webkit-box-shadow: inset 0 0 10px #000000;
-         box-shadow:         inset 0 0 10px #000000;`
+         box-shadow:         inset 0 0 10px #000000;`,
+         minWidth:'320px'
       },
       leftContent:{
          textAlign:"center",
-         width:'300px',
+         [theme.breakpoints.up('md')]:{
+            width:'300px',
+         height:'500px',
+         },
+         [theme.breakpoints.down('md')]:{
+            width:'200px',
+         height:'300px',
+         },
+         
          margin:'0 auto',
          position:'relative',
          padding:'10px',
          borderRadius:'6%',
-         backgroundColor:'red'
-         ,height:'500px',
+         backgroundColor:'red',
+         
          overflow:'hidden'
         
         
       },
       leftContentimg:{
          position:'absolute',
-         width:'300px',
-         height:'500px',
+         [theme.breakpoints.up('md')]:{
+            width:'300px',
+            height:'500px',
+         },
+         [theme.breakpoints.down('md')]:{
+            width:'200px',
+            height:'300px',
+         },
          left:'10px',
          borderRadius:'6%',
          userSelect:'none'
@@ -74,7 +92,10 @@ import PropTypes from 'prop-types';
       },
       buttonSection:{
          position:'absolute',
-         top:'45%'
+         top:'45%',
+         [theme.breakpoints.down('sm')]:{
+            left:'15%'
+         }
        
       },
       buttonhandle:{
@@ -130,7 +151,7 @@ const MovieDetails=props=>{
    }, []);
    return <>
    <Grid container spacing={3} className={classes.containbody}>
-      <Grid item md={6}>
+      <Grid item md={6} className={classes.MovieDetailContent}>
             <div className={classes.leftContent}>
             <img  src={imgPath} alt="hello" className={classes.leftContentimg}/>
               <div className={classes.leftContenthandleSection}>
@@ -156,7 +177,7 @@ const MovieDetails=props=>{
            
             </div>      
       </Grid>
-      <Grid item md={6}>
+      <Grid item md={6}className={classes.MovieDetailContent}>
       <div className={classes.rightContent}>
       <div className={classes.rightContentTitle}>{Details.title}</div>
       <div className={classes.rightContentReleaseDate}>Release Date: {Details.release_date?Details.release_date.split("-").reverse().join("-"):Details.release_date}</div>
