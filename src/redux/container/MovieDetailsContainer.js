@@ -9,11 +9,13 @@ class MovieDetailsContainer extends Component {
   
   render() {
     const Details=this.props.MovieReducer.MovieDetails;
-    const {OpenVideoTrailerModal,getMovieyoutube}=this.props.actions;
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete}=this.props.actions;
     console.log(this.props.MovieReducer);
     return (
       <div>
-        <MenuComponent getTopRatedMovie={actions.getTopRatedMovie}/>
+        <MenuComponent getTopRatedMovie={actions.getTopRatedMovie}
+        setValueAutocomplete={setValueAutocomplete}
+        />
        {Details? <MovieDetails
        openTrailer={OpenVideoTrailerModal}
        Details={Details}

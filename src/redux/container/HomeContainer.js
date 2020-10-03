@@ -14,9 +14,8 @@ import "../../App.css";
 import { bindActionCreators } from 'redux';
  class HomeContainer extends Component {
      componentDidMount(){
-         const {dispatchaction,MovieReducer}=this.props;
-         const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie,}=dispatchaction;
-         console.log(getTopPopularMovie);
+         const {dispatchaction,MovieReducer,title}=this.props;
+         const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=dispatchaction;
          getUpcomingMovie();
          getTopPopularMovie();
          
@@ -30,14 +29,18 @@ import { bindActionCreators } from 'redux';
          
      }
     render() {
-        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies}=this.props;
-
+        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue}=this.props;
+        const{setValueAutocomplete}=dispatchaction;
        
         return (
             <div >
                <Header>
-                   <MenuComponent getTopRatedMovie={dispatchaction.getTopRatedMovie} />
+                   <MenuComponent 
+                   setValueAutocomplete={setValueAutocomplete}
+                   getTopRatedMovie={dispatchaction.getTopRatedMovie} />
                    <AutoCompleteComponent
+                   setValueAutocomplete={setValueAutocomplete}
+                   formValue={formValue}
                    SearchResult={SearchResult}
                    SearchForKeyWord={dispatchaction.SearchForKeyWord}
                 SearchWithKeyWord={dispatchaction.SearchWithKeyWord}
@@ -83,20 +86,15 @@ const mapStateToProps =state=>{
         SearchResult:state.MovieReducer.SearchResult,
         topPopularMovie:state.MovieReducer.topPopularMovie,
         upComingMovies:state.MovieReducer.upComingMovies,
+        formValue:state.AutoCompleteReducer.formValue,
        
     }
 }
 const mapDispatchToProps =dispatch=>{
     return {
-        dispatchaction:bindActionCreators(actions,dispatch)
+        dispatchaction:bindActionCreators(actions,dispatch),
+        
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
 
-HomeContainer.propTypes={
-    MovieReducer: PropTypes.array,
-    dispatchaction:PropTypes.object,
-    TrailerOpen:PropTypes.object,
-    topPopularMovie:PropTypes.object,
-    upComingMovies:PropTypes.object
-}

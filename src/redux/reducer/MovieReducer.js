@@ -38,6 +38,7 @@ const MovieReducer =(state=init,action)=>{
             //default
         case actions.getTopRatedMovie:
             return {...state,
+                Movies:{...state.Movies,title:false}
             }
         case actions.getTopRatedMovieSuccess:
             return {

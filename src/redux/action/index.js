@@ -105,3 +105,8 @@ export const setCurrentTopRatePage=page=>{
     return{ type:constants.setCurrentTopRatePage,
     payload:page}
 }
+//auto
+export const setValueAutocomplete=value=>{
+    return { type:constants.setValueAutocomplete,
+    payload:value}
+}

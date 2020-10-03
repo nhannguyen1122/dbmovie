@@ -21,11 +21,13 @@ class TopRatedMovieContainer extends React.Component {
 
     render(){
         const{totalpage,data,actions,current}=this.props;
-        const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,getMovieyoutube,showDetails,getTopRatedMovie}=actions;
+        const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,getMovieyoutube,showDetails,getTopRatedMovie,setValueAutocomplete}=actions;
       
         return  <>
             <Container>
-            <MenuComponent getTopRatedMovie={getTopRatedMovie}/>
+            <MenuComponent getTopRatedMovie={getTopRatedMovie}
+            setValueAutocomplete={setValueAutocomplete}
+            />
         <Title>Top Rated Movie</Title>
           <ListTopRatedMovie>
             {data.map((item,index)=>{

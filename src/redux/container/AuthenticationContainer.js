@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Authenticationn from '../../component/Authentication';
 import LoginForm from '../../component/Authentication/LoginForm';
 import RegisterModal from '../../component/Authentication/RegisterModal';
+import MenuComponent from '../../component/Header/Menu';
 
 
 class AuthenticationContainer extends Component {
@@ -9,6 +10,7 @@ class AuthenticationContainer extends Component {
         return (
             <div>
                 <Authenticationn >
+                    
                     <LoginForm >
                         <RegisterModal />
                     </LoginForm>

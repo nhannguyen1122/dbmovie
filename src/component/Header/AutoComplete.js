@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AutoCompleteInput, ULContent,LIContent ,AutoContent,AutoContentChild,AutoContentULChild,Title} from "../../styledComponent";
 
 const useStyles =makeStyles(theme=>({
@@ -78,24 +78,28 @@ const useStyles =makeStyles(theme=>({
 }))
 const AutoCompleteComponent=props=>{
     const classes=useStyles();
-    const {SearchResult,SearchForKeyWord,SearchWithKeyWord}=props;
+    const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete}=props;
+    console.log(formValue);
     const[values,setValue]=useState({
         renderArray:false,
-        formvalue:""
+        // formvalue:formValue,
     })
 
     let persistRef=useRef(null);
-    const handleFocusOut=(e)=>{
-        setValue({
-            renderArray:false
-        })
-    }
+    
+    // const handleFocusOut=(e)=>{
+    //     console.log('onfocus out')
+    //     setValue({
+    //         renderArray:false
+    //     })
+    // }
     const handleChange=e=>{
         const {value}=e.target;
-        setValue({
-            ...values,
-            formvalue:value
-        })
+        setValueAutocomplete(value);
+        // setValue({
+        //     ...values,
+        //     formvalue:value
+        // })
         
         
         if(persistRef.current){
@@ -106,19 +110,19 @@ const AutoCompleteComponent=props=>{
             if(!value){
               
                 setValue({
-                    
-                    
+ 
                     renderArray:false,
 
                 })
             }
        else{
+        
         SearchForKeyWord(value);
         
        if(SearchResult.length>0){
       
         setValue({
-           formvalue:value,
+        //    formvalue:value,
             
             renderArray:true,
 
@@ -139,6 +143,7 @@ const AutoCompleteComponent=props=>{
 
         });
         SearchWithKeyWord(value);
+        setValueAutocomplete(value);
     }
     const render=()=>{
         let result=null;
@@ -162,8 +167,8 @@ const AutoCompleteComponent=props=>{
         
         <div className={classes.AutoContentChild}>
         <input className={classes.AutoCompleteInput} type="text" 
-      value={values.formvalue}
-       onFocusOut={handleFocusOut}
+      value={formValue}
+    //    onFocusOut={handleFocusOut}
        onFocus={handleChange}
         onChange={handleChange}
         id="AutoCompleteInput" 

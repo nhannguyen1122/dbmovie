@@ -110,7 +110,8 @@ const MenuComponent=props=>{
     }
     const handleGoHome=()=>{
       
-      const{getTopRatedMovie}=props;
+      const{getTopRatedMovie,setValueAutocomplete}=props;
+      setValueAutocomplete('');
       getTopRatedMovie();
     }
     const setDrawerClose=()=>{
@@ -182,10 +183,8 @@ const MenuComponent=props=>{
       <Divider/>
          <List className={classes.list}>
           {menuicon.map((item,index)=>{
-            return <>
-            
-            {item.name==='User'?
-            <ListItem button key={index}>
+            return <>{item.name==='User'?
+            <ListItem button>
             <ListItemIcon>
               <PersonIcon className={classes.Icon1}/>
             </ListItemIcon>
@@ -193,7 +192,7 @@ const MenuComponent=props=>{
             </ListItem>
             :
             <Link to='/homepage'  className={classes.menuName}>
-            <ListItem button key={index}onClick={handleGoHome1}>
+            <ListItem button onClick={handleGoHome1}>
             
             <ListItemIcon>
             <HomeIcon className={classes.Icon1} />
@@ -223,5 +222,5 @@ const MenuComponent=props=>{
 }
 export default MenuComponent;
 MenuComponent.propTypes={
-    classes:PropTypes.object
+    
 }

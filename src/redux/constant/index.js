@@ -28,3 +28,6 @@ export const getTopRatePage=`getTopRatePage`;
 export const getTopRatePageSuccess=`getTopRatePageSuccess`;
 //set currentpage
 export const setCurrentTopRatePage=`setCurrentTopRatePage`;
+//autocomplete
+export const setValueAutocomplete=`setValueAutocomplete`;
+
