@@ -1,8 +1,9 @@
 import React from "react";
 import { TextField, makeStyles, Button, Modal } from "@material-ui/core";
 import Backdrop from '@material-ui/core/Backdrop';
+import { Formik,FastField, Form } from 'formik';
 
-
+import * as Yup from "yup";
 const useStyles=makeStyles((theme)=>({
     root:{
         width:'25%',
@@ -22,49 +23,107 @@ const useStyles=makeStyles((theme)=>({
     input:{
         width:'70%'
     },
+    errors:{
+        color:'red'
+    }
     
 
 }));
-const RegisterModal=props=>{
-    const [form1,setForm]=React.useState({
-        email:'',
-        username:'',
-        password:'',
-        repassword:''
-    })
-    const classes=useStyles();
-    const handleChange=e=>{
-        
-        const value=e.target.value;
-        const name=e.target.name;
-        
-       setForm({
-           [name]:value
-       });
+const registerContent=[
+    {   id:'email',
+        name:'email',
+        Label:'Email',
+
+    },
+     {   id:'username',
+        name:'username',
+        Label:'Username',
+
+    },
+    {   id:'password',
+    name:'password',
+    Label:'password',
+
+    },
+    {   id:'repassword',
+    name:'repassword',
+    Label:'Repassword',
+
+    },
     
-    }
-   const handleSubmit=e=>{
-       e.preventDefault();
-      console.log(form1);
+]
+const initialValues={
+    email:'',
+    username:'',
+    password:'',
+    repassword:''
+}
+const validationSchema=Yup.object().shape({
+    email:Yup.string().email().required('required'),
+    username:Yup.string().min(6,'at least 6 characters')
+    .max(15,'max is 15 characters').required('required'),
+    password:Yup.string().min(6,'at least 6 characters')
+    .max(10,'max is 10 characters').required('required'),
+    // repassword:Yup.string().oneOf([Yup.ref('password'),null],'Passwords must match')
+})
+
+const RegisterModal=props=>{
+    
+    const classes=useStyles();
+    
+   const handleSubmit=value=>{
+     console.log(value);
    }
    
-    return<>
-    <form className={classes.root} onSubmit={handleSubmit}> 
-             <div><h1 className={classes.h1}>RegisterForm</h1></div>
-             <div>  <TextField  name="email" onChange={handleChange}  id="Email" label="Email"className={classes.input} /></div>
-             <br />
-             <div>  <TextField  name="username" onChange={handleChange} id="Username" label="Username" className={classes.input} /></div>
-             <br/>
-             <div>  <TextField  name="password" onChange={handleChange}  type="password"id="password" label="Password"className={classes.input} /></div>
-             <br />
-             <div>  <TextField  name="repassword" onChange={handleChange}  type="repassword"id="repassword" label="Password"className={classes.input} /></div>
-             <br />
+   const renderInput=({field,form,...props})=>{
+    const{value}=field;
+
+    return <TextField value={value} {...field}{...props}{...form} />
+   }
+   return <Formik
+   initialValues={initialValues}
+   validationSchema={validationSchema}
+   onSubmit={value=>handleSubmit(value)}
+   >
+       {(touched,errors,...props)=>{
+           console.log(touched);
+           return (
+               <Form className={classes.root}>
+                   
+                   <div>
+                       <FastField
+                       id="Email"
+                       name="email"
+                       label="Email"
+                       component={renderInput}
+                       />
+                       {touched.email&&errors.email&&<div>
+                           {errors.email}
+                           </div>}
+                   </div>
+                   
+               </Form>
+           )
+       }}
+
+   </Formik>
+    // return<>
+    // <form className={classes.root} onSubmit={handleSubmit}> 
+    //          <div><h1 className={classes.h1}>RegisterForm</h1></div>
+    //          <div>  <TextField  name="email"   id="Email" label="Email"className={classes.input} /></div>
+    //          <br />
+    //          <div>  <TextField  name="username"  id="Username" label="Username" className={classes.input} /></div>
+    //          <br/>
+    //          <div>  <TextField  name="password"   type="password"id="password" label="Password"className={classes.input} /></div>
+    //          <br />
+    //          <div>  <TextField  name="repassword"   type="repassword"id="repassword" label="Password"className={classes.input} /></div>
+    //          <br />
              
-             <div>
-                 <Button variant="contained" type="submit" color="primary" >Register</Button>
-             </div>
-    </form>
+    //          <div>
+    //              <Button variant="contained" type="submit" color="primary" >Register</Button>
+    //          </div>
+    // </form>
            
-        </>
+    //     </Formik>
     }
 export default RegisterModal;

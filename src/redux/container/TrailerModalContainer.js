@@ -43,6 +43,5 @@ const mapDispatchToProps =dispatch=>{
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
 
 HomeContainer.propTypes={
-    TrailerOpen: PropTypes.array,
-    dispatchaction:PropTypes.object
+ 
 }

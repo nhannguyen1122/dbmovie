@@ -58,7 +58,7 @@ const VideoModal=props=>{
           <Hidden mdUp>
           <YouTube videoId={MovieTrailerid} opts={opts} onReady={_onReady} />
           </Hidden>
-          <Hidden mdDown>
+          <Hidden smDown>
           <YouTube videoId={MovieTrailerid} opts={opts1} onReady={_onReady} />
           </Hidden>
           </div>
@@ -68,6 +68,5 @@ const VideoModal=props=>{
 }
 export default VideoModal;
 VideoModal.propTypes={
-  TrailerOpen:PropTypes.object,
-  MovieTrailerid:PropTypes.object,
+ 
 }

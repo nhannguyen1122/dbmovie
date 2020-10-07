@@ -30,4 +30,7 @@ export const getTopRatePageSuccess=`getTopRatePageSuccess`;
 export const setCurrentTopRatePage=`setCurrentTopRatePage`;
 //autocomplete
 export const setValueAutocomplete=`setValueAutocomplete`;
-
+//openloginform
+export const openLoginForm=`openLoginForm`;
+//open_register_form
+export const openRegisterForm=`openRegisterForm`;

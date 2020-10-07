@@ -110,3 +110,11 @@ export const setValueAutocomplete=value=>{
     return { type:constants.setValueAutocomplete,
     payload:value}
 }
+//open login form
+export const openLoginForm=()=>{
+    return { type:constants.openLoginForm}
+}
+//open register form
+export const openRegisterForm=()=>{
+    return { type:constants.openRegisterForm}
+}

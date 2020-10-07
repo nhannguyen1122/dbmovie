@@ -174,7 +174,7 @@ const AutoCompleteComponent=props=>{
         id="AutoCompleteInput" 
         name="AutoCompleteInput" 
         placeholder="Enter Keyword"
-        autocomplete="off"/>
+        autoComplete="off"/>
          </div>
          <div className={classes.AutoContentULChild}>
            {render()}

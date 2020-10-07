@@ -32,13 +32,13 @@ class TopRatedMovieContainer extends React.Component {
           <ListTopRatedMovie>
             {data.map((item,index)=>{
         
-        return <>
+        return <React.Fragment key={index}>
            
             <TopRatedMovie 
             openModal={OpenVideoTrailerModal}
             getMovieyoutube={getMovieyoutube}
             showDetails={showDetails}
-            item={item} key={index}/></>
+            item={item} key={index}/></React.Fragment>
             })}
 
         </ListTopRatedMovie>

@@ -183,15 +183,15 @@ const MenuComponent=props=>{
       <Divider/>
          <List className={classes.list}>
           {menuicon.map((item,index)=>{
-            return <>{item.name==='User'?
-            <ListItem button>
+            return <React.Fragment key={index}>{item.name==='User'?
+            <ListItem button >
             <ListItemIcon>
               <PersonIcon className={classes.Icon1}/>
             </ListItemIcon>
             {item.name}
             </ListItem>
             :
-            <Link to='/homepage'  className={classes.menuName}>
+            <Link to='/homepage'  className={classes.menuName}  >
             <ListItem button onClick={handleGoHome1}>
             
             <ListItemIcon>
@@ -205,7 +205,7 @@ const MenuComponent=props=>{
            
           
             <Divider/>
-            </>
+            </React.Fragment>
           })}
          </List>
 

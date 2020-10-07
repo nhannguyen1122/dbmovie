@@ -20,6 +20,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, RootReducer);
 const sagaMiddleware = createSagaMiddleware();
 const store=createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+// const store=createStore(RootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 let persistor = persistStore(store);
 

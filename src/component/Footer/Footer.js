@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import { FooterElement } from "../../styledComponent";
+
 const useStyles = makeStyles(theme=>({
     footerContent:{
         margin:'0 auto'
@@ -19,23 +20,17 @@ const Footer=props=>{
             <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDb)" width="130" height="94"/>
            
             </Grid>
-            <Grid itemitem sm={4} xs={6} className={classes.footerContent}>
-            <h1> The Basic</h1>
-            {
-                [
-                    "About TMDb",
-                    "Contact Us",
-                    "Support Forums",
-                   " API",
-                    "System Status"].map((item,index)=>{
-                        return <div key={index}>{item}</div>
-                    })
-            }
-
+            <Grid item sm={4} xs={6} className={classes.footerContent}>
+            <h1> Maps</h1>
+           
             </Grid>
             <Grid item sm={4} xs={6} className={classes.footerContent}>
             <h1> More Infor</h1>
+           <div> <a href="https://github.com/nhannguyen1122/dbmovie" className={classes.aContent}>Git hub</a></div>
+           <div> <a href="https://www.themoviedb.org/" className={classes.aContent}>The movie db</a></div>
+
             <a href="https://github.com/nhannguyen1122/dbmovie" className={classes.aContent}>Git hub</a>
+
             </Grid>
 
 

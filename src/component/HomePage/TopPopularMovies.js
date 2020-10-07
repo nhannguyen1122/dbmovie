@@ -97,8 +97,8 @@ const TopPopularMovies=props=>{
       const renderList=(numb,results)=>{
        
         return<> <GridList className={classes.gridList} cols={numb}>
-        {results.map((tile) => (
-          <GridListTile key={tile.img}>
+        {results.map((tile,index) => (
+          <GridListTile key={index}>
             <img src={`https://image.tmdb.org/t/p/w500/${tile.poster_path}`} alt={tile.title}  />
             <GridListTileBar
               title={tile.title}
@@ -120,10 +120,10 @@ const TopPopularMovies=props=>{
       const renderSkeletonList=(numb,results)=>{
         return <>
            <GridList className={classes.gridList} cols={numb}>
-        {results.map((tile) => (
-          <GridListTile key={tile.img}>
+        {results.map((tile,index) => (
+          <GridListTile key={index}>
            <Skeleton  animation="wave" className={classes.Skeletonimg}
-           variant="rec"
+           variant="rect"
            />
           </GridListTile>
         ))}
