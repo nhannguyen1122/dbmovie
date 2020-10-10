@@ -82,7 +82,6 @@ menuName:{
 
 const MenuComponent=props=>{
   const {authState,getTopRatedMovie,setValueAutocomplete,handleLogout}=props;
- const {isLogin}=authState;
   const[openDrawer,setStateDrawer]=useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuicon=[
@@ -138,7 +137,7 @@ const MenuComponent=props=>{
           </Link>
       </Grid>
       <Grid item md={6}>
-      {isLogin?<> <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
+      {localStorage.getItem('user')?<> <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
     onClick={handleClick}
     className={classes.SignIn} >
     <ExitToAppIcon  className={classes.Icon1} />

@@ -151,3 +151,17 @@ export const handleRegister=data=>{
     payload:data
     }
 }
+
+//confirm
+export const handleOpenConfirmModal=()=>{
+    return { type:constants.handleOpenConfirmModal}
+}
+export const handleCloseConfirmModal=()=>{
+    return { type:constants.handleCloseConfirmModal}
+}
+export const handleCloseRegisterConfirmModal=()=>{
+    return { type:constants.handleCloseRegisterConfirmModal}
+}
+export const handleOpenRegisterConfirmModal=()=>{
+    return { type:constants.handleOpenRegisterConfirmModal}
+}

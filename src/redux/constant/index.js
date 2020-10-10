@@ -46,3 +46,8 @@ export const handleLeftLoading=`handleLeftLoading`;
 export const handleCloseLeftLoading=`handleCloseLeftLoading`;
 export const handleRightLoading=`handleRightLoading`;
 export const handleCloseRightLoading=`handleCloseRightLoading`;
+//cofirm modal
+export const handleOpenConfirmModal=`openConfirmModal`;
+export const handleCloseConfirmModal=`closeConfirmModal`;
+export const handleCloseRegisterConfirmModal=`handleCloseRegisterConfirmModal`;
+export const handleOpenRegisterConfirmModal=`handleOpenRegisterConfirmModal`

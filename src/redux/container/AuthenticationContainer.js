@@ -15,12 +15,14 @@ class AuthenticationContainer extends Component {
    
     render() {
         const{authState,actions,loadingReducer}=this.props;
-        const{isLogin}=authState
+       
         const{loginFormOpenState,registerFormOpenState}=authState;
         const{openLoginForm,openRegisterForm,handleLogin,handleRegister,
-            handleLeftLoading,handleCloseLeftLoading,handleCloseRightLoading,handleRightLoading}=actions;
-       
-        if(isLogin){
+            handleLeftLoading,handleCloseLeftLoading,handleCloseRightLoading,handleRightLoading,
+            handleOpenRegisterConfirmModal, handleCloseRegisterConfirmModal,handleOpenConfirmModal,handleCloseConfirmModal}=actions;
+       let token=localStorage.getItem('user');
+      
+        if(token){
             return <Redirect to='/homepage'/>
           
        }
@@ -35,12 +37,19 @@ class AuthenticationContainer extends Component {
                     openLoginForm={openLoginForm}
                     openRegisterForm={openRegisterForm}
                     handleLogin={handleLogin}
+                    handleOpenConfirmModal={handleOpenConfirmModal}
+                    handleCloseConfirmModal={handleCloseConfirmModal}
+                    loadingReducer={loadingReducer}
+                    handleOpenRegisterConfirmModal={handleOpenRegisterConfirmModal}
+                    handleCloseRegisterConfirmModal={handleCloseRegisterConfirmModal}
                     />
                     <LoadingComponent loadingReducer={loadingReducer}
                     handleRightLoading={handleRightLoading}
                     handleLeftLoading={handleLeftLoading}
                     handleCloseLeftLoading={handleCloseLeftLoading}
                     handleCloseRightLoading={handleCloseRightLoading}
+                   
+                    
                     />
                    
                     </Authenticationn>

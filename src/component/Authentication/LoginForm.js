@@ -9,6 +9,7 @@ import {
   Zoom,
   Fab
 } from "@material-ui/core";
+import ConfirmModal from '../ConfirmModal/LoginConfirm'
 import 'react-toastify/dist/ReactToastify.min.css';
 import Backdrop from '@material-ui/core/Backdrop';
 import {Formik, FastField, Form} from 'formik';
@@ -17,6 +18,7 @@ import bcg from "../../img/bc2.png";
 import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
 import {Link} from "react-router-dom";
+import ResgisterConfirm from "../ConfirmModal/RegisterConfirm";
 const useStyles = makeStyles((theme) => ({
   root: {
 
@@ -80,9 +82,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoginForm = props => {
-  const {openRegisterForm, openLoginForm, loginFormOpenState, registerFormOpenState,handleLogin,handleRegister} = props;
-  
-  // const[isRegisterFormSubmit,setSubmit]=React.useState(false);
+  const {openRegisterForm, openLoginForm, loginFormOpenState, registerFormOpenState,handleLogin,handleRegister,loadingReducer,handleOpenConfirmModal,
+    handleOpenRegisterConfirmModal,handleCloseRegisterConfirmModal,handleCloseConfirmModal} = props;
+  const {confirmModalOpenState,registerConfirOpenState}=loadingReducer;
+ 
 
   const classes = useStyles();
   const handleSubmitLoginForm = (value, action) => {
@@ -100,7 +103,32 @@ const LoginForm = props => {
     action.resetForm();
     
   }
-  return <Zoom in={true}>
+  const handleOpenLoginForm=props=>{
+      const {touched}=props;
+     
+      if(touched.username||touched.password||touched.email||touched.repassword){
+        console.log('clicked')
+        handleOpenRegisterConfirmModal();
+      }
+      else{
+        openLoginForm();
+      }
+  }
+  const handleOpenModal=(props)=>{
+  
+    
+    const{touched}=props;
+    if(touched.username||touched.password){
+    handleOpenConfirmModal();
+    }
+    else{
+      openRegisterForm();
+    }
+    
+  }
+  let formProps={};
+  console.log('formPorps',formProps);
+  return<> <Zoom in={true}>
 
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -110,6 +138,7 @@ const LoginForm = props => {
             <div className={classes.formContainer}>
               <h1>Login form</h1>
               <Formik
+              
                 initialValues={{
                 username: '',
                 password: ''
@@ -127,14 +156,15 @@ const LoginForm = props => {
                     .required("required")
                 })}
                 onSubmit={(value, actions) => handleSubmitLoginForm(value, actions)}>
-                {({
-                  isValidating ,
-                  touched,
-                  values,
-                  errors,
-                  ...props
-                }) => {
-                  console.log(touched);
+                {(props) => {
+                  const {
+                   
+                    touched,
+                    
+                    errors,
+                    
+                    
+                  }=props;
                   return <Form className={classes.inputSection}>
                     <div className={classes.inputSection}>
                       <FastField
@@ -187,10 +217,13 @@ const LoginForm = props => {
                           </Link>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                          <Button color="primary" disabled={touched.username||touched.password?true:false}  onClick={() => openRegisterForm()}><CreateIcon/>
+                        <Button color="primary"   onClick={handleOpenModal.bind(null,props)}><CreateIcon/>
                             Register</Button>
                         </Grid>
                       </Grid>
+                      <ConfirmModal
+                      openRegisterForm={openRegisterForm}
+                      confirmModalOpenState={confirmModalOpenState} handleCloseConfirmModal={handleCloseConfirmModal} formProps={props}/>
                   </Form>
                 }}
               </Formik>
@@ -236,12 +269,13 @@ const LoginForm = props => {
                     required('required')
                 })}
                 onSubmit={(value, actions) => handleSubmitRegisterForm(value, actions)}>
-                {({
-                  touched,
-                  values,
-                  errors,
-                  ...props
-                }) => {
+                {(props) => {
+                  const {
+                    touched,
+                    values,
+                    errors
+                   
+                  }=props;
                   return <Form className={classes.inputSection}>
                     <div className={classes.inputSection}>
                       <FastField
@@ -283,7 +317,7 @@ const LoginForm = props => {
                         className={classes.fastField}
                         placeholder='Password'
                         as={TextField}
-                        type='input'
+                        type='password'
                         name="password"
                         error={errors.password && touched.password}
                         helperText={touched.password && errors.password
@@ -296,7 +330,7 @@ const LoginForm = props => {
                         className={classes.fastField}
                         placeholder="RePassword"
                         as={TextField}
-                        type='repassword'
+                        type='password'
                         name="repassword"
                         error={errors.repassword && touched.repassword}
                         helperText={touched.repassword && errors.repassword
@@ -314,7 +348,7 @@ const LoginForm = props => {
                     </Button>
                     <br/>
                     <br/>
-                    <div className={classes.aHref} onClick={() => openLoginForm()}><CreateIcon className={classes.CreateIcon}/>
+                    <div className={classes.aHref} onClick={handleOpenLoginForm.bind(null,props)}><CreateIcon className={classes.CreateIcon}/>
                       Already have an account?</div>
                     <br/>
                     <div className={classes.inputSection}>
@@ -323,6 +357,11 @@ const LoginForm = props => {
                           Home</Fab>
                       </Link>
                     </div>
+                    <ResgisterConfirm registerConfirOpenState={registerConfirOpenState}
+                    handleCloseRegisterConfirmModal={handleCloseRegisterConfirmModal}
+                    openLoginForm={openLoginForm}
+                    formProps={props}
+                    />
                   </Form>
                 }}
               </Formik>
@@ -335,6 +374,10 @@ const LoginForm = props => {
       
     </div>
   </Zoom>
+
+ 
+  </>
+  
 
 }
 export default LoginForm;

@@ -6,6 +6,13 @@ class AxiosConfig{
        
        );
     }
+    setHeader(token){
+        if(token){
+            return this.instance.defaults.headers.common.['Authorization']=`Bearer ${token}`
+        }
+        else{
+            delete this.AxiosInstance.defaults.headers.common["Authorization"]; }
+    }
     get(url){
         return this.instance.get(url);
     }
