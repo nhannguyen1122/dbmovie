@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
-import {  Button, makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import {  Button, makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import HomeIcon from '@material-ui/icons/Home';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import List from '@material-ui/core/List';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles=makeStyles(theme=>({
   Icon1:{
@@ -80,7 +81,8 @@ menuName:{
 }))
 
 const MenuComponent=props=>{
-  const[signInState,setSignIn]=useState(true);
+  const {authState,getTopRatedMovie,setValueAutocomplete,handleLogout}=props;
+ const {isLogin}=authState;
   const[openDrawer,setStateDrawer]=useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuicon=[
@@ -102,7 +104,7 @@ const MenuComponent=props=>{
     };
     const handleGoHome1=()=>{
       setStateDrawer(false);
-      const{getTopRatedMovie}=props;
+      
       getTopRatedMovie();
       
      
@@ -110,7 +112,7 @@ const MenuComponent=props=>{
     }
     const handleGoHome=()=>{
       
-      const{getTopRatedMovie,setValueAutocomplete}=props;
+     
       setValueAutocomplete('');
       getTopRatedMovie();
     }
@@ -119,6 +121,9 @@ const MenuComponent=props=>{
     }
     const handleOpenDrawer=()=>{
       setStateDrawer(true);
+    }
+    const handleLogoutUser=()=>{
+      handleLogout();
     }
     const DesktopMode=()=>{
       return  <>
@@ -133,13 +138,12 @@ const MenuComponent=props=>{
           </Link>
       </Grid>
       <Grid item md={6}>
-      <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
+      {isLogin?<> <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
     onClick={handleClick}
     className={classes.SignIn} >
-    <PersonIcon  className={classes.Icon1} />
+    <ExitToAppIcon  className={classes.Icon1} />
       </Button>
-
-      {signInState?<Menu
+      <Menu
         id="fade-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -148,18 +152,16 @@ const MenuComponent=props=>{
         TransitionComponent={Fade}
       > 
       <MenuItem onClick={handleClose}>favorite list</MenuItem>
-      <MenuItem onClick={handleClose}>Log out</MenuItem>
-      </Menu>:
-      <Menu
-      id="fade-menu"
-      anchorEl={anchorEl}
-      keepMounted
-      open={open}
-      onClose={handleClose}
-      TransitionComponent={Fade}
-    > <MenuItem onClick={handleClose}>Log in</MenuItem>
-    <MenuItem onClick={handleClose}>Register</MenuItem>
-    </Menu>
+      <MenuItem onClick={handleLogoutUser}>Log out</MenuItem>
+      </Menu></>:<>
+      <Tooltip title="Login">
+      <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
+   onClick={()=>window.location.href="/authentication"}
+    className={classes.SignIn} >
+    <PersonIcon  className={classes.Icon1} />
+      </Button>
+      </Tooltip>
+     </>
       }
       </Grid>
     </Grid>

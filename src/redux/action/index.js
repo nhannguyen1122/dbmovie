@@ -118,3 +118,36 @@ export const openLoginForm=()=>{
 export const openRegisterForm=()=>{
     return { type:constants.openRegisterForm}
 }
+// handle login
+export const handleLogin=value=>{
+    return { type:constants.handleLogin,
+    payload:value
+    }
+}
+export const handleLoginOk=res=>{
+    return { type:constants.handleLoginOk,
+    payload:res
+    }
+}
+//log out
+export const handleLogout=()=>{
+    return { type:constants.handleLogout}
+}
+//loading
+export const handleLeftLoading=()=>{
+    return { type:constants.handleLeftLoading}
+}
+export const handleCloseLeftLoading=()=>{
+    return { type:constants.handleCloseLeftLoading}
+}
+export const handleRightLoading=()=>{
+    return { type:constants.handleRightLoading}
+}
+export const handleCloseRightLoading=()=>{
+    return { type:constants.handleCloseRightLoading}
+}
+export const handleRegister=data=>{
+    return { type:constants.handleRegister,
+    payload:data
+    }
+}

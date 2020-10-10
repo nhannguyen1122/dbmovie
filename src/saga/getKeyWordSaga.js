@@ -13,7 +13,7 @@ export function* getKeyWordSaga(){
    yield takeEvery(constants.getTopRatePage,getTopRatePageSaga)
 
 }
-export function* SearchSaga(action){
+ function* SearchSaga(action){
     
     try {
        const apicall= yield call(SearchWithKeyWord,action.payload);
@@ -23,7 +23,7 @@ export function* SearchSaga(action){
         console.log(error);
     }
 }
-export function* getTotalPagesaga(){
+ function* getTotalPagesaga(){
     try {
         const apicall=yield call(GetPageAPI);
         const{total_pages}=apicall.data;
@@ -33,7 +33,7 @@ export function* getTotalPagesaga(){
         console.log(err);
     }
 }
-export function* getTopRatedMoviesaga(){
+ function* getTopRatedMoviesaga(){
     try{
         const apicall=yield call(SearchTopRated);
     
@@ -44,7 +44,7 @@ export function* getTopRatedMoviesaga(){
         console.log(error);
     }
 }
-export function* SearchWithKeyWordsaga(action){
+ function* SearchWithKeyWordsaga(action){
     try{
         const apicall=yield call(SearchWithKeyWord,action.payload);   
         const {results}=apicall.data;
@@ -54,7 +54,7 @@ export function* SearchWithKeyWordsaga(action){
         console.log(error);
     }
 }
-export  function* getMovieyoutubeSaga(action){
+  function* getMovieyoutubeSaga(action){
     try {
         yield true;
         const res=yield call(GetYoutubevideoAxios,action.payload);
@@ -67,7 +67,7 @@ export  function* getMovieyoutubeSaga(action){
     }
 
 }
-export function* getupComingMovieSaga(){
+ function* getupComingMovieSaga(){
     try{
         const res=yield call(GetUpcomingtMovie);
         const {results}=res.data;
@@ -77,7 +77,7 @@ export function* getupComingMovieSaga(){
         console.log(error);
     }
 }
-export function* getTopPopularMovieSaga(){
+ function* getTopPopularMovieSaga(){
     try{
         const res=yield call(GetTopPopularMovies);
         console.log(res);
@@ -89,7 +89,7 @@ export function* getTopPopularMovieSaga(){
         console.log(error);
     }
 }
-export  function* getTopRatePageSaga(action){
+  function* getTopRatePageSaga(action){
     
     const callapi=yield call(GetTopRateByPage,action.payload);
     const {results}=callapi.data;

@@ -34,3 +34,15 @@ export const setValueAutocomplete=`setValueAutocomplete`;
 export const openLoginForm=`openLoginForm`;
 //open_register_form
 export const openRegisterForm=`openRegisterForm`;
+//login
+export const handleLogin=`handleLogin`;
+export const handleLoginOk=`handleLoginOk`;
+//register
+export const handleRegister=`handleRegister`;
+//logout
+export const handleLogout=`handleLogout`;
+//loading
+export const handleLeftLoading=`handleLeftLoading`;
+export const handleCloseLeftLoading=`handleCloseLeftLoading`;
+export const handleRightLoading=`handleRightLoading`;
+export const handleCloseRightLoading=`handleCloseRightLoading`;

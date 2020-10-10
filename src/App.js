@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   BrowserRouter as Router,
@@ -26,6 +28,7 @@ function App() {
       </Switch>
       </Router>
       <TrailerModalContainer/>
+      <ToastContainer/>
     </div>
   );
 }

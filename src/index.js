@@ -19,17 +19,17 @@ const persistConfig = {
 }
 const persistedReducer = persistReducer(persistConfig, RootReducer);
 const sagaMiddleware = createSagaMiddleware();
-const store=createStore(persistedReducer, applyMiddleware(sagaMiddleware));
-// const store=createStore(RootReducer, applyMiddleware(sagaMiddleware));
+// const store=createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+const store=createStore(RootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 let persistor = persistStore(store);
 
 ReactDOM.render(
   
     <Provider store={store}>
-      <PersistGate  persistor={persistor}>
+      {/* <PersistGate  persistor={persistor}> */}
       <App />
-        </PersistGate>
+        {/* </PersistGate> */}
     
     </Provider>,
   

@@ -9,6 +9,7 @@ import {
   Zoom,
   Fab
 } from "@material-ui/core";
+import 'react-toastify/dist/ReactToastify.min.css';
 import Backdrop from '@material-ui/core/Backdrop';
 import {Formik, FastField, Form} from 'formik';
 import * as Yup from "yup";
@@ -79,19 +80,25 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoginForm = props => {
-  const {openRegisterForm, openLoginForm, loginFormOpenState, registerFormOpenState} = props;
+  const {openRegisterForm, openLoginForm, loginFormOpenState, registerFormOpenState,handleLogin,handleRegister} = props;
+  
   // const[isRegisterFormSubmit,setSubmit]=React.useState(false);
 
   const classes = useStyles();
   const handleSubmitLoginForm = (value, action) => {
-
-    console.log(value);
+    action.setSubmitting(true);
+    handleLogin(value);
+    action.setSubmitting(false);
+    action.resetForm();
   }
-  const handleSubmitRegisterForm = (value, action) => {
+  const handleSubmitRegisterForm = ({email,username,password,repassword,...value}, action) => {
     action.setSubmitting(true);
     // setSubmit(true);
-    console.log(value);
+    
+    handleRegister({email:email,username:username,password:password});
     action.setSubmitting(false);
+    action.resetForm();
+    
   }
   return <Zoom in={true}>
 
@@ -99,7 +106,7 @@ const LoginForm = props => {
       <Grid container spacing={0}>
         <Fade in={loginFormOpenState} className={classes.loginForm}>
           <Grid item xs={6}>
-
+              
             <div className={classes.formContainer}>
               <h1>Login form</h1>
               <Formik
@@ -121,11 +128,13 @@ const LoginForm = props => {
                 })}
                 onSubmit={(value, actions) => handleSubmitLoginForm(value, actions)}>
                 {({
+                  isValidating ,
                   touched,
                   values,
                   errors,
                   ...props
                 }) => {
+                  console.log(touched);
                   return <Form className={classes.inputSection}>
                     <div className={classes.inputSection}>
                       <FastField
@@ -164,26 +173,28 @@ const LoginForm = props => {
                       className={classes.inputButton}>
                       login
                     </Button>
+                    <br/>
+                    <br/>
+                      <Grid container spacing={3}>
+                        <Grid item xs={12} md={6}>
+                          <Link
+                            to="/homepage"
+                            style={{
+                            textDecoration: "none"
+                          }}>
+                            <Button color="primary"><HomeIcon/>
+                              Home</Button>
+                          </Link>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <Button color="primary" disabled={touched.username||touched.password?true:false}  onClick={() => openRegisterForm()}><CreateIcon/>
+                            Register</Button>
+                        </Grid>
+                      </Grid>
                   </Form>
                 }}
               </Formik>
-              <br/>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <Link
-                    to="/homepage"
-                    style={{
-                    textDecoration: "none"
-                  }}>
-                    <Button color="primary"><HomeIcon/>
-                      Home</Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Button color="primary" onClick={() => openRegisterForm()}><CreateIcon/>
-                    Register</Button>
-                </Grid>
-              </Grid>
+             
             </div>
 
           </Grid>
@@ -221,7 +232,8 @@ const LoginForm = props => {
                     .oneOf([
                       Yup.ref('password'),
                       null
-                    ], 'Passwords must match')
+                    ], 'Passwords must match').
+                    required('required')
                 })}
                 onSubmit={(value, actions) => handleSubmitRegisterForm(value, actions)}>
                 {({
@@ -300,24 +312,27 @@ const LoginForm = props => {
                       className={classes.inputButton}>
                       Register
                     </Button>
+                    <br/>
+                    <br/>
+                    <div className={classes.aHref} onClick={() => openLoginForm()}><CreateIcon className={classes.CreateIcon}/>
+                      Already have an account?</div>
+                    <br/>
+                    <div className={classes.inputSection}>
+                      <Link to="/homepage">
+                        <Fab variant="extended" color="primary"><HomeIcon/>
+                          Home</Fab>
+                      </Link>
+                    </div>
                   </Form>
                 }}
               </Formik>
-              <br/>
-              <div className={classes.aHref} onClick={() => openLoginForm()}><CreateIcon className={classes.CreateIcon}/>
-                Already have an account?</div>
-              <br/>
-              <div className={classes.inputSection}>
-                <Link to="/homepage">
-                  <Fab variant="extended" color="primary"><HomeIcon/>
-                    Home</Fab>
-                </Link>
-              </div>
+              
             </div>
 
           </Grid>
         </Fade>
       </Grid>
+      
     </div>
   </Zoom>
 

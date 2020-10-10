@@ -29,29 +29,6 @@ const useStyles=makeStyles((theme)=>({
     
 
 }));
-const registerContent=[
-    {   id:'email',
-        name:'email',
-        Label:'Email',
-
-    },
-     {   id:'username',
-        name:'username',
-        Label:'Username',
-
-    },
-    {   id:'password',
-    name:'password',
-    Label:'password',
-
-    },
-    {   id:'repassword',
-    name:'repassword',
-    Label:'Repassword',
-
-    },
-    
-]
 const initialValues={
     email:'',
     username:'',

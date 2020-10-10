@@ -9,11 +9,13 @@ class MovieDetailsContainer extends Component {
   
   render() {
     const Details=this.props.MovieReducer.MovieDetails;
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete}=this.props.actions;
-    console.log(this.props.MovieReducer);
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout}=this.props.actions;
+    const{authState}=this.props;
     return (
       <div>
         <MenuComponent getTopRatedMovie={actions.getTopRatedMovie}
+        handleLogout={handleLogout}
+        authState={authState}
         setValueAutocomplete={setValueAutocomplete}
         />
        {Details? <MovieDetails
@@ -30,6 +32,7 @@ class MovieDetailsContainer extends Component {
 const mapStateToProps = state => {
  return {
   MovieReducer:state.MovieReducer,
+  authState:state.AuthReducer
  }
 }
 const mapDispatchToProps = dispatch => {

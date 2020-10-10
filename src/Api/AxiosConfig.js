@@ -2,7 +2,9 @@ import axios from "axios";
 
 class AxiosConfig{
     constructor(){
-       this.instance=axios.create();
+       this.instance=axios.create(
+       
+       );
     }
     get(url){
         return this.instance.get(url);

@@ -14,7 +14,7 @@ import "../../App.css";
 import { bindActionCreators } from 'redux';
  class HomeContainer extends Component {
      componentDidMount(){
-         const {dispatchaction,MovieReducer,title}=this.props;
+         const {dispatchaction,MovieReducer}=this.props;
          const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=dispatchaction;
          getUpcomingMovie();
          getTopPopularMovie();
@@ -29,13 +29,14 @@ import { bindActionCreators } from 'redux';
          
      }
     render() {
-        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue}=this.props;
-        const{setValueAutocomplete}=dispatchaction;
+        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState}=this.props;
+        const{setValueAutocomplete,handleLogout}=dispatchaction;
+        console.log(authState.isLogin);
        
         return (
             <div >
                <Header>
-                   <MenuComponent 
+                   <MenuComponent handleLogout={handleLogout}  authState={authState}
                    setValueAutocomplete={setValueAutocomplete}
                    getTopRatedMovie={dispatchaction.getTopRatedMovie} />
                    <AutoCompleteComponent
@@ -87,6 +88,7 @@ const mapStateToProps =state=>{
         topPopularMovie:state.MovieReducer.topPopularMovie,
         upComingMovies:state.MovieReducer.upComingMovies,
         formValue:state.AutoCompleteReducer.formValue,
+        authState:state.AuthReducer
        
     }
 }
