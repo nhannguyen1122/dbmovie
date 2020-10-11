@@ -5,9 +5,36 @@ import * as actions from "../redux/action";
 
 import ToastConfig from "../component/toast";
 const Toast=new ToastConfig();
+const token=JSON.parse(localStorage.getItem('user'));
 export function* authSaga(){
   yield takeLatest(constants.handleLogin,handleLoginSaga);
   yield takeLatest(constants.handleRegister,handleRegisterSaga);
+  yield takeLatest(constants.getUsername,handlegetUsernameSaga)
+}
+function* handlegetUsernameSaga(){
+   try {
+     
+      const res=yield call(axiosCall.getUserNameAxios);
+      console.log(res);
+      const{username}=res.data;
+      if(username){
+         localStorage.setItem('username',JSON.stringify(username));
+      }
+      else{
+         localStorage.removeItem('user');
+      }
+     
+   } catch (error) {
+      console.log(error);
+      if(error.response.data.msg){
+      Toast.error(error.response.data.msg);
+      localStorage.removeItem('username');
+      localStorage.removeItem('user');
+      yield delay(1000);
+      window.location.href='/authentication';
+      }
+      
+   }
 }
 function* handleRegisterSaga(action){
  try{
@@ -42,14 +69,17 @@ function* handleLoginSaga(action){
     const res=yield call(axiosCall.loginAxios,payload);
     console.log(res);
     const{token,msg}=res.data;
-  
-        localStorage.setItem('user',JSON.stringify(token));
-        Toast.success(msg);
+    yield put(actions.handleLoginOk(token));
+    Toast.success(msg);
+   yield put(actions.getUsername());
+       
         yield delay(2000);
-         yield put(actions.handleLoginOk());
+        
+         
          yield put(actions.handleCloseLeftLoading());
    }
    catch(err){
+      console.log(err);
         const errorsMessage=err.response.data;
         console.log(errorsMessage);
         Toast.error(errorsMessage.msg);

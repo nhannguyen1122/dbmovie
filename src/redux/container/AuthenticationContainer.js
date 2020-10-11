@@ -21,8 +21,8 @@ class AuthenticationContainer extends Component {
             handleLeftLoading,handleCloseLeftLoading,handleCloseRightLoading,handleRightLoading,
             handleOpenRegisterConfirmModal, handleCloseRegisterConfirmModal,handleOpenConfirmModal,handleCloseConfirmModal}=actions;
        let token=localStorage.getItem('user');
-      
-        if(token){
+      let user=localStorage.getItem('username');
+        if(token&&user){
             return <Redirect to='/homepage'/>
           
        }

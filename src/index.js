@@ -12,24 +12,26 @@ import { PersistGate } from 'redux-persist/integration/react';
 import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './saga';
 
+
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist:['MovieReducer','AutoCompleteReducer','AuthReducer','loadingReducer']
   
 }
 const persistedReducer = persistReducer(persistConfig, RootReducer);
 const sagaMiddleware = createSagaMiddleware();
-// const store=createStore(persistedReducer, applyMiddleware(sagaMiddleware));
-const store=createStore(RootReducer, applyMiddleware(sagaMiddleware));
+const store=createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+// const store=createStore(RootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 let persistor = persistStore(store);
 
 ReactDOM.render(
   
     <Provider store={store}>
-      {/* <PersistGate  persistor={persistor}> */}
+      <PersistGate  persistor={persistor}>
       <App />
-        {/* </PersistGate> */}
+        </PersistGate>
     
     </Provider>,
   

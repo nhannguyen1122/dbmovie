@@ -12,7 +12,6 @@ import MenuComponent from '../../component/Header/Menu';
 import { Title } from '../../styledComponent';
 class TopRatedMovieContainer extends React.Component {
     componentDidMount(){
-        console.log('hello');
         const{actions,current}=this.props;
         const{getPage, getTopRatePage}=actions;
         getPage();
@@ -21,11 +20,14 @@ class TopRatedMovieContainer extends React.Component {
 
     render(){
         const{totalpage,data,actions,current}=this.props;
-        const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,getMovieyoutube,showDetails,getTopRatedMovie,setValueAutocomplete}=actions;
+        const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
+            getUsername,getMovieyoutube,showDetails,getTopRatedMovie,
+            setValueAutocomplete}=actions;
       
         return  <>
             <Container>
             <MenuComponent getTopRatedMovie={getTopRatedMovie}
+            getUsername={getUsername}
             setValueAutocomplete={setValueAutocomplete}
             />
         <Title>Top Rated Movie</Title>

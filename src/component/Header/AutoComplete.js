@@ -1,28 +1,38 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState, useRef, useEffect } from "react";
-import { AutoCompleteInput, ULContent,LIContent ,AutoContent,AutoContentChild,AutoContentULChild,Title} from "../../styledComponent";
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles =makeStyles(theme=>({
 
     root:{
-        position:'relative',
+        
         height:'50px'   
     },
     AutoContentChild:{
-        position:'absolute',
+        position:'relative',
        [theme.breakpoints.up('md')]:{
         width:'40%',
         left:'30.5%',
-        height:'100%'
+       
        },
        [theme.breakpoints.down('md')]:{
         width:'50%',
         left:'25%',
-        height:'100%'
+       
        },
       
     },
     AutoCompleteInput:{
+        boxShadow: 'inset -12px -8px 40px #464646;',
+        
+        paddingLeft:'2%',
+        borderRadius:"0.9rem",
+        border:'1px solid black',
+        transition:'all ease 0.5s', 
+        '&:focus':{
+            border:'1px solid red',
+            boxShadow:`rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 30px -18px inset`
+        },
         height: '100%',
         outline: 'none',
         width:'100%',
@@ -39,12 +49,14 @@ const useStyles =makeStyles(theme=>({
         padding:0,
     },
     AutoContentULChild:{
+        
+       
         display:'block',
         position:'absolute',
         top:'38px',
        [theme.breakpoints.up('md')]:{
-        width:'40.2%',
-        left:'30.55%',
+        width:'39%',
+        left:'31.5%',
        },
        [theme.breakpoints.down('md')]:{
         width:'50.2%',
@@ -54,6 +66,9 @@ const useStyles =makeStyles(theme=>({
         zIndex:100,
     },
     ULContent:{
+        borderRadius:'0.3rem',
+        position:'absolute',
+        top:'22vh',
         backgroundColor:'white',
         padding:0,
         paddingTop:'1px',
@@ -61,8 +76,9 @@ const useStyles =makeStyles(theme=>({
     },
     LIContent:{
         fontSize:'20px',
-
+        borderRadius:'0.4rem',
         listStyle:'none',
+        transition:'all ease 0.2s',
        ' &:hover':{
             backgroundColor: '#f2f2f2',
             cursor:'pointer',
@@ -74,32 +90,34 @@ const useStyles =makeStyles(theme=>({
         color:'red',
         userSelect:'none',
         fontFamily: ' "Libre Baskerville", serif'
+    },
+    searchIconDiv:{
+        position:'absolute',
+        margin:0,
+        top:0,
+        right:0,
+        fontSize:'30px',
+        '&:hover':{
+            color:'red',
+            cursor:'pointer',
+            
+        },
+    
     }
 }))
 const AutoCompleteComponent=props=>{
     const classes=useStyles();
-    const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete}=props;
-    console.log(formValue);
-    const[values,setValue]=useState({
-        renderArray:false,
-        // formvalue:formValue,
-    })
+    const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete,SearchSuccess}=props;
+    const[render,setRender]=React.useState(false)
+  
 
     let persistRef=useRef(null);
     
-    // const handleFocusOut=(e)=>{
-    //     console.log('onfocus out')
-    //     setValue({
-    //         renderArray:false
-    //     })
-    // }
+    
     const handleChange=e=>{
         const {value}=e.target;
         setValueAutocomplete(value);
-        // setValue({
-        //     ...values,
-        //     formvalue:value
-        // })
+       
         
         
         if(persistRef.current){
@@ -108,58 +126,54 @@ const AutoCompleteComponent=props=>{
         }
         persistRef.current=setTimeout(() => {
             if(!value){
-              
-                setValue({
- 
-                    renderArray:false,
-
-                })
+                SearchSuccess('');
+                setRender(false);
+               
             }
        else{
         
         SearchForKeyWord(value);
+        setRender(true);
         
        if(SearchResult.length>0){
-      
-        setValue({
-        //    formvalue:value,
-            
-            renderArray:true,
-
-        })
        }
        }
-      }, 1000);
-      
-      
+      }, 900);
     }
-    
     const SearchForMovie=(value)=>{
-       
-        setValue({
-            formvalue:value,
-           
-            renderArray:false,
-
-        });
         SearchWithKeyWord(value);
         setValueAutocomplete(value);
+        setRender(false);
+        SearchSuccess('');
     }
-    const render=()=>{
+    const renderUl=()=>{
         let result=null;
-        if(values.renderArray){
-            result=<ul className={classes.ULContent}>{SearchResult.map((item,index)=>{
-                 return <>
+        if(render){
+            result=<ul className={classes.ULContent}>
+                {SearchResult?SearchResult.map((item,index)=>{
+                 return <React.Fragment  key={index} >
                  <li className={classes.LIContent} 
-                 key={index} onClick={()=>SearchForMovie(item.title)}>{item.title}</li>
-             </>
-            })}</ul>;
+                onClick={()=>SearchForMovie(item.title)}>{item.title}</li>
+             </React.Fragment>
+            }):''}
+               
+
+            </ul>;
         }
         else{
-            result="";
+            result=''
         }
-    
         return result;
+    }
+    const handleSubmit=()=>{
+       if(!formValue){
+        setRender(false);
+       }
+       else{
+        SearchForMovie(formValue);
+        SearchSuccess('');
+        setRender(false);
+       }
     }
     return <>
      <h1 className={classes.Title}>MOVIE API</h1>
@@ -175,9 +189,10 @@ const AutoCompleteComponent=props=>{
         name="AutoCompleteInput" 
         placeholder="Enter Keyword"
         autoComplete="off"/>
+        <div className={classes.searchIconDiv} onClick={handleSubmit}><SearchIcon/></div>
          </div>
          <div className={classes.AutoContentULChild}>
-           {render()}
+           {renderUl()}
           </div>
            
           

@@ -4,6 +4,7 @@ let init={
     loginFormOpenState:true,
     registerFormOpenState:false,
     isLogin:false,
+    
 
 }
 
@@ -19,11 +20,16 @@ const AuthReducer=(state=init,action)=>{
         //     return {...state,}
         case constants.handleLogin:
             return {...state}
+        case constants.getUsername: 
+            return {...state}
+        
         case constants.handleLoginOk:
-            console.log("is login",state.isLogin);
-            return {...state,isLogin:true}
+            console.log('handleLoginook')
+            localStorage.setItem('user',JSON.stringify(action.payload));
+            return {...state}
         case constants.handleLogout: 
              localStorage.removeItem('user');
+             localStorage.removeItem('username');
             return {...state,isLogin:false}
         default:
             return state;

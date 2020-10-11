@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
 import {  Button, makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core';
@@ -81,7 +81,7 @@ menuName:{
 }))
 
 const MenuComponent=props=>{
-  const {authState,getTopRatedMovie,setValueAutocomplete,handleLogout}=props;
+  const {getUsername,getTopRatedMovie,setValueAutocomplete,handleLogout}=props;
   const[openDrawer,setStateDrawer]=useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuicon=[
@@ -91,13 +91,15 @@ const MenuComponent=props=>{
     { name:'User',
     
   },
-  ]
+  ];
   const open = Boolean(anchorEl);
   const classes=useStyles();
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
-    
+    useEffect(()=>{
+      getUsername();
+    },[])
     const handleClose = () => {
       setAnchorEl(null);
     };
@@ -109,6 +111,7 @@ const MenuComponent=props=>{
      
       
     }
+  
     const handleGoHome=()=>{
       
      
@@ -137,7 +140,7 @@ const MenuComponent=props=>{
           </Link>
       </Grid>
       <Grid item md={6}>
-      {localStorage.getItem('user')?<> <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
+      {localStorage.getItem('username')?<><span style={{color:'white'}}>hi {JSON.parse(localStorage.getItem('username'))}</span> <Button aria-controls="fade-MenuComponent" aria-haspopup="true" 
     onClick={handleClick}
     className={classes.SignIn} >
     <ExitToAppIcon  className={classes.Icon1} />

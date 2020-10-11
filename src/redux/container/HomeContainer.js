@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
          getUpcomingMovie();
          getTopPopularMovie();
          
+         
          if(MovieReducer.length>0){
 
          }
@@ -30,21 +31,24 @@ import { bindActionCreators } from 'redux';
      }
     render() {
         const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState}=this.props;
-        const{setValueAutocomplete,handleLogout}=dispatchaction;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=dispatchaction;
         console.log(authState.isLogin);
        
         return (
             <div >
                <Header>
-                   <MenuComponent handleLogout={handleLogout}  authState={authState}
+                   <MenuComponent handleLogout={handleLogout}
+                   getUsername={getUsername}
+                   authState={authState}
                    setValueAutocomplete={setValueAutocomplete}
-                   getTopRatedMovie={dispatchaction.getTopRatedMovie} />
+                   getTopRatedMovie={getTopRatedMovie} />
                    <AutoCompleteComponent
                    setValueAutocomplete={setValueAutocomplete}
                    formValue={formValue}
                    SearchResult={SearchResult}
-                   SearchForKeyWord={dispatchaction.SearchForKeyWord}
-                SearchWithKeyWord={dispatchaction.SearchWithKeyWord}
+                   SearchForKeyWord={SearchForKeyWord}
+                SearchWithKeyWord={SearchWithKeyWord}
+                SearchSuccess={SearchSuccess}
                    />
                    
                </Header>

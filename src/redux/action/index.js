@@ -165,3 +165,7 @@ export const handleCloseRegisterConfirmModal=()=>{
 export const handleOpenRegisterConfirmModal=()=>{
     return { type:constants.handleOpenRegisterConfirmModal}
 }
+//get username 
+export const getUsername=()=>{
+    return { type:constants.getUsername}
+}

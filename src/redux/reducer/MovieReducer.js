@@ -1,4 +1,6 @@
-
+import {persistReducer} from 'redux-persist';
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+import storage from "redux-persist/lib/storage";
 import * as actions from "../constant";
 let init={
     SearchResult:[],
@@ -18,6 +20,13 @@ let init={
     },
     topPopularMovie:[],
     upComingMovies:[],
+
+}
+const persistConfig={
+    key:'movie',
+    storage,
+    whitelist:['MovieDetails','TopRatedMovie'],
+    StateReconciler: autoMergeLevel2
 
 }
 const MovieReducer =(state=init,action)=>{
@@ -86,4 +95,6 @@ const MovieReducer =(state=init,action)=>{
             return state;
     }
 }
-export default MovieReducer;
+
+
+export default persistReducer(persistConfig,MovieReducer);

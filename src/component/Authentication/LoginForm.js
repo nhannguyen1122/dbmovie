@@ -88,19 +88,20 @@ const LoginForm = props => {
  
 
   const classes = useStyles();
-  const handleSubmitLoginForm = (value, action) => {
+  const handleSubmitLoginForm = async(value, action) => {
     action.setSubmitting(true);
-    handleLogin(value);
+    await handleLogin(value);
     action.setSubmitting(false);
     action.resetForm();
   }
-  const handleSubmitRegisterForm = ({email,username,password,repassword,...value}, action) => {
+  const handleSubmitRegisterForm = async({email,username,password,repassword,...value}, action) => {
     action.setSubmitting(true);
     // setSubmit(true);
     
-    handleRegister({email:email,username:username,password:password});
-    action.setSubmitting(false);
+    await handleRegister({email:email,username:username,password:password});
+    
     action.resetForm();
+    action.setSubmitting(false);
     
   }
   const handleOpenLoginForm=props=>{

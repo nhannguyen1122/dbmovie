@@ -51,3 +51,5 @@ export const handleOpenConfirmModal=`openConfirmModal`;
 export const handleCloseConfirmModal=`closeConfirmModal`;
 export const handleCloseRegisterConfirmModal=`handleCloseRegisterConfirmModal`;
 export const handleOpenRegisterConfirmModal=`handleOpenRegisterConfirmModal`
+//get username
+export const getUsername=`getUsername`;

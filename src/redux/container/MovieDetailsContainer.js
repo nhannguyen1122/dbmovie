@@ -7,13 +7,17 @@ import { bindActionCreators } from 'redux';
 import MenuComponent from '../../component/Header/Menu';
 class MovieDetailsContainer extends Component {
   
+  componentDidMount(){
+    
+  }
   render() {
     const Details=this.props.MovieReducer.MovieDetails;
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout}=this.props.actions;
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie}=this.props.actions;
     const{authState}=this.props;
     return (
       <div>
-        <MenuComponent getTopRatedMovie={actions.getTopRatedMovie}
+        <MenuComponent getTopRatedMovie={getTopRatedMovie}
+        getUsername={getUsername}
         handleLogout={handleLogout}
         authState={authState}
         setValueAutocomplete={setValueAutocomplete}
