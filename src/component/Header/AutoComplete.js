@@ -10,21 +10,13 @@ const useStyles =makeStyles(theme=>({
     },
     AutoContentChild:{
         position:'relative',
-       [theme.breakpoints.up('md')]:{
-        width:'40%',
-        left:'30.5%',
-       
-       },
-       [theme.breakpoints.down('md')]:{
-        width:'50%',
-        left:'25%',
-       
-       },
+       margin:'0 auto',
+       width:'50%'
       
     },
     AutoCompleteInput:{
         boxShadow: 'inset -12px -8px 40px #464646;',
-        
+       
         paddingLeft:'2%',
         borderRadius:"0.9rem",
         border:'1px solid black',
@@ -46,21 +38,23 @@ const useStyles =makeStyles(theme=>({
         fontSize: '20px',
       },
 
-        padding:0,
+        
     },
     AutoContentULChild:{
         
        
         display:'block',
         position:'absolute',
-        top:'38px',
+        top:'6%',
+
        [theme.breakpoints.up('md')]:{
-        width:'39%',
-        left:'31.5%',
+        width:'51%',
+        left:'25%'
+        
        },
        [theme.breakpoints.down('md')]:{
-        width:'50.2%',
-        left:'25.1%',
+        width:'51%',
+        left:'25%'
        },
         boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
         zIndex:100,
@@ -175,20 +169,20 @@ const AutoCompleteComponent=props=>{
         setRender(false);
        }
     }
-    return <>
-     <h1 className={classes.Title}>MOVIE API</h1>
-    <div className={classes.root}> 
+    return <div >
+     <div><h1 className={classes.Title}>MOVIE API</h1></div>
+   
         
         <div className={classes.AutoContentChild}>
-        <input className={classes.AutoCompleteInput} type="text" 
-      value={formValue}
-    //    onFocusOut={handleFocusOut}
-       onFocus={handleChange}
-        onChange={handleChange}
-        id="AutoCompleteInput" 
-        name="AutoCompleteInput" 
-        placeholder="Enter Keyword"
-        autoComplete="off"/>
+                <input className={classes.AutoCompleteInput} type="text" 
+            value={formValue}
+            //    onFocusOut={handleFocusOut}
+            onFocus={handleChange}
+                onChange={handleChange}
+                id="AutoCompleteInput" 
+                name="AutoCompleteInput" 
+                placeholder="Enter Keyword"
+                autoComplete="off"/>
         <div className={classes.searchIconDiv} onClick={handleSubmit}><SearchIcon/></div>
          </div>
          <div className={classes.AutoContentULChild}>
@@ -199,7 +193,7 @@ const AutoCompleteComponent=props=>{
           
          
 
+    
     </div>
-    </>
 }
 export default AutoCompleteComponent;

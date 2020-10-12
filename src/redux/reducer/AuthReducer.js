@@ -24,7 +24,7 @@ const AuthReducer=(state=init,action)=>{
             return {...state}
         
         case constants.handleLoginOk:
-            console.log('handleLoginook')
+            
             localStorage.setItem('user',JSON.stringify(action.payload));
             return {...state}
         case constants.handleLogout: 

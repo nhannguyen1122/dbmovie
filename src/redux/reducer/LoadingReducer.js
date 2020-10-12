@@ -4,11 +4,16 @@ let init={
     rightLoading:false,
     confirmModalOpenState:false,
     registerConfirOpenState:false,
-    resetFormState:false
+    resetFormState:false,
+    FlistOpenState:false,
    
 }
  const loadingReducer=(state=init,action)=>{
     switch(action.type){
+        case constant.openFlist :
+        return {...state,FlistOpenState:true}
+        case constant.closeFlist: 
+        return {...state,FlistOpenState:false}
         case constant.handleLeftLoading: 
         return {...state,leftLoading:true}
         case constant.handleCloseLeftLoading: 

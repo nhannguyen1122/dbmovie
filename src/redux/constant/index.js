@@ -53,3 +53,7 @@ export const handleCloseRegisterConfirmModal=`handleCloseRegisterConfirmModal`;
 export const handleOpenRegisterConfirmModal=`handleOpenRegisterConfirmModal`
 //get username
 export const getUsername=`getUsername`;
+
+//flist
+export const openFlist=`openFlist`;
+export const closeFlist=`closeFlist`;

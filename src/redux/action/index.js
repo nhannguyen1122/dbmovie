@@ -169,3 +169,12 @@ export const handleOpenRegisterConfirmModal=()=>{
 export const getUsername=()=>{
     return { type:constants.getUsername}
 }
+//flist
+export const openFlist=()=>{
+    return {
+        type:constants.openFlist
+    }
+}
+export const closeFlist=()=>{
+    return { type:constants.closeFlist}
+}

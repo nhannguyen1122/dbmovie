@@ -12,6 +12,7 @@ import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
+import FlistModal from '../../component/Flist/flistModal';
  class HomeContainer extends Component {
      componentDidMount(){
          const {dispatchaction,MovieReducer}=this.props;
@@ -30,9 +31,10 @@ import { bindActionCreators } from 'redux';
          
      }
     render() {
-        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState}=this.props;
-        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=dispatchaction;
-        console.log(authState.isLogin);
+        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,loadingReducer}=this.props;
+        const{FlistOpenState}=loadingReducer;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,closeFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=dispatchaction;
+        
        
         return (
             <div >
@@ -42,6 +44,7 @@ import { bindActionCreators } from 'redux';
                    authState={authState}
                    setValueAutocomplete={setValueAutocomplete}
                    getTopRatedMovie={getTopRatedMovie} />
+                   
                    <AutoCompleteComponent
                    setValueAutocomplete={setValueAutocomplete}
                    formValue={formValue}
@@ -59,9 +62,12 @@ import { bindActionCreators } from 'redux';
                   return <Movie key={index} item={item}
                   showDetails={dispatchaction.showDetails}
                   getMovieyoutube={dispatchaction.getMovieyoutube}
-                  openModal={dispatchaction.OpenVideoTrailerModal}/>
-                 
-                        
+                  openModal={dispatchaction.OpenVideoTrailerModal}
+                  
+                  openFlist={openFlist}
+             
+                  />
+                                        
               })}
               </ListMovie>
               <TopTrendingMovies 
@@ -78,6 +84,9 @@ import { bindActionCreators } from 'redux';
               <br />
               <br />
               <div  className="App"> <Footer/></div>
+              <FlistModal FlistOpenState={FlistOpenState}
+              closeFlist={closeFlist}
+              />
             </div>
         )
     }
@@ -92,7 +101,8 @@ const mapStateToProps =state=>{
         topPopularMovie:state.MovieReducer.topPopularMovie,
         upComingMovies:state.MovieReducer.upComingMovies,
         formValue:state.AutoCompleteReducer.formValue,
-        authState:state.AuthReducer
+        authState:state.AuthReducer,
+        loadingReducer:state.loadingReducer,
        
     }
 }

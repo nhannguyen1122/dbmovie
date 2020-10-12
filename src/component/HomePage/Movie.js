@@ -7,14 +7,26 @@ import DetailsIcon from '@material-ui/icons/Details';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Link } from "react-router-dom";
+import ToastConfig from "../toast";
+let Toast=new ToastConfig();
 const useStyles = makeStyles({
     root: {
       maxWidth: 255,
       textAlign:'center',
-      margin:'0 auto'
+      margin:'0 auto',
+      '&:hover':{
+        boxShadow:'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+      },
+      
     },
     media: {
       height: 340,
+      transition: 'all ease 1s',
+      '&:hover':{
+        transform: 'scale(1.05)',
+        
+      }
+
     },
     CardContentArea:{
       height:'411px',
@@ -29,13 +41,14 @@ const useStyles = makeStyles({
     },
     cardactionskeleton:{
       height:'50px'
-    }
+    },
+    
   });
 
 const Movie=props=>{
    
     const classes = useStyles();
-    const{item,openModal,showDetails,getMovieyoutube}=props;
+    const{item,openModal,showDetails,getMovieyoutube,openFlist}=props;
     
     const params=id=>{
       return `/details/${id}`
@@ -59,14 +72,24 @@ const Movie=props=>{
     const handleOpenDetails=item=>{
       showDetails(item);
     }
-    
+    const handleAddToFlist=()=>{
+      let token=localStorage.getItem('user');
+      let username=localStorage.getItem('username');
+      if(token&&username){
+        openFlist();
+      }
+      else{
+        Toast.error('Login Required')
+      }
+    }
     return<>
     <Grow
     in={checked}
+   
     style={{ transformOrigin: '0 0 0' }}
     {...(checked ? { timeout: 1000 } : {})}
-  ><Grid item sm={6} md={3} xs={12}>
-    <Card className={classes.root}>
+  ><Grid item sm={6} md={3} xs={12} >
+    <Card className={classes.root}  >
       <div >
       <CardActionArea  className={classes.CardContentArea} >
        {delay?<> <CardMedia
@@ -75,7 +98,7 @@ const Movie=props=>{
           title="Contemplative Reptile"
         />
         <CardContent >
-        <Typography  gutterBottom variant="h6" component="h2">
+        <Typography  gutterBottom variant="h6" component="h5">
          {item.title}
         </Typography>
       
@@ -99,7 +122,7 @@ const Movie=props=>{
         </Link>
         </Tooltip>
         <Tooltip title="Add to favorites">
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleAddToFlist}>
          <PlaylistAddIcon/>  
         </Button>
         </Tooltip>

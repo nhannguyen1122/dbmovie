@@ -20,8 +20,9 @@ import CreateIcon from '@material-ui/icons/Create';
 import {Link} from "react-router-dom";
 import ResgisterConfirm from "../ConfirmModal/RegisterConfirm";
 const useStyles = makeStyles((theme) => ({
+  
   root: {
-
+    
     textAlign: 'center',
     position: 'relative',
     top: '1rem',
