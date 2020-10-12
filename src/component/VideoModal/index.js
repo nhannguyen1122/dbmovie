@@ -10,11 +10,14 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
     },
     paper: {
-      
-      backgroundColor: theme.palette.background.paper,
+      position:'fixed',
+      backgroundColor: 'black',
       border: '1px solid black',
+      borderRadius:'0.5rem',
+      outline:'none',
       boxShadow: theme.shadows[5],
-      padding:0
+      padding:0,
+      
      
     },
   }));
