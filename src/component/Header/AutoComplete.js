@@ -29,14 +29,16 @@ const useStyles =makeStyles(theme=>({
         outline: 'none',
         width:'100%',
         margin:0,
-      [theme.breakpoints.up('sm')]:{
-        lineHeight:'40px',
+    //   [theme.breakpoints.up('sm')]:{
+    //     lineHeight:'40px',
+    //     fontSize: '30px',
+    //   },
+    //   [theme.breakpoints.down('sm')]:{
+    //     lineHeight:'40px',
+    //     fontSize: '20px',
+    //   },
+    lineHeight:'40px',
         fontSize: '30px',
-      },
-      [theme.breakpoints.down('sm')]:{
-        lineHeight:'30px',
-        fontSize: '20px',
-      },
 
         
     },

@@ -9,9 +9,16 @@ const useStyles = makeStyles(theme=>({
         outline:'none',
         border:'none',
         top:'25%',
+      [theme.breakpoints.up('md')]:{
         left:'35%',
-        position:'fixed',
         width:'400px',
+      },
+      [theme.breakpoints.down('sm')]:{
+        left:1,
+        width:'90%'
+      },
+        position:'fixed',
+       
         borderRadius:'0.5rem',
         padding:'10px'
     },
