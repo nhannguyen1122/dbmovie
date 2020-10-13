@@ -57,3 +57,6 @@ export const getUsername=`getUsername`;
 //flist
 export const openFlist=`openFlist`;
 export const closeFlist=`closeFlist`;
+//modal detail
+export const openDetailDrawer=`openDetailDrawer`;
+export const closeDetailDrawer=`closeDetailDrawer`;

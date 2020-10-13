@@ -5,6 +5,7 @@ import MovieDetailsContainer from "./redux/container/MovieDetailsContainer";
 
 import AuthenticationContainer from "./redux/container/AuthenticationContainer";
 import TopRatedMovieContainer from "./redux/container/TopRatedMovieContainer";
+import FlistContainer from "./redux/container/FlistContainer";
 export const Routes=[
 {
     path:"/homepage",
@@ -30,7 +31,12 @@ export const Routes=[
 }
 ,
 {
-    path: "*",
+    path:'/flist/:username',
+    exact:true,
+    component:()=><FlistContainer/>
+},
+{
+    path: "/*",
     exact:true,
     component:()=><NotFound/>
 }

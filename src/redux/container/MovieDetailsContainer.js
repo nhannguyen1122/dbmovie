@@ -14,6 +14,7 @@ class MovieDetailsContainer extends Component {
     const Details=this.props.MovieReducer.MovieDetails;
     const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie}=this.props.actions;
     const{authState}=this.props;
+    console.log('moviecontainer render');
     return (
       <div>
         <MenuComponent getTopRatedMovie={getTopRatedMovie}

@@ -127,6 +127,9 @@ const MenuComponent=props=>{
     const handleLogoutUser=()=>{
       handleLogout();
     }
+    const handleFlist=()=>{
+      
+    }
     const DesktopMode=()=>{
       return  <>
       <Grid container spacing={3} className={classes.menuContainer}>
@@ -153,7 +156,7 @@ const MenuComponent=props=>{
         onClose={handleClose}
         TransitionComponent={Fade}
       > 
-      <MenuItem onClick={handleClose}>favorite list</MenuItem>
+      <MenuItem onClick={handleFlist}><Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`}>Favorites</Link></MenuItem>
       <MenuItem onClick={handleLogoutUser}>Log out</MenuItem>
       </Menu></>:<>
       <Tooltip title="Login">

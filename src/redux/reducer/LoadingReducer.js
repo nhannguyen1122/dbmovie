@@ -6,10 +6,15 @@ let init={
     registerConfirOpenState:false,
     resetFormState:false,
     FlistOpenState:false,
+    DrawerModalOpenState:false,
    
 }
  const loadingReducer=(state=init,action)=>{
     switch(action.type){
+        case constant.openDetailDrawer:
+        return {...state,DrawerModalOpenState:true}
+        case constant.closeDetailDrawer:
+        return {...state,DrawerModalOpenState:false}
         case constant.openFlist :
         return {...state,FlistOpenState:true}
         case constant.closeFlist: 

@@ -9,7 +9,7 @@ import {
   Zoom,
   Fab
 } from "@material-ui/core";
-import ConfirmModal from '../ConfirmModal/LoginConfirm'
+import ConfirmModal from '../Modal/LoginConfirm'
 import 'react-toastify/dist/ReactToastify.min.css';
 import Backdrop from '@material-ui/core/Backdrop';
 import {Formik, FastField, Form} from 'formik';
@@ -18,7 +18,7 @@ import bcg from "../../img/bc2.png";
 import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
 import {Link} from "react-router-dom";
-import ResgisterConfirm from "../ConfirmModal/RegisterConfirm";
+import ResgisterConfirm from "../Modal/RegisterConfirm";
 const useStyles = makeStyles((theme) => ({
   
   root: {

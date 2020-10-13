@@ -12,7 +12,7 @@ import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
-import VideoModal from '../../component/VideoModal';
+import VideoModal from '../../component/Modal';
  class HomeContainer extends Component {
      
     render() {

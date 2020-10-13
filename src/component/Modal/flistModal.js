@@ -1,4 +1,4 @@
-import { Checkbox, Divider, Fab, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, Tooltip } from "@material-ui/core";
+import { AppBar, Checkbox, Divider, Fab, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, Tooltip } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React from "react";
 import AddIcon from '@material-ui/icons/Add';
@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme=>({
         outline:'none',
         border:'none',
         top:'25%',
+        overflow:'hidden',
       [theme.breakpoints.up('md')]:{
         left:'35%',
         width:'400px',
@@ -20,9 +21,14 @@ const useStyles = makeStyles(theme=>({
         position:'fixed',
        
         borderRadius:'0.5rem',
-        padding:'10px'
+       
     },
-    
+    content:{
+      padding:'10px'
+    }
+    ,fabButton:{
+      marginLeft:'10px'
+    }
    
 }));
 
@@ -35,15 +41,11 @@ const FlistModal=props=>{
         </>
     }
     return <Modal open={FlistOpenState} onClose={()=>closeFlist()} >
-        <div className={classes.root}>
+      <div className={classes.root}>
+      <AppBar position="static" color="secondary"> Choose your Flist to add</AppBar>
+        <div className={classes.content}>
         
-       <Tooltip title="add new " >
-       <Fab color="primary" aria-label="add" 
-        size="small"
-        >
-        <AddIcon />
-        </Fab>
-        </Tooltip>
+        <h1>Movie:this is movie</h1>
         <br/>
         <br/>
         <Divider/>
@@ -66,6 +68,20 @@ const FlistModal=props=>{
                 </Form>
             }}
         </Formik>
+        <Divider/>
+      
+        <br/>
+        <div className={classes.fabButton}>
+        <Tooltip title="add "  >
+       <Fab color="primary" aria-label="add" 
+        size="small"
+        >
+        <AddIcon />
+        </Fab>
+        </Tooltip>
+        </div>
+      
+        </div>
         </div>
     </Modal>
 }

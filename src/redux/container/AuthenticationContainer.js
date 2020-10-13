@@ -11,7 +11,7 @@ class AuthenticationContainer extends Component {
 
   render() {
     const {authState, actions, loadingReducer} = this.props;
-
+    console.log('authentication render');
     const {loginFormOpenState, registerFormOpenState} = authState;
     const {
       openLoginForm,

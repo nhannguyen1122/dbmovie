@@ -178,3 +178,10 @@ export const openFlist=()=>{
 export const closeFlist=()=>{
     return { type:constants.closeFlist}
 }
+//open detai Drawer
+export const openDetailDrawer=()=>{
+    return { type:constants.openDetailDrawer}
+}
+export const closeDetailDrawer=()=>{
+    return { type:constants.closeDetailDrawer}
+}

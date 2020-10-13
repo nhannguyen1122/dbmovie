@@ -12,11 +12,11 @@ import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
-import FlistModal from '../../component/Flist/flistModal';
+import FlistModal from '../../component/Modal/flistModal';
  class HomeContainer extends Component {
      componentDidMount(){
-         const {dispatchaction,MovieReducer}=this.props;
-         const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=dispatchaction;
+         const {actions,MovieReducer}=this.props;
+         const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=actions;
          getUpcomingMovie();
          getTopPopularMovie();
          
@@ -31,11 +31,11 @@ import FlistModal from '../../component/Flist/flistModal';
          
      }
     render() {
-        const{MovieReducer,dispatchaction,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,loadingReducer}=this.props;
+        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,loadingReducer}=this.props;
         const{FlistOpenState}=loadingReducer;
-        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,closeFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=dispatchaction;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,closeFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=actions;
         
-       
+       console.log('homcontainer render');
         return (
             <div >
                <Header>
@@ -57,12 +57,12 @@ import FlistModal from '../../component/Flist/flistModal';
                </Header>
                <ListMovie title={title}
                
-               setCurrentTopRatePage={dispatchaction.setCurrentTopRatePage}>
+               setCurrentTopRatePage={actions.setCurrentTopRatePage}>
               {MovieReducer.map((item,index)=>{
                   return <Movie key={index} item={item}
-                  showDetails={dispatchaction.showDetails}
-                  getMovieyoutube={dispatchaction.getMovieyoutube}
-                  openModal={dispatchaction.OpenVideoTrailerModal}
+                  showDetails={actions.showDetails}
+                  getMovieyoutube={actions.getMovieyoutube}
+                  openModal={actions.OpenVideoTrailerModal}
                   
                   openFlist={openFlist}
              
@@ -72,14 +72,14 @@ import FlistModal from '../../component/Flist/flistModal';
               </ListMovie>
               <TopTrendingMovies 
               upComingMovies={upComingMovies}
-              showDetails={dispatchaction.showDetails}
-              getMovieyoutube={dispatchaction.getMovieyoutube}
-              openModal={dispatchaction.OpenVideoTrailerModal}/>
+              showDetails={actions.showDetails}
+              getMovieyoutube={actions.getMovieyoutube}
+              openModal={actions.OpenVideoTrailerModal}/>
               <TopPopularMovies 
               topPopularMovie={topPopularMovie}
-              getMovieyoutube={dispatchaction.getMovieyoutube}
-                showDetails={dispatchaction.showDetails}
-              openModal={dispatchaction.OpenVideoTrailerModal} />
+              getMovieyoutube={actions.getMovieyoutube}
+                showDetails={actions.showDetails}
+              openModal={actions.OpenVideoTrailerModal} />
              
               <br />
               <br />
@@ -108,7 +108,7 @@ const mapStateToProps =state=>{
 }
 const mapDispatchToProps =dispatch=>{
     return {
-        dispatchaction:bindActionCreators(actions,dispatch),
+        actions:bindActionCreators(actions,dispatch),
         
     }
 }
