@@ -153,6 +153,18 @@ const Movie=props=>{
     const handleOpenDetails=item=>{
       showDetails(item);
     }
+    const renderVoteRate=item=>{
+      console.log(parseFloat(item));
+      if(parseFloat(item)>=8.0){
+        return <span style={{color:'green'}}>{item}</span>
+      }
+      else if(parseFloat(item)<8.0){
+        return <span style={{color:'orange'}}>{item}</span>
+      }
+      else{
+        return <span style={{color:'red'}}>{item}</span>
+      }
+    }
     const srcImg=(item)=>{
       let result="";
       if(item.poster_path){
@@ -213,7 +225,7 @@ const Movie=props=>{
         <div className={classes.TitleContent}>
           <h3 className={classes.h2}>{item.title}</h3>
           <div className={classes.mvDes}>
-            <div>Vote Rate:{item.vote_average}</div>
+            <div>Vote Rate: {renderVoteRate(item.vote_average)}</div>
             <div>
               {" "}
               Release_date: {item.release_date
