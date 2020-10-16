@@ -14,6 +14,11 @@ let init={
         current:1,
     },
     MovieDetails:{},
+    DetailsInfor:{
+        casts:[],
+        personalCast:{}
+
+    },
     TrailerOpen:{
         openstate:false,
         MovieTrailer:""
@@ -35,9 +40,16 @@ const MovieReducer =(state=init,action)=>{
             return{...state,TrailerOpen:{...state.TrailerOpen,openstate:true}};
         case actions.CloseVideoTrailerModal:
             return {...state,TrailerOpen:{openstate:false,MovieTrailer:""}};
+            //details
         case actions.showDetails:
             state={...state,MovieDetails:action.payload}
             return {...state};
+        case actions.getCasts:
+            return {...state}
+        case actions.getCastsOk:
+            console.log('dispatch')
+            return{...state,DetailsInfor:{...state.DetailsInfor,casts:action.payload}}
+
             //input
         case actions.SearchForKeyWord:
             return {...state};

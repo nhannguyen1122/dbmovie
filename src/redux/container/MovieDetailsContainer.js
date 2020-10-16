@@ -5,18 +5,26 @@ import PropsTypes from 'prop-types';
 import * as actions from "../action";
 import { bindActionCreators } from 'redux';
 import MenuComponent from '../../component/Header/Menu';
+import spiderman from "../../img/spiderman.jpg";
+import Footer from '../../component/Footer/Footer';
 class MovieDetailsContainer extends Component {
   
   componentDidMount(){
-    
+  
+  
   }
   render() {
-    const Details=this.props.MovieReducer.MovieDetails;
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie}=this.props.actions;
+    const{MovieReducer}=this.props;
+    const Details=MovieReducer.MovieDetails;
+    const {casts}=MovieReducer.DetailsInfor;
+    console.log(casts);
+    const {match}=this.props;
+
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts}=this.props.actions;
     const{authState}=this.props;
     console.log('moviecontainer render');
     return (
-      <div>
+      <div >
         <MenuComponent getTopRatedMovie={getTopRatedMovie}
         getUsername={getUsername}
         handleLogout={handleLogout}
@@ -24,11 +32,15 @@ class MovieDetailsContainer extends Component {
         setValueAutocomplete={setValueAutocomplete}
         />
        {Details? <MovieDetails
+       casts={casts}
+       getCasts={getCasts}
+       match={match}
        openTrailer={OpenVideoTrailerModal}
        Details={Details}
        getMovieyoutube={getMovieyoutube}
        
        />:""}
+       <div  className="App"> <Footer/></div>
       </div>
     );
   }

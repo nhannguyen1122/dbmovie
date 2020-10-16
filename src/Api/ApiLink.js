@@ -26,3 +26,6 @@ export const GetUpcomingtMovie=()=>{
 export const GetTopRateByPage=page=>{
     return AxiosConfig.get(`${TopRateURL}?api_key=${apikey}&language=en-US&page=${page}`);
 }
+export const GetCastAxios=id=>{
+    return  AxiosConfig.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apikey}`);
+}

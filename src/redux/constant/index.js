@@ -2,6 +2,9 @@ export const OpenVideoTrailerModal="openmodal";
 export const CloseVideoTrailerModal="closemodal";
 //show detail
 export const showDetails="showDetails";
+//show casts
+export const getCasts=`getCasts`;
+export const getCastsOk=`getCastsOk`;
 //get api from db
 export const SearchForKeyWord=`SearchForKeyWord`;
 export const SearchSuccess=`SearchSuccess`;

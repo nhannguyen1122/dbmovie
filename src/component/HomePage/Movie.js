@@ -154,7 +154,7 @@ const Movie=props=>{
       showDetails(item);
     }
     const renderVoteRate=item=>{
-      console.log(parseFloat(item));
+      
       if(parseFloat(item)>=8.0){
         return <span style={{color:'green'}}>{item}</span>
       }

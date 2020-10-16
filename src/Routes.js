@@ -21,7 +21,7 @@ export const Routes=[
 {
     path:"/details/:id",
     exact:true,
-    component:()=><MovieDetailsContainer />
+    component:({match})=><MovieDetailsContainer match={match}/>
 }
 ,
 {

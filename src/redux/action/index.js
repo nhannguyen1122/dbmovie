@@ -15,6 +15,15 @@ export const showDetails=(movie)=>{
         payload:movie
     }
 }
+export const getCasts=id=>{
+    return { type:constants.getCasts,
+    payload:id
+    }
+}
+export const getCastsOk=res=>{
+    return { type:constants.getCastsOk,
+    payload:res}
+}
 //api call
 export const SearchForKeyWord=keyword=>{
     return { type:constants.SearchForKeyWord,

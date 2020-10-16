@@ -4,8 +4,13 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 import { FooterElement } from "../../styledComponent";
 
 const useStyles = makeStyles(theme=>({
+    root:{
+        backgroundColor:'white',
+        paddingLeft:12
+    },
     footerContent:{
-        margin:'0 auto'
+        margin:'0 auto',
+        
     },
     aContent:{
         textDecoration:'none'
@@ -13,7 +18,7 @@ const useStyles = makeStyles(theme=>({
 }))
 const Footer=props=>{
     const classes = useStyles();
-    return<FooterElement>
+    return<div className={classes.root}>
         <Grid container spacing={1} >
             <Grid item sm={4} xs={6} className={classes.footerContent}>
             <h1>API FROM</h1>
@@ -39,6 +44,6 @@ const Footer=props=>{
        <hr/>
        </Container>
         <div style={{userSelect:'none',marginLeft:'70%'}}>Copy Right@2020-Nhân nguyễn</div>
-    </FooterElement>
+    </div>
 }
 export default Footer;
