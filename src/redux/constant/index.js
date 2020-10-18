@@ -63,3 +63,10 @@ export const closeFlist=`closeFlist`;
 //modal detail
 export const openDetailDrawer=`openDetailDrawer`;
 export const closeDetailDrawer=`closeDetailDrawer`;
+//flistSection
+export const getFlist=`getFlist`;
+export const getFlistOk=`getFlistOk`;
+
+export const deleteFlist=`deleteFlist`;
+export const deleteFlistOk=`deleteFlistOk`;
+

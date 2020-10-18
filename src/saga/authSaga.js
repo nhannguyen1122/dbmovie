@@ -3,7 +3,7 @@ import * as constants from "../redux/constant";
 import * as axiosCall from "../Api/AuthLink";
 import * as actions from "../redux/action";
 
-import ToastConfig from "../component/toast";
+import ToastConfig from "../Api/toast";
 const Toast = new ToastConfig();
 const token = JSON.parse(localStorage.getItem('user'));
 export function * authSaga() {

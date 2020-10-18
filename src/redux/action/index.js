@@ -194,3 +194,20 @@ export const openDetailDrawer=()=>{
 export const closeDetailDrawer=()=>{
     return { type:constants.closeDetailDrawer}
 }
+//flistSection
+export const getFlist=()=>{
+    return { type:constants.getFlist}
+}
+export const getFlistOk=res=>{
+    return { type:constants.getFlistOk,
+    payload:res}
+}
+export const deleteFlist=id=>{
+    return { type:constants.deleteFlist,
+    payload:id
+    }
+}
+export const deleteFlistOk=res=>{
+    return { type:constants.deleteFlistOk,
+    payload:res}
+}

@@ -7,39 +7,51 @@ import AutoCompleteComponent from '../../component/Header/AutoComplete';
 import { bindActionCreators } from 'redux';
 import * as actions from "../action";
 import DetailsModal from '../../component/Modal/DetailModal';
+import Footer from '../../component/Footer/Footer';
+import { Redirect } from 'react-router-dom';
+
 class FlistContainer extends Component {
     
     render() {
-        const {actions,loadingReducer}=this.props;
-        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,
+        const {actions,loadingReducer,FlistReducer}=this.props;
+        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
             openDetailDrawer,closeDetailDrawer,
         }=actions;
         const{DrawerModalOpenState}=loadingReducer;
-        return <>
-                <Header>
-                    <MenuComponent getUsername={getUsername}
-                     setValueAutocomplete={setValueAutocomplete}
-                     getTopRatedMovie={getTopRatedMovie}
-                    />
-                   
-                </Header>
-
-                <FlistSection getMovieyoutube={getMovieyoutube}
-            openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
-            DrawerModalOpenState={DrawerModalOpenState}
-                
+        let token= localStorage.getItem('user');
+        let username = localStorage.getItem('username')
+        return<>{ 
+        (token&&username?<>
+            <Header>
+                <MenuComponent getUsername={getUsername}
+                 setValueAutocomplete={setValueAutocomplete}
+                 getTopRatedMovie={getTopRatedMovie}
+                 handleLogout={handleLogout}
                 />
-                <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
-            DrawerModalOpenState={DrawerModalOpenState}/>
-            </>
+               
+            </Header>
+
+            <FlistSection getMovieyoutube={getMovieyoutube}
+        openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
+        DrawerModalOpenState={DrawerModalOpenState}
+        deleteFlist={deleteFlist}
         
+        FlistReducer={FlistReducer}
+            getFlist={getFlist}
+            />
+           
+            <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
+        DrawerModalOpenState={DrawerModalOpenState}/>
+       
+        </>:<Redirect to="/homepage"/>)}</>
     }
 }
 
 const mapStateToProps = state => {
     return {
         authState:state.AuthReducer,
-        loadingReducer:state.loadingReducer
+        loadingReducer:state.loadingReducer,
+        FlistReducer:state.FlistReducer
     }
 }
 const mapDispatchToProps =dispatch =>{

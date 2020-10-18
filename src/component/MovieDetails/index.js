@@ -336,7 +336,7 @@ const MovieDetails=props=>{
       if(parseFloat(item)>=8.0){
         return <span style={{color:'green'}}>{item}</span>
       }
-      else if(parseFloat(item)<8.0){
+      else if(parseFloat(item)<8.0&&parseFloat(item)>6.0){
         return <span style={{color:'orange'}}>{item}</span>
       }
       else{
@@ -366,7 +366,7 @@ const MovieDetails=props=>{
      if(parseFloat(item)>=8.0){
         result="green";
       }
-      else if(parseFloat(item)<8.0){
+      else if(parseFloat(item)<8.0&&parseFloat(item)>6.0){
        result="orange";
       }
       else{

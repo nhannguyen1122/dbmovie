@@ -8,7 +8,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Link } from "react-router-dom";
-import ToastConfig from "../toast";
+import ToastConfig from "../../Api/toast";
 let Toast=new ToastConfig();
 const useStyles = makeStyles({
   root: {
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   },
   contentSection3: {
     position: "absolute",
-    transform: "translateY(100px)",
+    transform: "translateY(40px)",
     opacity: 0,
     top: "60%",
     width: "100%",
@@ -158,7 +158,7 @@ const Movie=props=>{
       if(parseFloat(item)>=8.0){
         return <span style={{color:'green'}}>{item}</span>
       }
-      else if(parseFloat(item)<8.0){
+      else if(parseFloat(item)<8.0&&parseFloat(item)>6.0){
         return <span style={{color:'orange'}}>{item}</span>
       }
       else{
