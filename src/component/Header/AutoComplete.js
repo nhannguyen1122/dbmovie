@@ -37,8 +37,8 @@ const useStyles =makeStyles(theme=>({
     //     lineHeight:'40px',
     //     fontSize: '20px',
     //   },
-    lineHeight:'40px',
-        fontSize: '30px',
+    lineHeight:'25px',
+        fontSize: '25px',
 
         
     },
@@ -47,7 +47,7 @@ const useStyles =makeStyles(theme=>({
        
         display:'block',
         position:'absolute',
-        top:'6%',
+        top:'28%',
 
        [theme.breakpoints.up('md')]:{
         width:'51%',
@@ -63,8 +63,8 @@ const useStyles =makeStyles(theme=>({
     },
     ULContent:{
         borderRadius:'0.3rem',
-        position:'absolute',
-        top:'22vh',
+       
+       
         backgroundColor:'white',
         padding:0,
         paddingTop:'1px',
@@ -92,7 +92,7 @@ const useStyles =makeStyles(theme=>({
         margin:0,
         top:0,
         right:0,
-        fontSize:'30px',
+        fontSize:'25px',
         '&:hover':{
             color:'red',
             cursor:'pointer',

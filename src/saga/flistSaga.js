@@ -24,8 +24,11 @@ function* updateListSaga(action) {
             yield delay(1000);
             yield put(actions.closeFlist());
         }
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
+        const errorsMessage = err.response.data;
+    console.log(errorsMessage);
+    Toast.error(errorsMessage.msg);
     }
 }
 function* addNewFlistSaga(action){

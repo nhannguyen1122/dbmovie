@@ -12,6 +12,7 @@ import ToastConfig from "../../Api/toast";
 let Toast=new ToastConfig();
 const useStyles = makeStyles({
   root: {
+    margin:'0 auto',
     width: "250px",
     boxShadow: `5px 5px 115px -14px black`,
     borderRadius: "0.9rem",

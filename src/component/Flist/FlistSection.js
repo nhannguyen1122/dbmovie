@@ -91,7 +91,7 @@ const FlistSection=props=>{
         <Fade in={true}>
         <div className={classes.root}>
            <div className={classes.title}> <h1> Your List</h1>
-            <Fab   color='secondary' onClick={handleAdd}><AddIcon /></Fab></div>
+            <Tooltip title="add new"><Fab   color='secondary' onClick={handleAdd}><AddIcon /></Fab></Tooltip></div>
         {list.length>0?list.map((item,index)=>{
           return <List className={classes.flistSection} key={index}>
           <ListItem >
@@ -107,7 +107,7 @@ const FlistSection=props=>{
                  <DeleteForeverIcon/>
                 </IconButton>
               </Tooltip>
-          {item.ExpandMore ? <ExpandLess className={classes.Expand}  onClick={()=>handleClick(item)} /> : <ExpandMore className={classes.Expand} las   onClick={()=>handleClick(item)} />}
+          {item.ExpandMore ? <ExpandLess className={classes.Expand}  onClick={()=>handleClick(item)} /> : <ExpandMore className={classes.Expand}    onClick={()=>handleClick(item)} />}
         </ListItem>
         <Collapse in={item.ExpandMore} timeout="auto" unmountOnExit>
          {item.movie?item.movies.map((item,index)=>{
