@@ -13,17 +13,26 @@ import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
 import VideoModal from '../../component/Modal';
+import FlistModal from '../../component/Modal/flistModal';
  class HomeContainer extends Component {
      
     render() {
-        const{TrailerOpen,dispatchaction}=this.props;
-        console.log(dispatchaction);
-        console.log(TrailerOpen);
+        const{TrailerOpen,actions,loadingReducer,FlistReducer}=this.props;
+        const{FlistOpenState,flistModalType}=loadingReducer;
+       const{CloseVideoTrailerModal,closeFlist,addNewFlist,handleUpdateList}=actions;
+       const{updateList}=FlistReducer;
+       
         return (
             <>
               <VideoModal 
               MovieTrailerid={TrailerOpen.MovieTrailer}
-              TrailerOpen={TrailerOpen.openstate}closeModal={dispatchaction.CloseVideoTrailerModal}/>
+              TrailerOpen={TrailerOpen.openstate}closeModal={CloseVideoTrailerModal}/>
+              <FlistModal FlistOpenState={FlistOpenState}
+              flistModalType={flistModalType}
+              closeFlist={closeFlist}
+              addNewFlist={addNewFlist}     
+              updateList={updateList}  
+              handleUpdateList={handleUpdateList}       />
             </>
         )
     }
@@ -31,13 +40,14 @@ import VideoModal from '../../component/Modal';
 const mapStateToProps =state=>{
     return {
         TrailerOpen:state.MovieReducer.TrailerOpen,
-    
+        loadingReducer:state.loadingReducer,
+        FlistReducer:state.FlistReducer
        
     }
 }
 const mapDispatchToProps =dispatch=>{
     return {
-        dispatchaction:bindActionCreators(actions,dispatch)
+        actions:bindActionCreators(actions,dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

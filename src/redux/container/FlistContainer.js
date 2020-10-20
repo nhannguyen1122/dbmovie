@@ -15,8 +15,9 @@ class FlistContainer extends Component {
     render() {
         const {actions,loadingReducer,FlistReducer}=this.props;
         const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
-            openDetailDrawer,closeDetailDrawer,
+            openDetailDrawer,closeDetailDrawer,openFlist,handleExpandFlist,setUpdateList,
         }=actions;
+        
         const{DrawerModalOpenState}=loadingReducer;
         let token= localStorage.getItem('user');
         let username = localStorage.getItem('username')
@@ -32,12 +33,15 @@ class FlistContainer extends Component {
             </Header>
 
             <FlistSection getMovieyoutube={getMovieyoutube}
+            openFlist={openFlist}
         openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
         DrawerModalOpenState={DrawerModalOpenState}
         deleteFlist={deleteFlist}
-        
+        handleExpandFlist={handleExpandFlist}
         FlistReducer={FlistReducer}
             getFlist={getFlist}
+            setUpdateList={setUpdateList}
+
             />
            
             <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}

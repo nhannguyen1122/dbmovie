@@ -7,6 +7,7 @@ let init={
     resetFormState:false,
     FlistOpenState:false,
     DrawerModalOpenState:false,
+    flistModalType:0
    
 }
  const loadingReducer=(state=init,action)=>{
@@ -16,7 +17,7 @@ let init={
         case constant.closeDetailDrawer:
         return {...state,DrawerModalOpenState:false}
         case constant.openFlist :
-        return {...state,FlistOpenState:true}
+        return {...state,FlistOpenState:true,flistModalType:action.payload}
         case constant.closeFlist: 
         return {...state,FlistOpenState:false}
         case constant.handleLeftLoading: 

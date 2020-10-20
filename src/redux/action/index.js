@@ -179,13 +179,17 @@ export const getUsername=()=>{
     return { type:constants.getUsername}
 }
 //flist
-export const openFlist=()=>{
+export const openFlist=(number)=>{
     return {
-        type:constants.openFlist
+        type:constants.openFlist,
+        payload:number
     }
 }
 export const closeFlist=()=>{
-    return { type:constants.closeFlist}
+    return { type:constants.closeFlist
+        
+    
+    }
 }
 //open detai Drawer
 export const openDetailDrawer=()=>{
@@ -210,4 +214,33 @@ export const deleteFlist=id=>{
 export const deleteFlistOk=res=>{
     return { type:constants.deleteFlistOk,
     payload:res}
+}
+export const addNewFlist=name=>{
+    return { type:constants.addNewFlist,
+    payload:name
+    }
+}
+export const addNewFlistOk=res=>{
+    return { type:constants.addNewFlistOk,
+    payload:res
+    }
+}
+export const handleExpandFlist=(id)=>{
+    return {type:constants.handleExpandFlist,
+    payload:id
+    }
+}
+export const setUpdateList=(item)=>{
+    return {type:constants.setUpdateList,
+    payload :item
+    }
+}
+export const handleUpdateList=data=>{
+    return {type:constants.handleUpdateList,
+    payload:data}
+}
+export const handleUpdateListOk=res=>{
+    return {type:constants.handleUpdateListOk,
+    payload:res
+    }
 }

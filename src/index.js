@@ -16,7 +16,7 @@ import { rootSaga } from './saga';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist:['MovieReducer','AutoCompleteReducer','AuthReducer','loadingReducer']
+  blacklist:['MovieReducer','AutoCompleteReducer','AuthReducer','loadingReducer','FlistReducer']
   
 }
 const persistedReducer = persistReducer(persistConfig, RootReducer);

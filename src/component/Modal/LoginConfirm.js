@@ -3,11 +3,15 @@ import React from "react";
 
 
 const useStyles=makeStyles(theme=>({
+    modal:{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+          position:'fixed',
+    },
     root:{
         backgroundColor:'white',
-        position: 'fixed',
-        top:'25%',
-        left:'35%',
+    
         width:'30%',
         borderRadius:'0.3rem',
         overflow:'hidden',
@@ -36,7 +40,7 @@ const ConfirmModal=props=>{
       
     }
     return <>
-    <Modal open={confirmModalOpenState}>
+    <Modal open={confirmModalOpenState} className={classes.modal}>
         <div className={classes.root}>
         <AppBar position="sticky" color="secondary" >
             <h3 className={classes.title}>Confirm</h3>

@@ -84,9 +84,7 @@ import FlistModal from '../../component/Modal/flistModal';
               <br />
               <br />
               <div  className="App"> <Footer/></div>
-              <FlistModal FlistOpenState={FlistOpenState}
-              closeFlist={closeFlist}
-              />
+              
             </div>
         )
     }

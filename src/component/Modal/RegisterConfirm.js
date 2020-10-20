@@ -3,11 +3,14 @@ import React from "react";
 import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles=makeStyles(theme=>({
+    modal:{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+          position:'fixed',
+    },
     root:{
         backgroundColor:'white',
-        position: 'fixed',
-        top:'25%',
-        left:'40%',
         width:'20%',
         borderRadius:'2rem',
         overflow:'hidden',
@@ -48,7 +51,7 @@ const ResgisterConfirm=props=>{
       
     }
     return <>
-    <Modal open={registerConfirOpenState}>
+    <Modal open={registerConfirOpenState} className={classes.modal}>
         <div className={classes.root}>
         <div >
             <div className={classes.titleContent}><ClearIcon className={classes.iconTitle}/>

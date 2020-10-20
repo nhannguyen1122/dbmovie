@@ -179,7 +179,7 @@ const Movie=props=>{
       let token=localStorage.getItem('user');
       let username=localStorage.getItem('username');
       if(token&&username){
-        openFlist();
+        openFlist(0);
       }
       else{
         Toast.error('Login Required')

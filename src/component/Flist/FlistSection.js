@@ -1,7 +1,7 @@
-import { Button, Collapse, Container, Divider, Fade, Grid, Grow, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Slide, Tooltip } from "@material-ui/core";
+import { Button, Collapse, Container, Divider, Fab, Fade, Grid, Grow, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Slide, Tooltip } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import React from "react";
-import { faker } from "../../fakeapi";
+import AddIcon from '@material-ui/icons/Add';
 import DetailsIcon from '@material-ui/icons/Details';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import UpdateIcon from '@material-ui/icons/Update';
@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme)=>({
     },
     title:{
       color:'yellow',
-      textAlign:'center'
+      textAlign:'center',
+      
     },
     imageSection:{
       marginRight:'10px',
@@ -46,40 +47,57 @@ const useStyles = makeStyles((theme)=>({
         '&:hover':{
           color:'yellow'
         }
+      },
+      Expand:{
+        "&:hover":{
+          color:'yellow',
+          cursor:'pointer',
+        }
       }
     
 }))
 
 const FlistSection=props=>{
-    const{getMovieyoutube,openDetailDrawer,FlistReducer,getFlist,deleteFlist  }=props;
+    const{getMovieyoutube,openDetailDrawer,FlistReducer,
+      getFlist,deleteFlist,openFlist,handleExpandFlist,setUpdateList  }=props;
     const{list}=FlistReducer;
-    console.log(FlistReducer)
-    const [open,setOpen]=React.useState(false);
+    
+    console.log(list);
+   
     const classes = useStyles();
     useEffect(()=>{
       getFlist();
     },[])
-    const handleClick=()=>{
-        setOpen(state=>!state)
+    const handleClick=(item)=>{
+        
+        handleExpandFlist(item._id)
     }
     const handleOpenDetail=()=>{
-        console.log('hello')
         openDetailDrawer();
     }
     const handleOpenDeleteFlist=id=>{
       console.log(id);
       deleteFlist(id);
     }
+    const handleAdd=()=>{
+      openFlist(1);
+    }
+    const handleUpdate=(item)=>{
+      openFlist(2);
+      setUpdateList(item)
+
+    }
     return <Container>
         <Fade in={true}>
         <div className={classes.root}>
-            <h1 className={classes.title}> Your List</h1>
-        {list.map((item,index)=>{
+           <div className={classes.title}> <h1> Your List</h1>
+            <Fab   color='secondary' onClick={handleAdd}><AddIcon /></Fab></div>
+        {list.length>0?list.map((item,index)=>{
           return <List className={classes.flistSection} key={index}>
           <ListItem >
           <ListItemText primary={item.name}  />
-          <Tooltip title="details" >
-                <IconButton  color="secondary"className={classes.IconButton} >
+          <Tooltip title="update" >
+                <IconButton  color="secondary"className={classes.IconButton} onClick={()=>handleUpdate(item)} >
                  <UpdateIcon/>
                 </IconButton>
               </Tooltip>
@@ -89,9 +107,9 @@ const FlistSection=props=>{
                  <DeleteForeverIcon/>
                 </IconButton>
               </Tooltip>
-          {open ? <ExpandLess  onClick={handleClick} /> : <ExpandMore   onClick={handleClick} />}
+          {item.ExpandMore ? <ExpandLess className={classes.Expand}  onClick={()=>handleClick(item)} /> : <ExpandMore className={classes.Expand} las   onClick={()=>handleClick(item)} />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={item.ExpandMore} timeout="auto" unmountOnExit>
          {item.movie?item.movies.map((item,index)=>{
            return  <List component="div" disablePadding>
            <ListItem  className={classes.nested}>
@@ -116,14 +134,16 @@ const FlistSection=props=>{
               </Tooltip>
            </ListItem>
          </List>
-         }):''}
+         }): <ListItem  className={classes.nested}>
+              No movies
+           </ListItem>}
           
         </Collapse>
         
   
         
           </List>
-        })}
+        }):<h1 className={classes.title}>No List</h1>}
 
     
 

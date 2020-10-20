@@ -70,3 +70,10 @@ export const getFlistOk=`getFlistOk`;
 export const deleteFlist=`deleteFlist`;
 export const deleteFlistOk=`deleteFlistOk`;
 
+export const addNewFlist=`addNewFlist`;
+export const addNewFlistOk=`addNewFlistOk`;
+
+export const handleExpandFlist=`handleExpandFlist`;
+export const setUpdateList=`setUpdateList`
+export const handleUpdateList=`handleUpdateList`;
+export const handleUpdateListOk=`handleUpdateListOk`;
