@@ -5,7 +5,7 @@ import DetailsIcon from '@material-ui/icons/Details';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import { Link } from "react-router-dom";
 import Skeleton from "@material-ui/lab/Skeleton";
-import Collapse from '@material-ui/core/Collapse';
+import toast from "../../Api/toast";
 
 const useStyles = makeStyles({
     root:{
@@ -82,9 +82,9 @@ const useStyles = makeStyles({
         margin:'0 auto'
     }
 })
-
+const Toast=new toast(); 
 const TopRatedMovie=props=>{
-    const{item,openModal,getMovieyoutube,showDetails}=props;
+    const{item,openModal,getMovieyoutube,showDetails,openFlist}=props;
     const [checked, setChecked] = React.useState(false);
     const[delay,setTime]=React.useState(false);
     useEffect(()=>{
@@ -108,6 +108,18 @@ const TopRatedMovie=props=>{
        console.log(showDetails(item));
     showDetails(item);
   }
+  const handleAddToFlist=item=>{
+    let token=localStorage.getItem('user');
+ let username=localStorage.getItem('username');
+ if(token&&username){
+   openFlist(0);
+  
+   showDetails(item);
+   
+ }
+ else{
+   Toast.error('Login Required')
+ }}
     return <Grid item  sm={6} md={3} xs={12}>
         
        {delay?<>
@@ -118,7 +130,7 @@ const TopRatedMovie=props=>{
         <div className={classes.contentSection}>
          <div><YouTubeIcon className={classes.button} onClick={()=>handleOpen(item)} /> </div>
          <div> <Link to={params(item.id)}><DetailsIcon className={classes.button1} onClick={()=>handleOpenDetails(item)} /></Link></div>
-         <div>   <PlaylistAddIcon   className={classes.button2} /></div>
+         <div>   <PlaylistAddIcon   className={classes.button2} onClick={()=>handleAddToFlist(item)} /></div>
         </div>
         </div>
         </Fade >

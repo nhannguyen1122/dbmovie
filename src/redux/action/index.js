@@ -244,3 +244,20 @@ export const handleUpdateListOk=res=>{
     payload:res
     }
 }
+export const handleOpenBackdrop=(boolean)=>{
+    return {type:constants.handleOpenBackdrop,
+    payload:boolean
+    }
+}
+export const addMovieToFlist=data=>{
+    return {type:constants.addMovieToFlist,
+    payload:data}
+}
+export const handleDeleteMovie=id=>{
+    return {type:constants.handleDeleteMovie,
+    payload:id}
+}
+export const handleDeleteMovieOk=res=>{
+    return {type:constants.handleDeleteMovieOk,
+    payload:res}
+}

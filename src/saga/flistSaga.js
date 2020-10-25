@@ -10,9 +10,51 @@ export function* flistSaga(){
  yield takeLatest(constants.deleteFlist,deleteFlistSaga);
  yield takeLatest(constants.addNewFlist,addNewFlistSaga);
  yield takeLatest(constants.handleUpdateList,updateListSaga)
+ yield takeLatest(constants.addMovieToFlist,addMovieToFlistSaga);
+ yield takeLatest(constants.handleDeleteMovie,handleDeleteMovieSaga);
+}
+function* handleDeleteMovieSaga(action) {
+    try {
+        yield put(actions.handleOpenBackdrop(true));
+        console.log(action.payload);
+        const res=yield call(axioscall.handleDeleteMovieAxios,action.payload.id);
+        const {msg}=res.data;
+        if(res.status===200){
+            Toast.success(msg);
+            yield put(actions.handleDeleteMovieOk(action.payload.id));
+            yield delay(1000);
+            yield put(actions.handleOpenBackdrop(false));
+            
+        }
+    } catch (error) {
+        
+    }
+}
+function * addMovieToFlistSaga(action){
+    try {
+        yield put(actions.handleOpenBackdrop(true));
+       console.log(action.payload); 
+       const res=yield call(axioscall.addMovieToFlistAxios,action.payload);
+       console.log(res);
+       const{msg}=res.data;
+       if(res.status===200){
+        Toast.success(msg);
+        yield delay(1000);
+        yield put(actions.closeFlist());
+        yield put(actions.handleOpenBackdrop(false));
+    }
+    } catch (err) {
+        console.log(err);
+        const errorsMessage = err.response.data;
+    console.log(errorsMessage);
+    Toast.error(errorsMessage.msg);
+    yield delay(1000);
+    yield put(actions.handleOpenBackdrop(false));
+    }
 }
 function* updateListSaga(action) {
     try {
+        yield put(actions.handleOpenBackdrop(true));
         console.log(action.payload);
         const res=yield call(axioscall.updateFlistAxios,action.payload);
         console.log(res);
@@ -23,16 +65,20 @@ function* updateListSaga(action) {
             Toast.success(msg);
             yield delay(1000);
             yield put(actions.closeFlist());
+            yield put(actions.handleOpenBackdrop(false));
         }
     } catch (err) {
         console.log(err);
         const errorsMessage = err.response.data;
     console.log(errorsMessage);
     Toast.error(errorsMessage.msg);
+    yield delay(1000);
+    yield put(actions.handleOpenBackdrop(false));
     }
 }
 function* addNewFlistSaga(action){
     try {
+        yield put(actions.handleOpenBackdrop(true));
         console.log(action.payload)
         const res=yield call(axioscall.addNewFlistAxios,{name:action.payload});
         console.log(res);
@@ -42,6 +88,7 @@ function* addNewFlistSaga(action){
             yield put(actions.addNewFlistOk(playlist));
             yield delay(1000);
             yield put(actions.closeFlist());
+            yield put(actions.handleOpenBackdrop(false));
         }
     } catch (err) {
         
@@ -49,16 +96,21 @@ function* addNewFlistSaga(action){
         const errorsMessage = err.response.data;
     console.log(errorsMessage);
     Toast.error(errorsMessage.msg);
+    yield delay(1000);
+    yield put(actions.handleOpenBackdrop(false));
     }
 }
 function* deleteFlistSaga(action){
     try {
+        yield put(actions.handleOpenBackdrop(true));
         console.log(action.payload);
         const res=yield call(axioscall.deleteFlistAxios,action.payload);
         const {msg}=res.data;
         if(res.status===200){
             yield put(actions.deleteFlistOk(action.payload));
             Toast.success(msg);
+            yield delay(1000);
+            yield put(actions.handleOpenBackdrop(false));
            
         }
     }
@@ -67,6 +119,8 @@ function* deleteFlistSaga(action){
         const errorsMessage = err.response.data;
     console.log(errorsMessage);
     Toast.error(errorsMessage.msg);
+    yield delay(1000);
+    yield put(actions.handleOpenBackdrop(false));
     
     }
 }

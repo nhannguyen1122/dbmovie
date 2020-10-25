@@ -176,11 +176,14 @@ const Movie=props=>{
       }
       return result;
     }
-    const handleAddToFlist=()=>{
+    const handleAddToFlist=(item)=>{
       let token=localStorage.getItem('user');
       let username=localStorage.getItem('username');
       if(token&&username){
         openFlist(0);
+       
+        showDetails(item);
+        
       }
       else{
         Toast.error('Login Required')
@@ -217,7 +220,7 @@ const Movie=props=>{
 
           <div className={classes.contentSection3} >
             <Tooltip title="Add To Favorite">
-              <IconButton className={classes.IconButton} onClick={handleAddToFlist}>
+              <IconButton className={classes.IconButton} onClick={()=>handleAddToFlist(item)}>
                 <FavoriteIcon />
               </IconButton>
             </Tooltip>

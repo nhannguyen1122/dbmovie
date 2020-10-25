@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     height: '80vh',
     overflow:'hidden',
     background:'rgba(0,0,0,0.2)',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
   },
   loginLoadingRight:{
     textAlign: 'center',
@@ -30,9 +33,12 @@ const useStyles = makeStyles((theme) => ({
     height: '80vh',
     overflow:'hidden',
     background:'rgba(0,0,0,0.2)',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
   },
   img:{
-      paddingTop:'45%',
+    
       width:'100px'
   }
  

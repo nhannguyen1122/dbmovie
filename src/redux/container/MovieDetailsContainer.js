@@ -17,10 +17,10 @@ class MovieDetailsContainer extends Component {
     const{MovieReducer}=this.props;
     const Details=MovieReducer.MovieDetails;
     const {casts}=MovieReducer.DetailsInfor;
-    console.log(casts);
+    
     const {match}=this.props;
 
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts}=this.props.actions;
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts,openFlist}=this.props.actions;
     const{authState}=this.props;
     console.log('moviecontainer render');
     return (
@@ -32,6 +32,7 @@ class MovieDetailsContainer extends Component {
         setValueAutocomplete={setValueAutocomplete}
         />
        {Details? <MovieDetails
+       openFlist={openFlist}
        casts={casts}
        getCasts={getCasts}
        match={match}

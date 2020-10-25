@@ -1,7 +1,8 @@
 import * as constants from '../constant'
 let init={
     list:[],
-    updateList:{}
+    updateList:{},
+  
 
 }
 const findIndex=(id,list)=>{
@@ -17,9 +18,22 @@ const findIndex=(id,list)=>{
 
  const FlistReducer=(state=init,action)=>{
     switch(action.type){
+        case constants.handleDeleteMovie:
+        return {...state}
+        case constants.handleDeleteMovieOk:
+        console.log(action.payload); //playlistid-movieid
+        //find index of playlist
+        // filter id array
+        let arrId=action.payload.split('-');
+        let listid=arrId[0];
+        let movieid=arrId[1];
+        let indexOfList=findIndex(listid,state.list);
+        state.list[indexOfList].movies=state.list[indexOfList].movies.filter(item=>item.id!==parseInt(movieid));
+        return {...state};
+        case constants.addMovieToFlist: 
+        return {...state};
         case constants.setUpdateList:
-            
-            return {...state,updateList:action.payload}
+        return {...state,updateList:action.payload}
         case constants.handleUpdateList: 
         return {...state}
         case constants.handleUpdateListOk: 
@@ -41,6 +55,7 @@ const findIndex=(id,list)=>{
             }
             ,...state.list.slice(index+1)]}
         case constants.getFlist: 
+        
         return {...state}
         case constants.getFlistOk: 
         return {...state,list:action.payload}
@@ -52,7 +67,7 @@ const findIndex=(id,list)=>{
         
         }]}
         case constants.deleteFlist: 
-        return {...state}
+       return {...state}
         case constants.deleteFlistOk:
             console.log(action.payload);
             state.list=state.list.filter(item=>item._id!==action.payload);

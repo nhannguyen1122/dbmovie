@@ -1,207 +1,20 @@
 import React, { useEffect } from "react";
 import { Grid, makeStyles, Button, Tooltip, GridList, GridListTile, GridListTileBar, IconButton } from "@material-ui/core";
 import YouTubeIcon from '@material-ui/icons/YouTube';
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+
 import PropTypes from 'prop-types';
 import Carousel from 'react-elastic-carousel';
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import toast from "../../Api/toast";
 
-// const Details={
-//    popularity: 13.751,
-//    vote_count: 1269,
-//    video: false,
-//    poster_path: "/oyG9TL7FcRP4EZ9Vid6uKzwdndz.jpg",
-//    id: 696374,
-//    adult: false,
-//    backdrop_path: "/969BfPHGJcjg2aUv60g5uiiXFzf.jpg",
-//    original_language: "en",
-//    original_title: "Gabriel's Inferno",
-//    genre_ids: [
-//    10749
-//    ],
-//    title: "Gabriel's Inferno",
-//    vote_average: 9,
-//    overview: "An intriguing and sinful exploration of seduction, forbidden love, and redemption, Gabriel's Inferno is a captivating and wildly passionate tale of one man's escape from his own personal hell as he tries to earn the impossible--forgiveness and love.",
-//    release_date: "2020-05-29"
-//    }
+const Toast=new toast();
+
+
    
-   
-   // const useStyles=makeStyles(theme=>({
-      // MovieDetailContent:{
-      //       margin:'0 auto'
-      // },
-      // containbody:{
-      //    backgroundColor:'white',
-      //    height:'50%',
-      //    width:'100%',
-      //    margin:'0 auto',
-      //    borderRadius:'2%',
-      //    boxShadow:`-moz-box-shadow:    inset 0 0 10px #000000;
-      //    -webkit-box-shadow: inset 0 0 10px #000000;
-      //    box-shadow:         inset 0 0 10px #000000;`,
-      //    minWidth:'320px'
-      // },
-      // leftContent:{
-      //    textAlign:"center",
-      //    [theme.breakpoints.up('md')]:{
-      //       width:'300px',
-      //    height:'500px',
-      //    },
-      //    [theme.breakpoints.down('md')]:{
-      //       width:'200px',
-      //    height:'300px',
-      //    },
-         
-      //    margin:'0 auto',
-      //    position:'relative',
-      //    padding:'10px',
-      //    borderRadius:'6%',
-      //    backgroundColor:'red',
-         
-      //    overflow:'hidden'
-        
-        
-      // },
-      // leftContentimg:{
-      //    position:'absolute',
-      //    [theme.breakpoints.up('md')]:{
-      //       width:'300px',
-      //       height:'500px',
-      //    },
-      //    [theme.breakpoints.down('md')]:{
-      //       width:'200px',
-      //       height:'300px',
-      //    },
-      //    left:'10px',
-      //    borderRadius:'6%',
-      //    userSelect:'none'
-      // },
-      // leftContenthandleSection:{
-      //    position:'absolute',
-      //    left:0,
-      //    top:0,
-      //    color:'white',
-      //    backgroundColor:'white',
-      //    width:'100%',
-      //    height:'100%',
-        
-      //    opacity:0,
-      //    transition:'all ease 1s'
-      //    ,
-      //    '&:hover':{
-      //       opacity:0.7
-      //    }
-         
-      // },
-      // buttonSection:{
-      //    position:'absolute',
-      //    top:'45%',
-      //    [theme.breakpoints.down('sm')]:{
-      //       left:'15%'
-      //    }
-       
-      // },
-      // buttonhandle:{
-      //    color:'white',
-       
-      //    borderRadius:'30%'
-      //    ,
-      //  '&:hover':{
-      //     color:'yellow'
-      //  }
-      // },
-      
-      // rightContent:{
-      //    textAlight:'center',
-      //    margin:'10px',
-      //    width:'80%',
-      //    padding:'10px',
-      //    height:'90%',
-        
-        
-
-      // },
-      // rightContentTitle:{
-      //    fontSize:'50px',
-      //   color:'orange',
-      //   userSelect:'none'
-      // },
-      // rightContentReleaseDate:{
-      //    fontWeight:'bold',
-      //    fontSize:'20px'
-      // },
-      // rightContentOverview:{
-      //    fontSize:'25px'
-      // },
-
-   // }));
-
-   const data=[
-      {
-      cast_id: 2,
-      character: "Julianne Mitchell",
-      credit_id: "5ea1c702713ed4002450fa16",
-      gender: 1,
-      id: 1312450,
-      name: "Melanie Zanetti",
-      order: 1,
-      profile_path: "/lbUQ7ilvBtWMU23reKsHg3jRmsf.jpg"
-      },
-      {
-      cast_id: 3,
-      character: "Gabriel Emerson",
-      credit_id: "5ea1c724bdc34c002023c899",
-      gender: 2,
-      id: 544002,
-      name: "Giulio Berruti",
-      order: 2,
-      profile_path: "/ktPKniWGVkm6eBG7a2R7WGd96kZ.jpg"
-      },
-      {
-      cast_id: 4,
-      character: "Tom Mitchell",
-      credit_id: "5ea1c74aec455200273d19dc",
-      gender: 2,
-      id: 73659,
-      name: "Kurt McKinney",
-      order: 3,
-      profile_path: "/ebkMXPJXAGsPpfzysNmht6NVtR6.jpg"
-      },
-      {
-      cast_id: 5,
-      character: "",
-      credit_id: "5ea1c77cec455200213d1a14",
-      gender: 1,
-      id: 2267910,
-      name: "Agnes Albright",
-      order: 4,
-      profile_path: "/a1UVXkIFONmwjr0Cxydc0jQHPFq.jpg"
-      },
-      {
-      cast_id: 6,
-      character: "",
-      credit_id: "5ea1c78fec455200213d1a22",
-      gender: 1,
-      id: 2595115,
-      name: "Margaux Brooke",
-      order: 5,
-      profile_path: "/leLl5l6KnjMdg5O48FhDfB7GquI.jpg"
-      },
-      {
-      cast_id: 7,
-      character: "",
-      credit_id: "5ea1c7a7bdc34c002623c860",
-      gender: 2,
-      id: 1326237,
-      name: "Ned Van Zandt",
-      order: 6,
-      profile_path: "/lJK2Bk79xhP133piZ03p4d6rsD0.jpg"
-      }
-      ]
    const useStyles = makeStyles((theme) => ({
       root: {
         backgroundImage:
-          "url('https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg')",
+          "url('https://images.pexels.com/photos/1379640/pexels-photo-1379640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')",
         width: "100%",
         fontFamily: '"Montserrat",sans-serif',
         backgroundColor: "rgb(0,0,0.5)",
@@ -323,7 +136,7 @@ const config=[{
 }]
 const MovieDetails=props=>{
    const classes=useStyles();
-   const {Details,openTrailer,getMovieyoutube,match,getCasts,casts}=props;
+   const {Details,openTrailer,getMovieyoutube,match,getCasts,casts,openFlist}=props;
    
    
    let imgPath=`https://image.tmdb.org/t/p/w500${Details.poster_path}`;
@@ -374,6 +187,19 @@ const MovieDetails=props=>{
       }
       return result;
    }
+     const handleAddToFlist=(item)=>{
+    let token=localStorage.getItem('user');
+    let username=localStorage.getItem('username');
+    if(token&&username){
+      openFlist(0);
+     
+      // showDetails(item);
+      
+    }
+    else{
+      Toast.error('Login Required')
+    }
+  }
    return (<div className={classes.root}>
         <div className={classes.contentSection}>
           <Grid container spacing={2}>
@@ -390,8 +216,8 @@ const MovieDetails=props=>{
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6} className={classes.infor}>
-                  <div> popularity:100</div>
-                  <div> Language:us</div>
+                  <div> Popularity:{parseFloat(Details.popularity).toFixed(2)}</div>
+                  <div> Language:{Details.original_language}</div>
                 </Grid>
                 </Grid>
               <div className={classes.DetailSection}>
@@ -405,7 +231,7 @@ const MovieDetails=props=>{
                   </Tooltip>
                   &nbsp;&nbsp;
                   <Tooltip title="">
-                  <Button variant="contained" color="secondary"><FavoriteIcon/> </Button>
+                  <Button variant="contained" color="secondary" onClick={()=>handleAddToFlist(Details)}><FavoriteIcon/> </Button>
                   </Tooltip>
                   
                 </Grid>

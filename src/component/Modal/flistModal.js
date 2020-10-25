@@ -1,26 +1,26 @@
-import { AppBar, Button, Checkbox, Divider, Fab, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, TextField, Tooltip } from "@material-ui/core";
+import { AppBar, Button, Checkbox, Divider, Fab, FormControl, FormControlLabel, FormGroup, FormLabel, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, Radio, RadioGroup, TextField, Tooltip } from "@material-ui/core";
 import { FastField, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import AddIcon from '@material-ui/icons/Add';
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme=>({
     root:{
       display:'flex',
       justifyContent:'center',
-      alignItems:'center',
-        position:'fixed',
-        witdh:'40px'
-        
-        
+      alignItems:'center', 
+        witdh:'40px', 
     },
     contentSection:{
+      
       backgroundColor:'white',
       border:'none', outline:'none',
       borderRadius:'0.5rem',
       overflow:'hidden',
      [theme.breakpoints.up('md')]:{
       width:'400px',
+     
      
      }
       
@@ -36,20 +36,35 @@ const useStyles = makeStyles(theme=>({
     }
     ,fabButton:{
       marginLeft:'10px'
+    },
+    LinkButton:{
+      textDecoration:'none'
     }
    
 }));
 
-const addToFlist={
-  AppBar:'Choose your Flist to add',
-  Movie:'this is Movie',
-  button:<AddIcon />
 
-}
 
 
 const FlistModal=props=>{
-    const {FlistOpenState,closeFlist,flistModalType,addNewFlist,updateList,handleUpdateList}=props;
+ 
+    const {FlistOpenState,closeFlist,flistModalType,addNewFlist,updateList,handleUpdateList,getFlist,list,addMovieToFlist,MovieDetails}=props;
+    console.log(list);
+    
+    useEffect(()=>{
+      
+      getFlist();
+    },[])
+    const addToFlist={
+     movie:MovieDetails,
+     name:'',
+     validationSchema:Yup.object().shape({
+      movie:Yup.object(),
+      name:Yup.string().required()
+    }),
+     
+    
+    }
     const addNew={
       AppBar:'Add new list',
       name:'list',
@@ -78,53 +93,69 @@ const FlistModal=props=>{
       button:'Update'
       
     }
-    console.log(FlistOpenState);
     const classes=useStyles();
+    
     const renderAddToFlistModal=()=>{
+      
       return <>
-       <AppBar position="static" color="secondary" className={classes.AppBar}> Choose your Flist to add</AppBar>
+       <AppBar position="static" color="primary" className={classes.AppBar}> Choose your Flist to add</AppBar>
         <div className={classes.content}>
-        <h1>Movie:this is movie</h1>
+    <h1>Movie:{MovieDetails.title}</h1>
         <br/>
+        <br/>
+        <FormLabel component="legend">Your List</FormLabel>
         <br/>
         <Divider/>
-        <Formik>
+        <Formik
+        initialValues={addToFlist}
+        validationSchema={addToFlist.validationSchema}
+        onSubmit={value=>handleSubmit(value)}
+        >
             {(props)=>{
                 return <Form>
-                  {<List>
-                    <ListItem >
-                    <ListItemIcon>
-                    <Checkbox
-                edge="start"
-                checked={true}
-                tabIndex={-1}
-                disableRipple
-                // inputProps={{ 'aria-labelledby': labelId }}
-              />  <ListItemText id='a' primary={`name flist 1`} />
-              </ListItemIcon>
-                        </ListItem>  
-                    </List>}
-                </Form>
-            }}
-        </Formik>
-        <Divider/>
-      
-        <br/>
+                 <FormControl component="fieldset">
+       
+                  <RadioGroup aria-label="name" name="name" >
+                 {list.length?list.map((item,index)=>{
+                   return   <FastField as={FormControlLabel}
+                    key={index}
+                    value={item.name}
+                   control={<Radio />} 
+                    label={item.name} />
+                 }):<React.Fragment><div>You dont have any list yet</div>
+                 <br/>
+                <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} className={classes.LinkButton}><Button variant="contained" color="primary" onClick={()=>closeFlist()} size="small">Mange your list</Button></Link>
+                <br/>
+                 </React.Fragment>}
+                  </RadioGroup>
+          </FormControl>
+          <br/>
+          <Divider/>
+          <br/>
         <div className={classes.fabButton}>
         <Tooltip title="add "  >
-       <Fab color="primary" aria-label="add" 
+       <Fab color="primary" aria-label="add"  type='submit'
         size="small"
         >
         <AddIcon />
         </Fab>
         </Tooltip>
-        </div>
+        </div>  
+                 
+                </Form>
+            }}
+            
+            
+        </Formik>
+        
+      
+        
       
         </div>
       </>
     }
     const handleSubmit=value=>{
-      console.log(value);
+      flistModalType===0&&addMovieToFlist(value);
       flistModalType===1&&addNewFlist(value.list)
       flistModalType===2&&handleUpdateList({id:value.id,name:value.updatelist});
     }

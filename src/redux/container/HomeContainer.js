@@ -7,20 +7,17 @@ import Footer from '../../component/Footer/Footer';
 import AutoCompleteComponent from '../../component/Header/AutoComplete';
 import MenuComponent from '../../component/Header/Menu';
 import PropTypes from 'prop-types';
-import TopTrendingMovies from '../../component/HomePage/TopTrendingMovies';
+import UpcomingMovie from '../../component/HomePage/UpcomingMovie';
 import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
-import FlistModal from '../../component/Modal/flistModal';
  class HomeContainer extends Component {
      componentDidMount(){
          const {actions,MovieReducer}=this.props;
          const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=actions;
          getUpcomingMovie();
          getTopPopularMovie();
-         
-         
          if(MovieReducer.length>0){
 
          }
@@ -31,11 +28,8 @@ import FlistModal from '../../component/Modal/flistModal';
          
      }
     render() {
-        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,loadingReducer}=this.props;
-        const{FlistOpenState}=loadingReducer;
-        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,closeFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=actions;
-        
-       console.log('homcontainer render');
+        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState}=this.props;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=actions;
         return (
             <div >
                <Header>
@@ -52,6 +46,7 @@ import FlistModal from '../../component/Modal/flistModal';
                    SearchForKeyWord={SearchForKeyWord}
                 SearchWithKeyWord={SearchWithKeyWord}
                 SearchSuccess={SearchSuccess}
+              
                    />
                    
                </Header>
@@ -70,12 +65,15 @@ import FlistModal from '../../component/Modal/flistModal';
                                         
               })}
               </ListMovie>
-              <TopTrendingMovies 
+              <UpcomingMovie 
+
               upComingMovies={upComingMovies}
               showDetails={actions.showDetails}
               getMovieyoutube={actions.getMovieyoutube}
+              openFlist={openFlist}
               openModal={actions.OpenVideoTrailerModal}/>
               <TopPopularMovies 
+              openFlist={openFlist}
               topPopularMovie={topPopularMovie}
               getMovieyoutube={actions.getMovieyoutube}
                 showDetails={actions.showDetails}

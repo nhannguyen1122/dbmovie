@@ -77,3 +77,10 @@ export const handleExpandFlist=`handleExpandFlist`;
 export const setUpdateList=`setUpdateList`
 export const handleUpdateList=`handleUpdateList`;
 export const handleUpdateListOk=`handleUpdateListOk`;
+
+export const handleOpenBackdrop=`handleOpenBackdrop`;
+
+export const addMovieToFlist=`addMovieToFlist`;
+
+export const handleDeleteMovie=`handleDeleteMovie`;
+export const handleDeleteMovieOk=`handleDeleteMovieOk`;

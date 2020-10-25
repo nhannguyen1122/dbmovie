@@ -8,12 +8,62 @@ import IconButton from '@material-ui/core/IconButton';
 import { Container, Menu, MenuItem, Grid, Button, Hidden } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { TopRatedMovie } from "../../styledComponent";
-
+import toast from "../../Api/toast";
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import DetailsIcon from '@material-ui/icons/Details';
 import { Link } from "react-router-dom";
 import Skeleton from "@material-ui/lab/Skeleton";
+const useStyles = makeStyles((theme) => ({
+       
+  gridList: {
+    flexWrap: 'nowrap',
+  
+    transform: 'translateZ(0)',
+    width:'100%'
+    
+  },
+  title: {
+    color:'white',
+    '&:hover':{
+      color:'yellow'
+    }
+  },
+  titleBar: {
+    background:
+    
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+  moviename:{
+    color:'yellow'
+  },
+  closebutton: {
+    fontSize:'15px',
+    backgroundColor:'#6F7C87',
+    border:'none',
+    borderRadius:'50%',
+    outline:'none',
+    '&:hover':{
+      color:'white',
+      cursor:'pointer',
+      backgroundColor:'red',
+    }
+   
+  },
+  youtube: {
+    color:'red'
+  },
+  DetailIcon:{
+    textDecoration:'none'
+  },
+  Skeletonimg:{
+    height:'100%',
+    width:'100%'
+  }
+  
+  
+}));
+const Toast=new toast(); 
 const TopPopularMovies=props=>{
   const [anchorEl, setAnchorEl] = React.useState(null);
   const[delay,setTime]=React.useState(false);
@@ -26,52 +76,6 @@ const TopPopularMovies=props=>{
       clearTimeout(settimeoutskeletons);
     }
   },[])
-    const useStyles = makeStyles((theme) => ({
-       
-        gridList: {
-          flexWrap: 'nowrap',
-        
-          transform: 'translateZ(0)',
-          width:'100%'
-          
-        },
-        title: {
-          color:'white',
-          '&:hover':{
-            color:'yellow'
-          }
-        },
-        titleBar: {
-          background:
-          
-            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-        },
-        moviename:{
-          color:'yellow'
-        },
-        closebutton: {
-          fontSize:'15px',
-          backgroundColor:'#6F7C87',
-          border:'none',
-          borderRadius:'50%',
-          outline:'none',
-          '&:hover':{
-            color:'white',
-            cursor:'pointer',
-            backgroundColor:'red',
-          }
-         
-        },
-        youtube: {
-          color:'red'
-        },
-        Skeletonimg:{
-          height:'100%',
-          width:'100%'
-        }
-        
-        
-      }));
       const handleOpen=(item)=>{
         openModal(item);
         setAnchorEl(null);
@@ -92,7 +96,18 @@ const TopPopularMovies=props=>{
         console.log(item);
         showDetails(item);
       }
-
+      const handleAddToFlist=item=>{
+         let token=localStorage.getItem('user');
+      let username=localStorage.getItem('username');
+      if(token&&username){
+        openFlist(0);
+       
+        showDetails(item);
+        
+      }
+      else{
+        Toast.error('Login Required')
+      }}
 
       const renderList=(numb,results)=>{
        
@@ -131,7 +146,7 @@ const TopPopularMovies=props=>{
         </>
       }
       const classes = useStyles();
-      const{openModal,showDetails,getMovieyoutube}=props;
+      const{openModal,showDetails,getMovieyoutube,openFlist}=props;
       const results=props.topPopularMovie;
 
       const render=(results)=>{
@@ -168,7 +183,7 @@ const TopPopularMovies=props=>{
                 <YouTubeIcon className={classes.youtube} /> 
                 Trailer
                 </MenuItem>
-                <Link to={setparams(item.id)}>
+                <Link to={setparams(item.id)} className={classes.DetailIcon}>
                 <MenuItem onClick={()=>handleOpenDetails(item)} > 
                 
                 <DetailsIcon />
@@ -177,7 +192,7 @@ const TopPopularMovies=props=>{
                 </MenuItem>
                 </Link>
                
-                <MenuItem > 
+                <MenuItem  onClick={()=>handleAddToFlist(item)} > 
                 <PlaylistAddIcon/>   
                 Add to list
                 </MenuItem>

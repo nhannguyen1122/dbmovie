@@ -22,7 +22,7 @@ class TopRatedMovieContainer extends React.Component {
         const{totalpage,data,actions,current}=this.props;
         const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
             getUsername,getMovieyoutube,showDetails,getTopRatedMovie,
-            setValueAutocomplete}=actions;
+            setValueAutocomplete,openFlist}=actions;
       
         return  <>
             <Container>
@@ -40,6 +40,7 @@ class TopRatedMovieContainer extends React.Component {
             openModal={OpenVideoTrailerModal}
             getMovieyoutube={getMovieyoutube}
             showDetails={showDetails}
+            openFlist={openFlist}
             item={item} key={index}/></React.Fragment>
             })}
 

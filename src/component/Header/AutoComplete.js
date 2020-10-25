@@ -5,7 +5,6 @@ import SearchIcon from '@material-ui/icons/Search';
 const useStyles =makeStyles(theme=>({
 
     root:{
-        
         height:'50px'   
     },
     AutoContentChild:{
@@ -16,7 +15,6 @@ const useStyles =makeStyles(theme=>({
     },
     AutoCompleteInput:{
         boxShadow: 'inset -12px -8px 40px #464646;',
-       
         paddingLeft:'2%',
         borderRadius:"0.9rem",
         border:'1px solid black',
@@ -29,42 +27,20 @@ const useStyles =makeStyles(theme=>({
         outline: 'none',
         width:'100%',
         margin:0,
-    //   [theme.breakpoints.up('sm')]:{
-    //     lineHeight:'40px',
-    //     fontSize: '30px',
-    //   },
-    //   [theme.breakpoints.down('sm')]:{
-    //     lineHeight:'40px',
-    //     fontSize: '20px',
-    //   },
     lineHeight:'25px',
         fontSize: '25px',
-
-        
     },
     AutoContentULChild:{
-        
-       
-        display:'block',
         position:'absolute',
-        top:'28%',
-
-       [theme.breakpoints.up('md')]:{
-        width:'51%',
-        left:'25%'
-        
-       },
-       [theme.breakpoints.down('md')]:{
-        width:'51%',
-        left:'25%'
-       },
+        left:'1%',
+        top:'90%',
+        width:'100%',
         boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
         zIndex:100,
+        
     },
     ULContent:{
         borderRadius:'0.3rem',
-       
-       
         backgroundColor:'white',
         padding:0,
         paddingTop:'1px',
@@ -113,12 +89,8 @@ const AutoCompleteComponent=props=>{
     const handleChange=e=>{
         const {value}=e.target;
         setValueAutocomplete(value);
-       
-        
-        
         if(persistRef.current){
             clearTimeout(persistRef.current);
-            
         }
         persistRef.current=setTimeout(() => {
             if(!value){
@@ -126,11 +98,9 @@ const AutoCompleteComponent=props=>{
                 setRender(false);
                
             }
-       else{
-        
+       else{  
         SearchForKeyWord(value);
-        setRender(true);
-        
+        setRender(true);  
        if(SearchResult.length>0){
        }
        }
@@ -172,23 +142,22 @@ const AutoCompleteComponent=props=>{
        }
     }
     return <div >
-     <div><h1 className={classes.Title}>MOVIE API</h1></div>
-   
-        
+     <div><h1 className={classes.Title}>MOVIE PROJECT</h1></div>  
         <div className={classes.AutoContentChild}>
                 <input className={classes.AutoCompleteInput} type="text" 
-            value={formValue}
-            //    onFocusOut={handleFocusOut}
-            onFocus={handleChange}
-                onChange={handleChange}
-                id="AutoCompleteInput" 
-                name="AutoCompleteInput" 
-                placeholder="Enter Keyword"
-                autoComplete="off"/>
+                        value={formValue}
+                        //    onFocusOut={handleFocusOut}
+                        onFocus={handleChange}
+                        onChange={handleChange}
+                        id="AutoCompleteInput" 
+                        name="AutoCompleteInput" 
+                        placeholder="Enter Keyword"
+                        autoComplete="off"/>
         <div className={classes.searchIconDiv} onClick={handleSubmit}><SearchIcon/></div>
-         </div>
+       
          <div className={classes.AutoContentULChild}>
            {renderUl()}
+          </div>
           </div>
            
           

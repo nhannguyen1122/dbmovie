@@ -68,7 +68,7 @@ function * handleLoginSaga(action) {
     yield put(actions.handleLoginOk(token));
     Toast.success(msg);
     yield put(actions.getUsername());
-
+    yield put(actions.getFlist());
     yield delay(2000);
 
     yield put(actions.handleCloseLeftLoading());

@@ -25,10 +25,12 @@ function App() {
           exact={item.exact} />
         })
       }
+     
       </Switch>
-      </Router>
       <TrailerModalContainer/>
       <ToastContainer/>
+      </Router>
+     
     </div>
   );
 }

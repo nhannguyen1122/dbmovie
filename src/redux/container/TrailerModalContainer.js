@@ -7,20 +7,22 @@ import Footer from '../../component/Footer/Footer';
 import AutoCompleteComponent from '../../component/Header/AutoComplete';
 import Menu from '../../component/Header/Menu';
 import PropTypes from 'prop-types';
-import TopTrendingMovies from '../../component/HomePage/TopTrendingMovies';
+import TopTrendingMovies from '../../component/HomePage/UpcomingMovie';
 import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
 import VideoModal from '../../component/Modal';
 import FlistModal from '../../component/Modal/flistModal';
+import BackdropModal from '../../component/Modal/BackdropModal';
  class HomeContainer extends Component {
      
     render() {
-        const{TrailerOpen,actions,loadingReducer,FlistReducer}=this.props;
-        const{FlistOpenState,flistModalType}=loadingReducer;
-       const{CloseVideoTrailerModal,closeFlist,addNewFlist,handleUpdateList}=actions;
-       const{updateList}=FlistReducer;
+        const{TrailerOpen,actions,loadingReducer,FlistReducer,MovieReducer}=this.props;
+        const{FlistOpenState,flistModalType,backdropOpenState}=loadingReducer;
+       const{CloseVideoTrailerModal,closeFlist,addNewFlist,handleUpdateList,getFlist,addMovieToFlist}=actions;
+       const{updateList,list}=FlistReducer;
+       const{MovieDetails}=MovieReducer;
        
         return (
             <>
@@ -32,7 +34,16 @@ import FlistModal from '../../component/Modal/flistModal';
               closeFlist={closeFlist}
               addNewFlist={addNewFlist}     
               updateList={updateList}  
-              handleUpdateList={handleUpdateList}       />
+              handleUpdateList={handleUpdateList}
+              getFlist={getFlist}
+              list={list}
+              addMovieToFlist={addMovieToFlist}
+              MovieDetails={MovieDetails}
+              />
+              <BackdropModal 
+               
+                backdropOpenState={backdropOpenState}
+              />
             </>
         )
     }
@@ -41,7 +52,8 @@ const mapStateToProps =state=>{
     return {
         TrailerOpen:state.MovieReducer.TrailerOpen,
         loadingReducer:state.loadingReducer,
-        FlistReducer:state.FlistReducer
+        FlistReducer:state.FlistReducer,
+        MovieReducer:state.MovieReducer
        
     }
 }

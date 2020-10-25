@@ -16,3 +16,11 @@ export const addNewFlistAxios=name=>{
 export const updateFlistAxios=(data)=>{
     return AxiosConfig.patch(`${url}/update/${data.id}`,{name:data.name});
 }
+
+export const addMovieToFlistAxios=data=>{
+    console.log(data.name);
+    return AxiosConfig.patch(`${url}/addmovie/${data.name}`,{movie:data.movie})
+}
+export const handleDeleteMovieAxios=id=>{
+    return AxiosConfig.delete(`${url}/deletemovie/${id}`)
+}

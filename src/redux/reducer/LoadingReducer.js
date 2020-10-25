@@ -1,4 +1,4 @@
-import * as constant from "../constant"
+import * as constants from "../constant"
 let init={
     leftLoading:false,
     rightLoading:false,
@@ -7,36 +7,40 @@ let init={
     resetFormState:false,
     FlistOpenState:false,
     DrawerModalOpenState:false,
-    flistModalType:0
+    flistModalType:0,
+    backdropOpenState:false
    
 }
  const loadingReducer=(state=init,action)=>{
     switch(action.type){
-        case constant.openDetailDrawer:
+        case constants.handleOpenBackdrop:{
+            return {...state,backdropOpenState:action.payload}
+        }
+        case constants.openDetailDrawer:
         return {...state,DrawerModalOpenState:true}
-        case constant.closeDetailDrawer:
+        case constants.closeDetailDrawer:
         return {...state,DrawerModalOpenState:false}
-        case constant.openFlist :
+        case constants.openFlist :
         return {...state,FlistOpenState:true,flistModalType:action.payload}
-        case constant.closeFlist: 
+        case constants.closeFlist: 
         return {...state,FlistOpenState:false}
-        case constant.handleLeftLoading: 
+        case constants.handleLeftLoading: 
         return {...state,leftLoading:true}
-        case constant.handleCloseLeftLoading: 
+        case constants.handleCloseLeftLoading: 
         return {...state,leftLoading:false}
-        case constant.handleRightLoading: 
+        case constants.handleRightLoading: 
         return {...state,rightLoading:true}
-        case constant.handleCloseRightLoading: 
+        case constants.handleCloseRightLoading: 
         return {...state,rightLoading:false}
-        case constant.handleCloseConfirmModal: 
+        case constants.handleCloseConfirmModal: 
         return {...state,confirmModalOpenState:false}
-        case constant.handleOpenConfirmModal: 
+        case constants.handleOpenConfirmModal: 
         return {...state,confirmModalOpenState:true}
-        case constant.handleOpenRegisterConfirmModal: 
+        case constants.handleOpenRegisterConfirmModal: 
         return {...state,registerConfirOpenState:true}
-        case constant.handleCloseRegisterConfirmModal: 
+        case constants.handleCloseRegisterConfirmModal: 
         return {...state,registerConfirOpenState:false}
-        case constant.openRegisterForm:
+        case constants.openRegisterForm:
         return {...state,resetFormState:true}
         default:
             return state;
