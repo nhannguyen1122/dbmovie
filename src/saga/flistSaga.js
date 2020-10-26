@@ -126,10 +126,12 @@ function* deleteFlistSaga(action){
 }
 function* getFlistSaga(){
     try {
+        yield put(actions.handleOpenBackdrop(true));
         const res=yield call(axioscall.getFlistAxios);
         console.log(res);
         const{msg,result}=res.data;
         yield put(actions.getFlistOk(result));
+        yield put(actions.handleOpenBackdrop(false));
     } catch (error) {
         console.log(error);
     }

@@ -9,7 +9,6 @@ import TopRatedMovie from '../../component/TopRatedMovie/TopratedMovies';
 import * as actions from "../action/index";
 import  "../../App.css";
 import MenuComponent from '../../component/Header/Menu';
-import { Title } from '../../styledComponent';
 class TopRatedMovieContainer extends React.Component {
     componentDidMount(){
         const{actions,current}=this.props;
@@ -30,7 +29,7 @@ class TopRatedMovieContainer extends React.Component {
             getUsername={getUsername}
             setValueAutocomplete={setValueAutocomplete}
             />
-        <Title>Top Rated Movie</Title>
+       
           <ListTopRatedMovie>
             {data.map((item,index)=>{
         

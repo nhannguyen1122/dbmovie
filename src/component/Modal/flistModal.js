@@ -26,7 +26,10 @@ const useStyles = makeStyles(theme=>({
       
     },
     AppBar:{
-      padding:'10px'
+      padding:'10px',
+      background: `linear-gradient(
+        rgba(30,27,38, 0.95), 
+        rgba(30,27,38, 0.95))`,
     },
     content:{
       padding:'10px',
@@ -40,7 +43,38 @@ const useStyles = makeStyles(theme=>({
     LinkButton:{
       textDecoration:'none'
     }
-   
+   ,buttonFlist:{
+     background:`linear-gradient(
+      rgba(30,27,38, 0.95), 
+      rgba(30,27,38, 0.95))`,
+      color:'white'
+   },
+   h1:{
+     fontFamily:'cursive'
+   },
+   xButton:{
+     position:'absolute',
+     margin:'10px',
+     right:0,
+     backgroundColor:'red',
+     width:'22px',
+     height:'22px',
+     top:0,
+     border:'none',
+     borderRadius:'50%',
+     color:'white',
+     outline:'none',
+
+     '&:hover':{
+       color:'yellow',
+       cursor:'pointer',
+     },
+     '&:active':{
+      color:'black',
+      cursor:'pointer',
+    }
+     
+   }
 }));
 
 
@@ -98,9 +132,11 @@ const FlistModal=props=>{
     const renderAddToFlistModal=()=>{
       
       return <>
-       <AppBar position="static" color="primary" className={classes.AppBar}> Choose your Flist to add</AppBar>
+       <AppBar position="relative"  className={classes.AppBar}> <div>Choose your list to add</div>
+      <button className={classes.xButton} onClick={()=>closeFlist()}> x</button>
+       </AppBar>
         <div className={classes.content}>
-    <h1>Movie:{MovieDetails.title}</h1>
+    <h1 className={classes.h1}>Movie:{MovieDetails.title}</h1>
         <br/>
         <br/>
         <FormLabel component="legend">Your List</FormLabel>
@@ -124,7 +160,7 @@ const FlistModal=props=>{
                     label={item.name} />
                  }):<React.Fragment><div>You dont have any list yet</div>
                  <br/>
-                <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} className={classes.LinkButton}><Button variant="contained" color="primary" onClick={()=>closeFlist()} size="small">Mange your list</Button></Link>
+                <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} className={classes.LinkButton}><Button variant="contained"className={classes.buttonFlist} onClick={()=>closeFlist()} size="small">Mange your list</Button></Link>
                 <br/>
                  </React.Fragment>}
                   </RadioGroup>
@@ -134,7 +170,7 @@ const FlistModal=props=>{
           <br/>
         <div className={classes.fabButton}>
         <Tooltip title="add "  >
-       <Fab color="primary" aria-label="add"  type='submit'
+       <Fab className={classes.buttonFlist} aria-label="add"  type='submit'
         size="small"
         >
         <AddIcon />
@@ -161,7 +197,9 @@ const FlistModal=props=>{
     }
     const renderInputModal=(obj)=>{
       return <>
-        <AppBar className={classes.AppBar} position="static" color="primary">{obj.AppBar}</AppBar>
+        <AppBar className={classes.AppBar} position="relative" >{obj.AppBar}
+        <button className={classes.xButton} onClick={()=>closeFlist()}> x</button>
+        </AppBar>
         <div className={classes.content}>
       
         <Formik
@@ -194,8 +232,8 @@ const FlistModal=props=>{
                    <br/>
                     <br/>
                   <div className={classes.fabButton}>
-                   <Tooltip title="add "  >
-                      <Button color="primary" variant="contained" aria-label="add"  type="submit"
+                   <Tooltip title={obj.button}  >
+                      <Button  className={classes.buttonFlist}variant="contained" aria-label="add"  type="submit"
                         size="small"
                         >
                         {obj.button}

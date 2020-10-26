@@ -232,7 +232,7 @@ const Movie=props=>{
             <div>Vote Rate: {renderVoteRate(item.vote_average)}</div>
             <div>
               {" "}
-              Release_date: {item.release_date
+              Release_date: {item.release_date&&item.release_date
                 .split("-")
                 .reverse()
                 .join("-")}{" "}

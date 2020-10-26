@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { CircularProgress, makeStyles } from "@material-ui/core";
 import React, { useState, useRef, useEffect } from "react";
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -42,7 +42,7 @@ const useStyles =makeStyles(theme=>({
     ULContent:{
         borderRadius:'0.3rem',
         backgroundColor:'white',
-        padding:0,
+        paddingLeft:'2px',
         paddingTop:'1px',
         width:'100%',
     },
@@ -66,7 +66,7 @@ const useStyles =makeStyles(theme=>({
     searchIconDiv:{
         position:'absolute',
         margin:0,
-        top:0,
+        top:1,
         right:0,
         fontSize:'25px',
         '&:hover':{
@@ -116,12 +116,12 @@ const AutoCompleteComponent=props=>{
         let result=null;
         if(render){
             result=<ul className={classes.ULContent}>
-                {SearchResult?SearchResult.map((item,index)=>{
+                {SearchResult.length>0?SearchResult.map((item,index)=>{
                  return <React.Fragment  key={index} >
                  <li className={classes.LIContent} 
                 onClick={()=>SearchForMovie(item.title)}>{item.title}</li>
              </React.Fragment>
-            }):''}
+            }):<li style={{textAlign:'center',listStyle:'none'}}> <CircularProgress size={10} color="secondary" /> Loading</li>}
                
 
             </ul>;

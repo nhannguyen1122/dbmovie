@@ -35,7 +35,9 @@ function* getCastsSaga(action){
  function* SearchSaga(action){
     
     try {
+        
        const apicall= yield call(SearchWithKeyWord,action.payload);
+       console.log(apicall);
        const {results}=apicall.data;
        yield put(actions.SearchSuccess(results));
     } catch (error) {
@@ -65,8 +67,10 @@ function* getCastsSaga(action){
 }
  function* SearchWithKeyWordsaga(action){
     try{
+        yield put(actions.handleOpenBackdrop(true));
         const apicall=yield call(SearchWithKeyWord,action.payload);   
         const {results}=apicall.data;
+        yield put(actions.handleOpenBackdrop(false));
         yield put(actions.SearchWithKeyWordSuccess(results));
     }
     catch(error){

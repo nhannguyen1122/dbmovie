@@ -5,7 +5,6 @@ import PropsTypes from 'prop-types';
 import * as actions from "../action";
 import { bindActionCreators } from 'redux';
 import MenuComponent from '../../component/Header/Menu';
-import spiderman from "../../img/spiderman.jpg";
 import Footer from '../../component/Footer/Footer';
 class MovieDetailsContainer extends Component {
   

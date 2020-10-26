@@ -48,7 +48,10 @@ class FlistContainer extends Component {
             <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
         DrawerModalOpenState={DrawerModalOpenState}/>
        
-        </>:<Redirect to="/homepage"/>)}</>
+        </>:<Redirect to="/homepage"/>)}
+    
+        </>
+        
     }
 }
 

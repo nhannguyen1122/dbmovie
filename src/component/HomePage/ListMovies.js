@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid, Container, Button, makeStyles } from "@material-ui/core";
-import { TopRatedMovie } from "../../styledComponent";
+import { Grid, Container, Button, makeStyles, CircularProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const useStyles=makeStyles({
@@ -9,6 +8,12 @@ const useStyles=makeStyles({
         marginRight:'3%',
         color:'white',
     },
+    h1:{
+        color:'red',
+    userSelect:'none',
+
+    float:'left',
+    }
 })
 
 
@@ -18,7 +23,9 @@ const ListMovie=props=>{
     const handleOpenTopRated=()=>{
         setCurrentTopRatePage(1);
     }
-    return <Container> <TopRatedMovie>{title?"Results":"Top Rated Movie"} </TopRatedMovie> <Grid container spacing={3} >
+    return <Container> <h1 className={classes.h1}>{title?"Results":"Top Rated Movie"} </h1>  
+     <Grid container spacing={3} >
+        
         {props.children}
         </Grid  >
         <br/>

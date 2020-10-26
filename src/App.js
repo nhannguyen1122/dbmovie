@@ -14,7 +14,7 @@ import "./App.css";
 import TrailerModalContainer from './redux/container/TrailerModalContainer';
 function App() {
   return (
-    <div>
+    <div >
     <Router>
     <Switch>
     {

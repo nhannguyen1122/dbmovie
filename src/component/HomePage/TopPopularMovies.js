@@ -7,7 +7,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import { Container, Menu, MenuItem, Grid, Button, Hidden } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import { TopRatedMovie } from "../../styledComponent";
 import toast from "../../Api/toast";
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
@@ -56,9 +55,12 @@ const useStyles = makeStyles((theme) => ({
   DetailIcon:{
     textDecoration:'none'
   },
-  Skeletonimg:{
-    height:'100%',
-    width:'100%'
+  h1:{
+    
+    color:'red',
+    userSelect:'none',
+
+    float:'left',
   }
   
   
@@ -152,7 +154,7 @@ const TopPopularMovies=props=>{
       const render=(results)=>{
         if(results.length>0){
           return <Container>
-          <TopRatedMovie> Popular  Movies</TopRatedMovie>
+          <h1 className={classes.h1}> Popular  Movies</h1>
      {delay?<>
       <Hidden smDown >
         {renderList(4.5,results)}
