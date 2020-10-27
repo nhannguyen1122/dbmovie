@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme)=>({
 
 const FlistSection=props=>{
     const{getMovieyoutube,openDetailDrawer,FlistReducer,
-      getFlist,deleteFlist,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie  }=props;
+      getFlist,deleteFlist,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie,showDetails  }=props;
       // const [listLoading,displayListLoading]=React.useState(true)
     const{list}=FlistReducer;
     
@@ -86,8 +86,10 @@ const FlistSection=props=>{
         
         handleExpandFlist(item._id)
     }
-    const handleOpenDetail=()=>{
-        openDetailDrawer();
+    const handleOpenDetail=(movie)=>{
+        openDetailDrawer(0);
+        showDetails(movie);
+        getMovieyoutube(movie.id);
     }
     const handleOpenDeleteFlist=id=>{
       console.log(id);
@@ -142,7 +144,7 @@ const FlistSection=props=>{
                 {/* <Button variant="contained" color="secondary">update</Button>
                 </Tooltip> */}
                 <Tooltip title="details" >
-                <IconButton  color="primary"className={classes.IconButton}  onClick={()=>handleOpenDetail()}>
+                <IconButton  color="primary"className={classes.IconButton}  onClick={()=>handleOpenDetail(movie)}>
                 <DetailsIcon/>
                 </IconButton>
               </Tooltip>

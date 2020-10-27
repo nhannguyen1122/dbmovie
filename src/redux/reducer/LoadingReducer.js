@@ -8,7 +8,10 @@ let init={
     FlistOpenState:false,
     DrawerModalOpenState:false,
     flistModalType:0,
-    backdropOpenState:false
+    backdropOpenState:false,
+    drawerModalContent:null,
+    
+    
    
 }
  const loadingReducer=(state=init,action)=>{
@@ -17,7 +20,8 @@ let init={
             return {...state,backdropOpenState:action.payload}
         }
         case constants.openDetailDrawer:
-        return {...state,DrawerModalOpenState:true}
+            console.log(action.payload);
+        return {...state,DrawerModalOpenState:true,drawerModalContent:action.payload}
         case constants.closeDetailDrawer:
         return {...state,DrawerModalOpenState:false}
         case constants.openFlist :

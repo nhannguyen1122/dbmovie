@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, makeStyles, Button, Tooltip, GridList, GridListTile, GridListTileBar, IconButton } from "@material-ui/core";
+import { Grid, makeStyles, Button, Tooltip, GridList, GridListTile, GridListTileBar, IconButton, Hidden } from "@material-ui/core";
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
 import PropTypes from 'prop-types';
@@ -14,16 +14,18 @@ const Toast=new toast();
    const useStyles = makeStyles((theme) => ({
       root: {
         backgroundImage:
-          "url('https://images.pexels.com/photos/1379640/pexels-photo-1379640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')",
+          "url('https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')",
         width: "100%",
         fontFamily: '"Montserrat",sans-serif',
         backgroundColor: "rgb(0,0,0.5)",
         margin:0,
-        paddingBottom:3,
+       padding:'30px 0 30px 0'
         
         
       },
       contentSection: {
+        boxShadow: `5px 5px 40px -10px black`,
+        borderRadius:'1rem',
         width: "60%",
         margin: " 0 auto",
         // backgroundColor: " orange",
@@ -38,7 +40,9 @@ const Toast=new toast();
       title: {
         fontSize: 50,
         color: "#e3e0db",
-    
+        [theme.breakpoints.down('sm')]:{
+          fontSize:'30px'
+        },
         fontWeight: 5,
         margin: 0
       },
@@ -105,7 +109,8 @@ const Toast=new toast();
          left:'5%',
         zIndex:"100",
          color:"yellow",
-         top:'60%'
+         top:'60%',
+        
       },
       bgcHover:{
          position: "absolute",
@@ -136,7 +141,7 @@ const config=[{
 }]
 const MovieDetails=props=>{
    const classes=useStyles();
-   const {Details,openTrailer,getMovieyoutube,match,getCasts,casts,openFlist}=props;
+   const {Details,openTrailer,getMovieyoutube,match,getCasts,casts,openFlist,openDetailDrawer,getDetailCast}=props;
    
    
    let imgPath=`https://image.tmdb.org/t/p/w500${Details.poster_path}`;
@@ -164,13 +169,18 @@ const MovieDetails=props=>{
          
       };
    }, []);
+   const handleOpenInfor=id=>{
+    openDetailDrawer(1);
+
+    getDetailCast(id);
+   }
    const renderCarousel=item=>{
       let result='';
       result=<div className={classes.carouselItemContainer}>
          <h2 className={classes.titleCarousel}>{item.name}</h2>
          <img src={item.profile_path?`https://image.tmdb.org/t/p/w500/${item.profile_path}`:`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`} alt={item.name}  className={classes.gridItemListContainerImg}/>
          <span className={classes.bgcHover}></span>
-         <div className={classes.buttonCarouselSection}><Button  variant="outlined" color="secondary">More Infor</Button></div>
+         <div className={classes.buttonCarouselSection}><Button  variant="outlined" color="secondary" onClick={()=>handleOpenInfor(item.id)}>More Infor</Button></div>
       </div>
       return result;
    }
@@ -249,9 +259,16 @@ const MovieDetails=props=>{
           </Grid>
           <div className={classes.carouselContainer}>
          <h2>Casts</h2>
-         <Carousel itemsToShow={4} pagination={false} breakpoints={config} className={classes.Carousel}>
+        <Hidden mdUp>
+        <Carousel itemsToShow={2} pagination={false} breakpoints={config} className={classes.Carousel}>
          {casts.map((item,index)=><React.Fragment key={index}>{renderCarousel(item)}</React.Fragment>)}
          </Carousel>
+        </Hidden>
+        <Hidden smDown>
+        <Carousel itemsToShow={4} pagination={false} breakpoints={config} className={classes.Carousel}>
+         {casts.map((item,index)=><React.Fragment key={index}>{renderCarousel(item)}</React.Fragment>)}
+         </Carousel>
+        </Hidden>
        </div>
         </div>
         

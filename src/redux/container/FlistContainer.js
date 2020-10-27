@@ -3,18 +3,16 @@ import React, { Component } from 'react';
 import FlistSection from '../../component/Flist/FlistSection';
 import Header from '../../component/Header/Header';
 import MenuComponent from '../../component/Header/Menu';
-import AutoCompleteComponent from '../../component/Header/AutoComplete';
 import { bindActionCreators } from 'redux';
 import * as actions from "../action";
-import DetailsModal from '../../component/Modal/DetailModal';
-import Footer from '../../component/Footer/Footer';
+
 import { Redirect } from 'react-router-dom';
 
 class FlistContainer extends Component {
     
     render() {
         const {actions,loadingReducer,FlistReducer}=this.props;
-        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
+        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,showDetails,
             openDetailDrawer,closeDetailDrawer,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie
         }=actions;
         
@@ -42,11 +40,10 @@ class FlistContainer extends Component {
         FlistReducer={FlistReducer}
             getFlist={getFlist}
             setUpdateList={setUpdateList}
-
+            showDetails={showDetails}
             />
            
-            <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
-        DrawerModalOpenState={DrawerModalOpenState}/>
+            
        
         </>:<Redirect to="/homepage"/>)}
     

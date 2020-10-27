@@ -52,7 +52,7 @@ MenuIconButton:{
   
 },
 DrawerContainer:{
-  width:'30vh'
+  width:'25%'
 },
 MenuIconButton1:{
  marginLeft:'25%'
@@ -105,7 +105,7 @@ const MenuComponent=props=>{
     }
     const DesktopMode=()=>{
       return  <>
-      <Grid container spacing={3} className={classes.menuContainer}>
+      <Grid container spacing={0} className={classes.menuContainer}>
         <Grid item md={6}>
             <Link to='/homepage' >
             <IconButton onClick={handleGoHome} >

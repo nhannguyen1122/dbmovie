@@ -24,6 +24,14 @@ export const getCastsOk=res=>{
     return { type:constants.getCastsOk,
     payload:res}
 }
+export const getDetailCast=id=>{
+    return { type:constants.getDetailCast,payload:id}
+}
+export const getDetailCastOk=res=>{
+    return { type:constants.getDetailCastOk,
+    payload:res}
+    
+}
 //api call
 export const SearchForKeyWord=keyword=>{
     return { type:constants.SearchForKeyWord,
@@ -192,8 +200,11 @@ export const closeFlist=()=>{
     }
 }
 //open detai Drawer
-export const openDetailDrawer=()=>{
-    return { type:constants.openDetailDrawer}
+export const openDetailDrawer=(number)=>{
+    return { type:constants.openDetailDrawer,
+        payload:number
+    
+    }
 }
 export const closeDetailDrawer=()=>{
     return { type:constants.closeDetailDrawer}

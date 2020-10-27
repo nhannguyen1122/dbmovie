@@ -14,12 +14,14 @@ class MovieDetailsContainer extends Component {
   }
   render() {
     const{MovieReducer}=this.props;
+    
     const Details=MovieReducer.MovieDetails;
     const {casts}=MovieReducer.DetailsInfor;
     
-    const {match}=this.props;
+    const {match,actions}=this.props;
 
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts,openFlist}=this.props.actions;
+    const {OpenVideoTrailerModal,getMovieyoutube,
+      setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts,openFlist,openDetailDrawer,getDetailCast}=actions;
     const{authState}=this.props;
     console.log('moviecontainer render');
     return (
@@ -29,6 +31,7 @@ class MovieDetailsContainer extends Component {
         handleLogout={handleLogout}
         authState={authState}
         setValueAutocomplete={setValueAutocomplete}
+        
         />
        {Details? <MovieDetails
        openFlist={openFlist}
@@ -38,9 +41,13 @@ class MovieDetailsContainer extends Component {
        openTrailer={OpenVideoTrailerModal}
        Details={Details}
        getMovieyoutube={getMovieyoutube}
+       openDetailDrawer={openDetailDrawer}
+       getDetailCast={getDetailCast}
+       
+       
        
        />:""}
-       <div  className="App"> <Footer/></div>
+       <div> <Footer/></div>
       </div>
     );
   }

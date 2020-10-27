@@ -1,61 +1,175 @@
-import { Drawer, makeStyles } from '@material-ui/core';
-import { YouTube } from '@material-ui/icons';
-import React from 'react';
-import { boolean } from 'yup';
+import { Drawer, LinearProgress, makeStyles } from '@material-ui/core';
+import YouTube from "react-youtube";
 
-const movie={
-    popularity: 38.074,
-    vote_count: 16078,
-    video: false,
-    poster_path: "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
-    id: 122,
-    adult: false,
-    backdrop_path: "/lXhgCODAbBXL5buk9yEmTpOoOgR.jpg",
-    original_language: "en",
-    original_title: "The Lord of the Rings: The Return of the King",
-    genre_ids: [
-    28,
-    12,
-    14
-    ],
-    title: "The Lord of the Rings: The Return of the King",
-    vote_average: 8.5,
-    overview: "Aragorn is revealed as the heir to the ancient kings as he, Gandalf and the other members of the broken fellowship struggle to save Gondor from Sauron's forces. Meanwhile, Frodo and Sam take the ring closer to the heart of Mordor, the dark lord's realm.",
-    release_date: "2003-12-01"
-    }
-
+import React, { useEffect, useRef } from 'react';
     const useStyles = makeStyles(theme=>({
         root:{
-            margin:'10px',
-            width: '45vh'
+            padding:'10px',
+            width: '45vh',
+            background: `linear-gradient(
+                rgba(30,27,38, 0.95), 
+                rgba(30,27,38, 0.95))`,
+            color:'grey',
+           
+        },
+        loading:{
+            width:'45vh',
+            display:'flex',
+            justifyContent:'center',
+            height:'60px',
+            position:'fixed',
+            zIndex:1500
+        },
+        loading1:{
+            display:'none'
+        },
+        root1:{
+           
+            width: '45vh',
+            display:'flex',
+            justifyContent:'center',
+            justifyItems:'center',
+            flexDirection:'column',
+         
+        },
+        h1:{
+           
+            fontFamily:'cursive',
+            color:'orange'
+        },
+        span:{
+            color:"white"
+        },
+        xButtonRight:{
+            backgroundColor:'red',
+            color:'white',
+            outline:'none',
+            border:'none',
+            '&:hover':{
+                cursor:'pointer',
+                color:'yellow',
+
+            },
+            '&:active':{
+              
+                color:'black',
+                
+            }
+
+
+        },
+        xButtonLeft:{
+            marginLeft:'90%',
+            backgroundColor:'red',
+            color:'white',
+            outline:'none',
+            border:'none',
+            borderRadius:'50%',
+            '&:hover':{
+                cursor:'pointer',
+                color:'yellow',
+
+            },
+            '&:active':{
+              
+                color:'black',
+                
+            }
+        },
+        //cast
+        img:{
+            width:'200px',
+            height:'200px',
+            borderRadius:'50%',
+            boxShadow: `5px 5px 40px -10px black`,
+        },
+        imgSection:{
+            background: `linear-gradient(
+                rgba(30,27,38, 0.95), 
+                rgba(30,27,38, 0.95))`,
+            textAlign:'center'
+        },
+        name:{
+            color:'yellow'
+        },
+        spanCast:{
+            fontWeight:'bold'
+        },
+        inforSection:{
+            padding:'10px'
         }
     }))
 const DetailsModal=props=>{
-    const{DrawerModalOpenState,closeDetailDrawer}=props;
-    console.log(DrawerModalOpenState)
+    const{DrawerModalOpenState,closeDetailDrawer,MovieDetails,drawerModalContent,personalCast,MovieTrailerid}=props;
+   
+    const _onReady=(e)=>{
+        e.target.pauseVideo();
+      }
+const opts1 = {
+    height: '190px',
+    width: '340px',
+  
+};
     const classes=useStyles();
+   
     const handleClose = () => {
         closeDetailDrawer();
     }
-    return <>
-    <Drawer  open={DrawerModalOpenState} anchor='right' onClose={handleClose}>
-    
-     <div className={classes.root}>
-         <button>x</button>
-        <h1>{movie.title}</h1>
-        <div><span>Release:</span>{movie.release_date}</div>
-        <div><span>Poppularity:</span>{movie.popularity}</div>
-        <div><span>Vote count:</span>{movie.vote_count}</div>
-        <div><span>Poppularity:</span>{movie.popularity}</div>
-        <div><span>18+:</span>{movie.adult}</div>
-        <div><span>language:</span>{movie.original_language}</div>
-        <div><span>vote_avg:</span>{movie.vote_average}</div>
+    const renderModal=numb=>{
+      if(numb===0){
+          return <div className={classes.root}>
+          <button className={classes.xButtonRight} onClick={handleClose}>x</button>
+          <h1 className={classes.h1}>{MovieDetails.title}</h1>
+        <div> <span className={classes.span}>Release: </span>{MovieDetails.release_date.split("-").reverse().join('-')}</div>
+        <div> <span className={classes.span}>Poppularity: </span>{parseFloat(MovieDetails.popularity).toFixed(2)}</div>
+        <div> <span className={classes.span}>Vote count: </span>{parseFloat(MovieDetails.vote_count).toFixed(2)}</div>
+        <div> <span className={classes.span}>18+: </span>{MovieDetails.adult?'yes':'no'}</div>
+        <div> <span className={classes.span}>language: </span>{MovieDetails.original_language}</div>
+        <div> <span className={classes.span}>vote_avg: </span>{MovieDetails.vote_average}</div>
+        <br/>
+        <div><span className={classes.span}>Trailer</span></div>
+        <br/>
+        <div> <YouTube videoId={MovieTrailerid} opts={opts1} onReady={_onReady} /> </div>
+        <br/>
+        
+        <div><span className={classes.span}>Overview:</span>{MovieDetails.overview}</div>
+        <br/>
+        <img alt='img' style={{width:'100%',height:'40vh'}}src={MovieDetails.backdrop_path?`https://image.tmdb.org/t/p/w500/${MovieDetails.backdrop_path}`:`https://image.tmdb.org/t/p/w500/${MovieDetails.poster_path}`}/>
 
-        <img alt='img' style={{width:'100%',height:'45vh'}}src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>
-        <div>Overview:{movie.overview}</div>
-        <div>trailer</div>
-        {/* <YouTube videoId={} opts={opts} onReady={_onReady} /> */}
+          </div>
+      }
+      else{
+          return<>
+          <div className={classes.root1}>
+              <div className={classes.imgSection}>
+              <button className={classes.xButtonLeft} onClick={handleClose}>x</button>
+          <br/>
+          <img alt='img'className={classes.img}src={personalCast.profile_path?`https://image.tmdb.org/t/p/w500/${personalCast.profile_path}`:'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'}/>
+            <h2 className={classes.name}>{personalCast.name}</h2>
+              </div>
+           
+          <div className={classes.inforSection}>
+          <div> <span className={classes.spanCast}>Stage name: </span>{personalCast.also_known_as?personalCast.also_known_as:'No have'}</div>
+          <div> <span className={classes.spanCast}>Sex: </span>{personalCast.gender===1?'woman':'man'}</div>
+          <div> <span className={classes.spanCast}>Dob: </span>{personalCast.birthday?personalCast.birthday.split('-').reverse().join('-'):'Not update yet'}</div>
+          <div> <span className={classes.spanCast}>Career: </span>{personalCast.known_for_department}</div>
+
+          <div> <span className={classes.spanCast}>Biography: </span>{personalCast.biography?personalCast.biography:'Not update yet'}</div>
+          </div>
+          
+         
      </div>
+        </>
+       
+        
+      }
+    }
+    return <>
+    <Drawer  open={DrawerModalOpenState} anchor={drawerModalContent===0?'right':'left'} onClose={handleClose} >
+    
+     
+         {renderModal(drawerModalContent)}
+   
     </Drawer>
     </>
 }

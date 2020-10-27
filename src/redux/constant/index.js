@@ -5,6 +5,8 @@ export const showDetails="showDetails";
 //show casts
 export const getCasts=`getCasts`;
 export const getCastsOk=`getCastsOk`;
+export const getDetailCast=`getDetailCast`;
+export const getDetailCastOk=`getDetailCastOk`;
 //get api from db
 export const SearchForKeyWord=`SearchForKeyWord`;
 export const SearchSuccess=`SearchSuccess`;

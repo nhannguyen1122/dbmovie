@@ -1,7 +1,8 @@
 import { takeLatest, call, put, takeEvery } from "redux-saga/effects";
 import * as constants from "../redux/constant";
-import { SearchWithKeyWord,GetCastAxios, SearchTopRated, GetYoutubevideoAxios,GetTopRateByPage,GetUpcomingtMovie,GetTopPopularMovies,GetPageAPI } from "../Api/ApiLink";
+import { SearchWithKeyWord,GetCastAxios, SearchTopRated, GetYoutubevideoAxios,GetTopRateByPage,GetUpcomingtMovie,GetTopPopularMovies,GetPageAPI, GetDetailCastAxios } from "../Api/ApiLink";
 import * as actions from "../redux/action";
+import { func } from "prop-types";
 export function* getKeyWordSaga(){
    yield takeLatest(constants.SearchForKeyWord,SearchSaga);
    yield takeLatest(constants.getTopRatedMovie,getTopRatedMoviesaga);
@@ -12,7 +13,17 @@ export function* getKeyWordSaga(){
    yield takeLatest(constants.getPage,getTotalPagesaga);
    yield takeEvery(constants.getTopRatePage,getTopRatePageSaga)
    yield takeEvery(constants.getCasts,getCastsSaga);
-
+   yield takeLatest(constants.getDetailCast,getDetailCastSaga);
+}
+function* getDetailCastSaga(action){
+   try {
+      const res=yield call(GetDetailCastAxios,action.payload);
+      console.log(res);
+      const {data}=res;
+      yield put(actions.getDetailCastOk(data));
+   } catch (error) {
+       console.log(error);
+   }
 }
 function* getCastsSaga(action){
     yield true;

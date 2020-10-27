@@ -36,6 +36,8 @@ const persistConfig={
 }
 const MovieReducer =(state=init,action)=>{
     switch(action.type){
+        case actions.closeDetailDrawer:
+            return{...state,DetailsInfor:{...state.DetailsInfor,personalCast:{}}}
         case actions.OpenVideoTrailerModal:
             return{...state,TrailerOpen:{...state.TrailerOpen,openstate:true}};
         case actions.CloseVideoTrailerModal:
@@ -47,9 +49,12 @@ const MovieReducer =(state=init,action)=>{
         case actions.getCasts:
             return {...state}
         case actions.getCastsOk:
-            console.log('dispatch')
-            return{...state,DetailsInfor:{...state.DetailsInfor,casts:action.payload}}
 
+            return{...state,DetailsInfor:{...state.DetailsInfor,casts:action.payload}}
+        case actions.getDetailCast: 
+            return {...state};
+        case actions.getDetailCastOk: 
+            return {...state,DetailsInfor:{...state.DetailsInfor,personalCast:action.payload}}
             //input
         case actions.SearchForKeyWord:
             return {...state};
