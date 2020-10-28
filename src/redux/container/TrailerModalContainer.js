@@ -40,6 +40,7 @@ import DetailsModal from '../../component/Modal/DetailModal';
               personalCast={personalCast}
         DrawerModalOpenState={DrawerModalOpenState}
         drawerModalContent={drawerModalContent}
+        
         MovieTrailerid={TrailerOpen.MovieTrailer}
         />
               <BackdropModal 

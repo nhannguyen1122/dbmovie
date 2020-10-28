@@ -11,7 +11,12 @@ const useStyles=makeStyles(theme=>({
     },
     root:{
         backgroundColor:'white',
-        width:'20%',
+        [theme.breakpoints.up('md')]:{
+            width:'20%',
+        },
+        [theme.breakpoints.down('sm')]:{
+            width:'50%',
+        },
         borderRadius:'2rem',
         overflow:'hidden',
         border:'none',
@@ -63,13 +68,14 @@ const ResgisterConfirm=props=>{
                  <br/>
                
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid xs={6}>
                 <Button variant="contained" size="small" color="primary" type='reset' onClick={handleOpenRegisterForm}>Yes</Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid xs={6}>
                 <Button variant="contained" size="small" color="primary" onClick={()=>handleCloseRegisterConfirmModal()}>cancel</Button>
             </Grid>
         </Grid>
+        <br/>
         </div>
         </div>
     </Modal>

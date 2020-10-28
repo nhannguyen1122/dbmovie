@@ -29,7 +29,7 @@ class TopRatedMovieContainer extends React.Component {
             getUsername={getUsername}
             setValueAutocomplete={setValueAutocomplete}
             />
-       
+            
           <ListTopRatedMovie>
             {data.map((item,index)=>{
         

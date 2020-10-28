@@ -10,6 +10,7 @@ let init={
     flistModalType:0,
     backdropOpenState:false,
     drawerModalContent:null,
+    loginMobileLoading:false
     
     
    
@@ -29,13 +30,13 @@ let init={
         case constants.closeFlist: 
         return {...state,FlistOpenState:false}
         case constants.handleLeftLoading: 
-        return {...state,leftLoading:true}
+        return {...state,leftLoading:true,loginMobileLoading:true}
         case constants.handleCloseLeftLoading: 
-        return {...state,leftLoading:false}
+        return {...state,leftLoading:false,loginMobileLoading:false}
         case constants.handleRightLoading: 
-        return {...state,rightLoading:true}
+        return {...state,rightLoading:true,loginMobileLoading:true}
         case constants.handleCloseRightLoading: 
-        return {...state,rightLoading:false}
+        return {...state,rightLoading:false,loginMobileLoading:false}
         case constants.handleCloseConfirmModal: 
         return {...state,confirmModalOpenState:false}
         case constants.handleOpenConfirmModal: 

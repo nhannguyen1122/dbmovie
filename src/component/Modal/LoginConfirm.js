@@ -12,7 +12,12 @@ const useStyles=makeStyles(theme=>({
     root:{
         backgroundColor:'white',
     
-        width:'30%',
+        [theme.breakpoints.up('md')]:{
+            width:'30%',
+        },
+        [theme.breakpoints.down('sm')]:{
+            width:'50%',
+        },
         borderRadius:'0.3rem',
         overflow:'hidden',
         border:'none',

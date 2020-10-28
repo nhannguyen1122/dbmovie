@@ -1,12 +1,15 @@
 import React from "react";
 import {
+  Backdrop,
+  CircularProgress,
+  Hidden,
   makeStyles,
  
 } from "@material-ui/core";
 import icon from "../../img/loading.gif"
 
 const useStyles = makeStyles((theme) => ({
-
+  backdrop:{zIndex:2000},
   loginLoadingLeft:{
     textAlign: 'center',
     position: 'fixed',
@@ -46,11 +49,14 @@ const useStyles = makeStyles((theme) => ({
 
 const LoadingComponent = props => {
     const{loadingReducer} = props;
-    const{leftLoading,rightLoading}=loadingReducer;
+    const{leftLoading,rightLoading,loginMobileLoading}=loadingReducer;
   const classes = useStyles();
   return<div>
-     {leftLoading?<div className={classes.loginLoadingLeft}><img src={icon} alt="loading" className={classes.img}/></div>:null}
-     {rightLoading?<div className={classes.loginLoadingRight}><img src={icon} alt="loading"className={classes.img}/></div>:null}
+    <Hidden smDown> {leftLoading?<div className={classes.loginLoadingLeft}><img src={icon} alt="loading" className={classes.img}/></div>:null}
+     {rightLoading?<div className={classes.loginLoadingRight}><img src={icon} alt="loading"className={classes.img}/></div>:null}</Hidden>
+     <Hidden mdUp><Backdrop className={classes.backdrop} open={loginMobileLoading}>
+  <CircularProgress color="primary" />
+</Backdrop></Hidden>
   </div>
   
 

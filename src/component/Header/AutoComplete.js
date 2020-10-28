@@ -44,9 +44,9 @@ const useStyles =makeStyles(theme=>({
         width:'100%',
     },
     LIContent:{
-        paddingLeft:'2%',
+        marginLeft:'2%',
         fontSize:'20px',
-
+      
         listStyle:'none',
         transition:'all ease 0.2s',
        ' &:hover':{
