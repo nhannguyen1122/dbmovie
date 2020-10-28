@@ -1,12 +1,16 @@
 import React from "react";
-import * as actionsConstant from '../constant';
+import * as constants from '../constant';
 let init={
     formValue:'',
+    render:false,
+    
     
 }
 const AutoCompleteReducer=(state=init,action)=>{
     switch(action.type){
-        case actionsConstant.setValueAutocomplete:
+        case  constants.setRender:
+            return {...state,render:action.payload}
+        case constants.setValueAutocomplete:
             return {...state,formValue:action.payload}
         
         default:

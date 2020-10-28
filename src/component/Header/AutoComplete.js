@@ -15,7 +15,8 @@ const useStyles =makeStyles(theme=>({
     },
     AutoCompleteInput:{
         boxShadow: 'inset -12px -8px 40px #464646;',
-        paddingLeft:'2%',
+        
+        paddingLeft:'3%',
         borderRadius:"0.9rem",
         border:'1px solid black',
         transition:'all ease 0.5s', 
@@ -27,19 +28,15 @@ const useStyles =makeStyles(theme=>({
         outline: 'none',
         width:'100%',
         margin:0,
-    lineHeight:'25px',
+        lineHeight:'25px',
         fontSize: '25px',
     },
-    AutoContentULChild:{
+    ULContent:{
         position:'absolute',
         left:'1%',
-        top:'90%',
-        width:'100%',
         boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
         zIndex:100,
         
-    },
-    ULContent:{
         borderRadius:'0.3rem',
         backgroundColor:'white',
         paddingLeft:'2px',
@@ -47,8 +44,9 @@ const useStyles =makeStyles(theme=>({
         width:'100%',
     },
     LIContent:{
+        paddingLeft:'2%',
         fontSize:'20px',
-        borderRadius:'0.4rem',
+
         listStyle:'none',
         transition:'all ease 0.2s',
        ' &:hover':{
@@ -66,7 +64,8 @@ const useStyles =makeStyles(theme=>({
     searchIconDiv:{
         position:'absolute',
         margin:0,
-        top:1,
+        height:'100%',
+        top:0,
         right:0,
         fontSize:'25px',
         '&:hover':{
@@ -79,8 +78,8 @@ const useStyles =makeStyles(theme=>({
 }))
 const AutoCompleteComponent=props=>{
     const classes=useStyles();
-    const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete,SearchSuccess}=props;
-    const[render,setRender]=React.useState(false)
+    const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete,render}=props;
+    // const[render,setRender]=React.useState(false)
   
 
     let persistRef=useRef(null);
@@ -89,57 +88,42 @@ const AutoCompleteComponent=props=>{
     const handleChange=e=>{
         const {value}=e.target;
         setValueAutocomplete(value);
-        if(persistRef.current){
-            clearTimeout(persistRef.current);
-        }
-        persistRef.current=setTimeout(() => {
-            if(!value){
-                SearchSuccess('');
-                setRender(false);
-               
+        if(value){
+            if(persistRef.current){
+                clearTimeout(persistRef.current);
             }
-       else{  
-        SearchForKeyWord(value);
-        setRender(true);  
-       if(SearchResult.length>0){
-       }
-       }
-      }, 900);
+            persistRef.current=setTimeout(() => SearchForKeyWord(value),900);
+        }
+        else{
+            SearchForKeyWord(null);
+        }
     }
     const SearchForMovie=(value)=>{
         SearchWithKeyWord(value);
         setValueAutocomplete(value);
-        setRender(false);
-        SearchSuccess('');
+        SearchForKeyWord(null);
     }
+    const handleSubmit=()=>{
+        if(formValue){
+         SearchForMovie(formValue);
+        }
+     }
     const renderUl=()=>{
         let result=null;
         if(render){
             result=<ul className={classes.ULContent}>
-                {SearchResult.length>0?SearchResult.map((item,index)=>{
+                {SearchResult.length>0&&SearchResult.map((item,index)=>{
                  return <React.Fragment  key={index} >
                  <li className={classes.LIContent} 
                 onClick={()=>SearchForMovie(item.title)}>{item.title}</li>
              </React.Fragment>
-            }):<li style={{textAlign:'center',listStyle:'none'}}> <CircularProgress size={10} color="secondary" /> Loading</li>}
-               
-
+            })}
             </ul>;
         }
         else{
             result=''
         }
         return result;
-    }
-    const handleSubmit=()=>{
-       if(!formValue){
-        setRender(false);
-       }
-       else{
-        SearchForMovie(formValue);
-        SearchSuccess('');
-        setRender(false);
-       }
     }
     return <div >
      <div><h1 className={classes.Title}>MOVIE PROJECT</h1></div>  
@@ -153,11 +137,8 @@ const AutoCompleteComponent=props=>{
                         name="AutoCompleteInput" 
                         placeholder="Enter Keyword"
                         autoComplete="off"/>
-        <div className={classes.searchIconDiv} onClick={handleSubmit}><SearchIcon/></div>
-       
-         <div className={classes.AutoContentULChild}>
+        <SearchIcon className={classes.searchIconDiv} onClick={handleSubmit}/> 
            {renderUl()}
-          </div>
           </div>
            
           

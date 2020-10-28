@@ -32,6 +32,11 @@ export const getDetailCastOk=res=>{
     payload:res}
     
 }
+//set render
+export const setRender=boolean=>{
+    return { type:constants.setRender,
+    payload:boolean}
+}
 //api call
 export const SearchForKeyWord=keyword=>{
     return { type:constants.SearchForKeyWord,

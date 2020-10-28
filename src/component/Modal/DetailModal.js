@@ -1,7 +1,7 @@
-import { Drawer, LinearProgress, makeStyles } from '@material-ui/core';
+import { Drawer, Hidden, makeStyles } from '@material-ui/core';
 import YouTube from "react-youtube";
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
     const useStyles = makeStyles(theme=>({
         root:{
             padding:'10px',
@@ -110,6 +110,10 @@ const opts1 = {
     width: '340px',
   
 };
+const opts={
+    height: '150px',
+    width:'250px',
+}
     const classes=useStyles();
    
     const handleClose = () => {
@@ -129,7 +133,12 @@ const opts1 = {
         <br/>
         <div><span className={classes.span}>Trailer</span></div>
         <br/>
-        <div> <YouTube videoId={MovieTrailerid} opts={opts1} onReady={_onReady} /> </div>
+        <div> <Hidden mdUp>
+          <YouTube videoId={MovieTrailerid} opts={opts} onReady={_onReady} />
+          </Hidden>
+          <Hidden smDown>
+          <YouTube videoId={MovieTrailerid} opts={opts1} onReady={_onReady} />
+          </Hidden> </div>
         <br/>
         
         <div><span className={classes.span}>Overview:</span>{MovieDetails.overview}</div>

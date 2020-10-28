@@ -46,11 +46,23 @@ function* getCastsSaga(action){
  function* SearchSaga(action){
     
     try {
-        
+        if(action.payload){
        const apicall= yield call(SearchWithKeyWord,action.payload);
        console.log(apicall);
        const {results}=apicall.data;
+       if(results.length>0){
        yield put(actions.SearchSuccess(results));
+       yield put(actions.setRender(true));
+        }
+        else{
+            yield put(actions.setRender(false));
+        }
+    }
+
+        else{
+            yield put(actions.setRender(false));
+
+        }
     } catch (error) {
         console.log(error);
     }

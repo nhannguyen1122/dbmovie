@@ -52,7 +52,7 @@ MenuIconButton:{
   
 },
 DrawerContainer:{
-  width:'25%'
+  width:'35vh'
 },
 MenuIconButton1:{
  marginLeft:'25%'

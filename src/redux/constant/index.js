@@ -8,6 +8,7 @@ export const getCastsOk=`getCastsOk`;
 export const getDetailCast=`getDetailCast`;
 export const getDetailCastOk=`getDetailCastOk`;
 //get api from db
+export const setRender=`setRender`;
 export const SearchForKeyWord=`SearchForKeyWord`;
 export const SearchSuccess=`SearchSuccess`;
 // get list by SearchForKeyWord

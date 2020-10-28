@@ -64,10 +64,16 @@ const Footer=props=>{
          <Container>
         <Grid container spacing={2} >
             <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
-            <h2 className={classes.h2}>API FROM</h2>
+            <h2 className={classes.h2}>API From</h2>
             <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The Movie Database (TMDb)" width="130" height="94"/>
             </Grid>
+            <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
+            <h2 className={classes.h2}> About this Project</h2>
+            <div>This project has two part.In the front end, it is included react  combined with redux, redux-saga, formik,axios, React Router , Material UI,etc...
+                In the back end , i am using nodejs-express-jwtoken to build a user favorite list  </div>
+           
 
+            </Grid>
            <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
             <h2 className={classes.h2}> More Infor</h2>
            <span> <IconButton href="https://github.com/nhannguyen1122/dbmovie" ><GitHubIcon className={classes.aContent}/></IconButton></span>
@@ -76,21 +82,16 @@ const Footer=props=>{
 
             </Grid>
 
+            
            <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
-            <h2 className={classes.h2}> Address</h2>
+            <h2 className={classes.h2}> Contact</h2>
             <div><IconButton><PhoneIcon/></IconButton><span>(+84)347541357</span></div>
             <div><IconButton><LocationOnIcon/></IconButton><span>Hà Nội- Việt nam</span></div>
-            <div><IconButton><EmailIcon/></IconButton><span>nhannguyen1122@gmail.com</span></div>
+            <div><IconButton><EmailIcon/></IconButton><span>nhannguyenn1122@gmail.com</span></div>
 
             </Grid>
 
-           <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
-            <h2 className={classes.h2}> About this Project</h2>
-            <div>This project has two part.In the front end, it is included react  combined with redux, redux-saga, formik,axios, React Router , Material UI,etc...
-                In the back end , i am using nodejs-express-jwtoken to build a user favorite list  </div>
            
-
-            </Grid>
 
 
         </Grid>

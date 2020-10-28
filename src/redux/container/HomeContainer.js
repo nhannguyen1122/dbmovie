@@ -29,8 +29,9 @@ import { CircularProgress } from '@material-ui/core';
          
      }
     render() {
-        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState}=this.props;
-        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,SearchWithKeyWord,SearchForKeyWord,getTopRatedMovie}=actions;
+        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,render}=this.props;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,SearchWithKeyWord,
+            setRender,SearchForKeyWord,getTopRatedMovie}=actions;
         return (
             <div >
                <Header>
@@ -41,6 +42,8 @@ import { CircularProgress } from '@material-ui/core';
                    getTopRatedMovie={getTopRatedMovie} />
                    
                    <AutoCompleteComponent
+                   render={render}
+                   setRender={setRender}
                    setValueAutocomplete={setValueAutocomplete}
                    formValue={formValue}
                    SearchResult={SearchResult}
@@ -91,6 +94,7 @@ import { CircularProgress } from '@material-ui/core';
 }
 const mapStateToProps =state=>{
     return {
+        
         MovieReducer:state.MovieReducer.Movies.results,
         title:state.MovieReducer.Movies.title,
         TrailerOpen:state.MovieReducer.MovieDetails,
@@ -98,6 +102,7 @@ const mapStateToProps =state=>{
         topPopularMovie:state.MovieReducer.topPopularMovie,
         upComingMovies:state.MovieReducer.upComingMovies,
         formValue:state.AutoCompleteReducer.formValue,
+        render:state.AutoCompleteReducer.render,
         authState:state.AuthReducer,
         loadingReducer:state.loadingReducer,
        
