@@ -1,9 +1,18 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, makeStyles } from "@material-ui/core";
 import React from "react";
+const useStyles = makeStyles(theme=>({
+        h1:{
+                float:'left',
+                color:'red',
+                userSelect:'none'
+        }
+}))
 const ListTopRatedMovie=props=>{
-return <Grid container spacing={1} >
+        const classes= useStyles();
+return <><h1 className={classes.h1}>Top Rated Movie</h1>
+        <Grid container spacing={1} >
         {props.children}
-        </Grid  >
+        </Grid  ></>
 
 }
 
