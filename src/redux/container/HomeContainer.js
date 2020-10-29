@@ -13,24 +13,14 @@ import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
  class HomeContainer extends Component {
-     componentDidMount(){
-         const {actions,MovieReducer}=this.props;
-         const{getTopRatedMovie,getUpcomingMovie,getTopPopularMovie}=actions;
-         getUpcomingMovie();
-         getTopPopularMovie();
-         if(MovieReducer.length>0){
-
-         }
-         else{
-            getTopRatedMovie();
-         }
-         
-         
-     }
+    
     render() {
-        const{MovieReducer,actions,SearchResult,title,topPopularMovie,upComingMovies,formValue,authState,render}=this.props;
-        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,SearchWithKeyWord,
-            setRender,SearchForKeyWord,getTopRatedMovie}=actions;
+        const{MovieReducer,actions,AutoCompleteReducer,authState}=this.props;
+        const{Movies,topPopularMovie,SearchResult,upComingMovies}=MovieReducer;
+        const{formValue,render}=AutoCompleteReducer;
+        const{results,title}=Movies;
+        const{setValueAutocomplete,handleLogout,getUsername,SearchSuccess,openFlist,SearchWithKeyWord,setCurrentTopRatePage,setRender,
+        SearchForKeyWord,getTopRatedMovie,getUpcomingMovie,getTopPopularMovie,showDetails,getMovieyoutube,OpenVideoTrailerModal}=actions;
         return (
             <div >
                <Header>
@@ -47,44 +37,39 @@ import { bindActionCreators } from 'redux';
                    formValue={formValue}
                    SearchResult={SearchResult}
                    SearchForKeyWord={SearchForKeyWord}
-                SearchWithKeyWord={SearchWithKeyWord}
-                SearchSuccess={SearchSuccess}
-              
-                   />
+                   SearchWithKeyWord={SearchWithKeyWord}
+                   SearchSuccess={SearchSuccess}/>
                    
                </Header>
-               <ListMovie title={title}
-               
-               setCurrentTopRatePage={actions.setCurrentTopRatePage}>
-              {MovieReducer.map((item,index)=>{
+                <ListMovie 
+                  title={title}
+                  getTopRatedMovie={getTopRatedMovie}
+                  setCurrentTopRatePage={setCurrentTopRatePage}>
+                  {results.map((item,index)=>{
                   return <Movie key={index} item={item}
-                  showDetails={actions.showDetails}
-                  getMovieyoutube={actions.getMovieyoutube}
-                  openModal={actions.OpenVideoTrailerModal}
-                  
-                  openFlist={openFlist}
-             
-                  />
-                                        
-              })}
+                  showDetails={showDetails}
+                  getMovieyoutube={getMovieyoutube}
+                  openModal={OpenVideoTrailerModal}
+                  openFlist={openFlist}/>                      
+                  })}
               </ListMovie>
               <UpcomingMovie 
-
-              upComingMovies={upComingMovies}
-              showDetails={actions.showDetails}
-              getMovieyoutube={actions.getMovieyoutube}
-              openFlist={openFlist}
-              openModal={actions.OpenVideoTrailerModal}/>
+                  getUpcomingMovie={getUpcomingMovie}
+                  upComingMovies={upComingMovies}
+                  showDetails={showDetails}
+                  getMovieyoutube={getMovieyoutube}
+                  openFlist={openFlist}
+                  openModal={OpenVideoTrailerModal}/>
               <TopPopularMovies 
-              openFlist={openFlist}
-              topPopularMovie={topPopularMovie}
-              getMovieyoutube={actions.getMovieyoutube}
-                showDetails={actions.showDetails}
-              openModal={actions.OpenVideoTrailerModal} />
-             
+                  getTopPopularMovie={getTopPopularMovie}
+                  openFlist={openFlist}
+                  topPopularMovie={topPopularMovie}
+                  getMovieyoutube={getMovieyoutube}
+                  showDetails={showDetails}
+                  openModal={OpenVideoTrailerModal} />
               <br />
               <br />
-              <div > <Footer/></div>
+              <Footer/>
               
             </div>
         )
@@ -94,17 +79,9 @@ import { bindActionCreators } from 'redux';
 const mapStateToProps =state=>{
     return {
         
-        MovieReducer:state.MovieReducer.Movies.results,
-        title:state.MovieReducer.Movies.title,
-        TrailerOpen:state.MovieReducer.MovieDetails,
-        SearchResult:state.MovieReducer.SearchResult,
-        topPopularMovie:state.MovieReducer.topPopularMovie,
-        upComingMovies:state.MovieReducer.upComingMovies,
-        formValue:state.AutoCompleteReducer.formValue,
-        render:state.AutoCompleteReducer.render,
-        authState:state.AuthReducer,
-        loadingReducer:state.loadingReducer,
-       
+        MovieReducer:state.MovieReducer,
+        AutoCompleteReducer:state.AutoCompleteReducer,
+        authState:state.AuthReducer,       
     }
 }
 const mapDispatchToProps =dispatch=>{

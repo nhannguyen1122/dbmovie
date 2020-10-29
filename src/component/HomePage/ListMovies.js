@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Container, Button, makeStyles, CircularProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,10 @@ const useStyles=makeStyles({
 
 const ListMovie=props=>{
     const classes= useStyles();
-    const{title,setCurrentTopRatePage}=props;
+    const{title,setCurrentTopRatePage,getTopRatedMovie}=props;
+    useEffect(()=>{
+        getTopRatedMovie();
+    },[])
     const handleOpenTopRated=()=>{
         setCurrentTopRatePage(1);
     }

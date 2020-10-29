@@ -13,19 +13,15 @@ class MovieDetailsContainer extends Component {
   
   }
   render() {
-    const{MovieReducer}=this.props;
-    
+    const{MovieReducer,match,actions,authState}=this.props;
+    const{DetailsInfor}=MovieReducer;
     const Details=MovieReducer.MovieDetails;
-    const {casts}=MovieReducer.DetailsInfor;
-    
-    const {match,actions}=this.props;
-
-    const {OpenVideoTrailerModal,getMovieyoutube,
-      setValueAutocomplete,handleLogout,getUsername,getTopRatedMovie,getCasts,openFlist,openDetailDrawer,getDetailCast}=actions;
-    const{authState}=this.props;
-    console.log('moviecontainer render');
+    const {casts}=DetailsInfor;
+    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,
+    getUsername,getTopRatedMovie,getCasts,openFlist,openDetailDrawer,getDetailCast}=actions;
+   
     return (
-      <div >
+      < >
         <MenuComponent getTopRatedMovie={getTopRatedMovie}
         getUsername={getUsername}
         handleLogout={handleLogout}
@@ -47,8 +43,8 @@ class MovieDetailsContainer extends Component {
        
        
        />:""}
-       <div> <Footer/></div>
-      </div>
+        <Footer/>
+      </>
     );
   }
 }
@@ -66,6 +62,6 @@ const mapDispatchToProps = dispatch => {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsContainer)
 MovieDetailsContainer.propsTypes={
-  MovieDetails:PropsTypes.object,
-  actions:PropsTypes.object,
+  // MovieDetails:PropsTypes.object,
+  // actions:PropsTypes.object,
 }

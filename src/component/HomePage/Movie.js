@@ -142,7 +142,7 @@ const Movie=props=>{
       let setTimeske=setTimeout(() => {
         setTime(true);
       }, 2000);
-      
+
       return()=> clearTimeout(setTimeske);
     },[]);
     const handleOpen=(item)=>{
@@ -249,49 +249,8 @@ const Movie=props=>{
    
     style={{ transformOrigin: '0 0 0' }}
     {...(checked ? { timeout: 1000 } : {})}
-  ><Grid item sm={6} md={3} xs={12} >
+  ><Grid item sm={6} md={4} lg={3} xs={12} >
     {renderMovie()}
-    {/* <Card className={classes.root}  >
-      <div >
-      <CardActionArea  className={classes.CardContentArea} >
-       {delay?<> <CardMedia
-          className={classes.media}
-          image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-          title="Contemplative Reptile"
-        />
-        <CardContent >
-        <Typography  gutterBottom variant="h6" component="h5">
-         {item.title}
-        </Typography>
-      
-      </CardContent></>
-        :<Skeleton animation='wave' className={classes.mediaskeleton }/>}
-       
-      </CardActionArea>
-      </div>
-      {delay?<>
-        <CardActions>
-      <Tooltip title="Trailer">
-        <Button size="small" color="primary" onClick={()=>handleOpen(item)}>
-        <YouTubeIcon className={classes.youtube} /> 
-        </Button>
-      </Tooltip>
-      <Tooltip title="Details">
-       <Link to={params(item.id)}>
-       <Button size="small" color="primary" onClick={()=>{handleOpenDetails(item)}}>
-       <DetailsIcon />
-        </Button>
-        </Link>
-        </Tooltip>
-        <Tooltip title="Add to favorites">
-        <Button size="small" color="primary" onClick={handleAddToFlist}>
-         <PlaylistAddIcon/>  
-        </Button>
-        </Tooltip>
-      </CardActions>
-      </>:<><Skeleton animation='wave'  className={classes.cardactionskeleton}/></>}
-    </Card> */}
-        
         </Grid>
         </Grow>
 

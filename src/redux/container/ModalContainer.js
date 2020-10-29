@@ -34,7 +34,8 @@ import DetailsModal from '../../component/Modal/DetailModal';
               addMovieToFlist={addMovieToFlist}
               MovieDetails={MovieDetails}
               />
-              <DetailsModal openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
+              <DetailsModal openDetailDrawer={openDetailDrawer}
+              closeDetailDrawer={closeDetailDrawer}
               MovieDetails={MovieDetails}
               personalCast={personalCast}
               DrawerModalOpenState={DrawerModalOpenState}

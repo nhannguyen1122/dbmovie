@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
 const Toast=new toast(); 
 
 const UpcomingMovie=props=>{
+  const classes = useStyles();
+  const{openModal,showDetails,getMovieyoutube,openFlist,getUpcomingMovie}=props;
+  const results=props.upComingMovies;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [item,setItem]=React.useState({});
   const[delay,setTime]=React.useState(false);
@@ -76,6 +79,7 @@ const UpcomingMovie=props=>{
     let settimeoutskeletons=setTimeout(() => {
       setTime(true);
     },2000);
+    getUpcomingMovie();
     return ()=>clearTimeout(settimeoutskeletons);
   },[])
     
@@ -149,9 +153,7 @@ const UpcomingMovie=props=>{
       </GridList>
         </>
       }
-      const classes = useStyles();
-      const{openModal,showDetails,getMovieyoutube,openFlist}=props;
-      const results=props.upComingMovies;
+    
 
       const render=(results)=>{
         if(results.length>0){

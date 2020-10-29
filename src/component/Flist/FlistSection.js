@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Collapse, Container, Divider, Fab, Fade, Grid, Grow, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Slide, Tooltip } from "@material-ui/core";
+import { Button, CircularProgress, Collapse, Container, Divider, Fab, Fade, Grid, Grow, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Slide, Tooltip } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import React from "react";
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme)=>({
     imageSection:{
       marginRight:'10px',
       width:'150px',
-      height:'200px'
+      height:'200px',
+      boxShadow: `5px 5px 40px -10px black`,
     },
     flistSection:{
         borderRadius:'0.5rem',
@@ -56,6 +57,15 @@ const useStyles = makeStyles((theme)=>({
         margin:'0 auto',
         borderRadius:'0.5rem',
       },
+      nestedMobile:{
+        paddingTop:'5px',
+        border:'2px solid black',
+        backgroundColor:'#aaaab6',
+        margin:'0 auto',
+        borderRadius:'0.5rem',
+        textAlign:'center'
+        
+      },
       IconButton:{
         '&:hover':{
           color:'yellow'
@@ -66,6 +76,12 @@ const useStyles = makeStyles((theme)=>({
           color:'yellow',
           cursor:'pointer',
         }
+      },
+      mobileButtonSection:{
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'row',
+        itemAlign:'center'
       }
     
 }))
@@ -92,7 +108,6 @@ const FlistSection=props=>{
         getMovieyoutube(movie.id);
     }
     const handleOpenDeleteFlist=id=>{
-      console.log(id);
       deleteFlist(id);
     }
     const handleAdd=()=>{
@@ -104,9 +119,46 @@ const FlistSection=props=>{
 
     }
     const handleDeleteMovieFromList=(movieid,listid)=>{
-      console.log('movieid',movieid);
-      console.log('listid',listid);
       handleDeleteMovie({id:`${listid}-${movieid}`});
+    }
+    const renderDesktopList=(movie,item)=>{
+      return <List component="div" disablePadding>
+      <ListItem  className={classes.nested}>
+        <ListItemIcon>
+          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img" className={classes.imageSection}/>
+        </ListItemIcon>
+        <ListItemText primary={movie.title} />
+            <Tooltip title="details" >
+            <IconButton  color="primary"className={classes.IconButton}  onClick={()=>handleOpenDetail(movie)}>
+            <DetailsIcon/>
+            </IconButton>
+          </Tooltip>
+          
+          <Tooltip title="remove from list" >
+            <IconButton  color="secondary"className={classes.IconButton}  onClick={()=>handleDeleteMovieFromList(movie.id,item._id)}>
+            <DeleteForeverIcon/>
+            </IconButton>
+          </Tooltip>
+      </ListItem>
+    </List>
+    }
+    const renderMobileList=(movie,item)=>{
+      return<Container className={classes.nestedMobile}>
+         <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img" className={classes.imageSection}/>
+        <div>{movie.title}</div>
+        <div className={classes.mobileButtonSection}>
+        <Tooltip title="details" >
+            <IconButton  color="primary"className={classes.IconButton}  onClick={()=>handleOpenDetail(movie)}>
+            <DetailsIcon/>
+            </IconButton>
+          </Tooltip>
+        <Tooltip title="remove from list" >
+            <IconButton  color="secondary"className={classes.IconButton}  onClick={()=>handleDeleteMovieFromList(movie.id,item._id)}>
+            <DeleteForeverIcon/>
+            </IconButton>
+          </Tooltip>
+        </div>
+      </Container>
     }
     return <Container>
         <Fade in={true}>
@@ -123,7 +175,6 @@ const FlistSection=props=>{
                 <UpdateIcon/>
                 </IconButton>
               </Tooltip>
-                
               <Tooltip title="delete" >
                 <IconButton  color="secondary"className={classes.IconButton} onClick={()=>handleOpenDeleteFlist(item._id)} >
                 <DeleteForeverIcon/>
@@ -133,29 +184,8 @@ const FlistSection=props=>{
         </ListItem>
         <Collapse in={item.ExpandMore} timeout="auto" unmountOnExit>
         {item.movies.length>0?item.movies.map((movie,index)=>{
-          return  <List component="div" disablePadding key={index}>
-          <ListItem  className={classes.nested}>
-            <ListItemIcon>
-              <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img" className={classes.imageSection}/>
-            </ListItemIcon>
-            <ListItemText primary={movie.title} />
-            
-            {/* <Tooltip title="update">
-                {/* <Button variant="contained" color="secondary">update</Button>
-                </Tooltip> */}
-                <Tooltip title="details" >
-                <IconButton  color="primary"className={classes.IconButton}  onClick={()=>handleOpenDetail(movie)}>
-                <DetailsIcon/>
-                </IconButton>
-              </Tooltip>
-              
-              <Tooltip title="remove from list" >
-                <IconButton  color="secondary"className={classes.IconButton}  onClick={()=>handleDeleteMovieFromList(movie.id,item._id)}>
-                <DeleteForeverIcon/>
-                </IconButton>
-              </Tooltip>
-          </ListItem>
-        </List>
+          return<React.Fragment key={index}>  <Hidden xsDown>{renderDesktopList(movie,item)}</Hidden>
+                  <Hidden smUp>{renderMobileList(movie,item)}</Hidden></React.Fragment>
      }): <ListItem  className={classes.nested}>
           No movies
        </ListItem>}

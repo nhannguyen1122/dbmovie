@@ -148,9 +148,11 @@ const TopPopularMovies=props=>{
         </>
       }
       const classes = useStyles();
-      const{openModal,showDetails,getMovieyoutube,openFlist}=props;
+      const{openModal,showDetails,getMovieyoutube,openFlist,getTopPopularMovie}=props;
       const results=props.topPopularMovie;
-
+      useEffect(()=>{
+        getTopPopularMovie();
+      },[])
       const render=(results)=>{
         if(results.length>0){
           return <Container>

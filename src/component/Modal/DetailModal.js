@@ -97,6 +97,9 @@ import React from 'react';
         },
         inforSection:{
             padding:'10px'
+        },
+        youtubeSection:{
+            textAlign:'center'
         }
     }))
 const DetailsModal=props=>{
@@ -107,12 +110,12 @@ const DetailsModal=props=>{
       }
 const opts1 = {
     height: '190px',
-    width: '340px',
+    width: '230px',
   
 };
 const opts={
     height: '150px',
-    width:'250px',
+    width:'200px',
 }
     const classes=useStyles();
    
@@ -133,7 +136,7 @@ const opts={
         <br/>
         <div><span className={classes.span}>Trailer</span></div>
         <br/>
-        <div> <Hidden mdUp>
+        <div className={classes.youtubeSection}> <Hidden mdUp>
           <YouTube videoId={MovieTrailerid} opts={opts} onReady={_onReady} />
           </Hidden>
           <Hidden smDown>

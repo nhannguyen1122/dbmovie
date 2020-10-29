@@ -11,30 +11,31 @@ import  "../../App.css";
 import MenuComponent from '../../component/Header/Menu';
 class TopRatedMovieContainer extends React.Component {
     componentDidMount(){
-        const{actions,current}=this.props;
-        const{getPage, getTopRatePage}=actions;
+        const{actions}=this.props;
+        const{getPage}=actions;
         getPage();
-        getTopRatePage(current);
+        
     }
 
     render(){
         const{totalpage,data,actions,current}=this.props;
         const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
-            getUsername,getMovieyoutube,showDetails,getTopRatedMovie,
-            setValueAutocomplete,openFlist}=actions;
+        getUsername,getMovieyoutube,showDetails,getTopRatedMovie,
+        setValueAutocomplete,openFlist}=actions;
       
-        return  <>
+        return <>
             <Container>
             <MenuComponent getTopRatedMovie={getTopRatedMovie}
             getUsername={getUsername}
             setValueAutocomplete={setValueAutocomplete}
             />
-            
-          <ListTopRatedMovie>
-            {data.map((item,index)=>{
         
-        return <React.Fragment key={index}>
-           
+            <ListTopRatedMovie
+            current={current}
+            getTopRatePage={getTopRatePage}
+            >
+            {data.map((item,index)=>{
+            return <React.Fragment key={index}>
             <TopRatedMovie 
             openModal={OpenVideoTrailerModal}
             getMovieyoutube={getMovieyoutube}
@@ -42,21 +43,17 @@ class TopRatedMovieContainer extends React.Component {
             openFlist={openFlist}
             item={item} key={index}/></React.Fragment>
             })}
-
-        </ListTopRatedMovie>
-        <br/>
-
-      <div> <PaginationComponent totalpage={totalpage} 
-      getTopRatePage={getTopRatePage}
-      setCurrentTopRatePage={setCurrentTopRatePage}
-      current={current}
-      /></div>
-      <br/>
-      <br/>
-      </Container>
-      <div  className="App">
-      <Footer />
-        </div>
+            </ListTopRatedMovie>
+            <br/>
+            <div> <PaginationComponent totalpage={totalpage} 
+            getTopRatePage={getTopRatePage}
+            setCurrentTopRatePage={setCurrentTopRatePage}
+            current={current}
+            /></div>
+            <br/>
+            <br/>
+            </Container>
+            <Footer />
         </>
     }
 }
