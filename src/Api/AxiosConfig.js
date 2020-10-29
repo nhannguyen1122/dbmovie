@@ -2,12 +2,12 @@ import axios from "axios";
 
 class AxiosConfig{
     constructor(){
-       this.instance=axios.create();
+       this.flistInstance=axios.create();
        //handleling before make a request
-       this.instance.interceptors.request.use(function (config) {
-           console.log(config);
+       this.flistInstance.interceptors.request.use(function (config) {
+           console.log('config:',config);
         let token=JSON.parse(localStorage.getItem('user'));
-        if(token){
+        if(token&&config.url.includes(`https://backendapinodejs.herokuapp.com`)){
              config.headers.common['Authorization']=`Bearer ${token}`
         }
         else{
@@ -23,16 +23,16 @@ class AxiosConfig{
        );
     }
     get(url){
-        return this.instance.get(url);
+        return this.flistInstance.get(url);
     }
     post(url,data){
-        return  this.instance.post(url,data);
+        return  this.flistInstance.post(url,data);
     }
     patch(url,data){
-        return this.instance.patch(url,data);
+        return this.flistInstance.patch(url,data);
     }
     delete(url){
-        return this.instance.delete(url);
+        return this.flistInstance.delete(url);
     }
 }
 export default new AxiosConfig();

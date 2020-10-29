@@ -12,35 +12,36 @@ class FlistContainer extends Component {
     
     render() {
         const {actions,loadingReducer,FlistReducer}=this.props;
-        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,showDetails,
-            openDetailDrawer,closeDetailDrawer,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie
-        }=actions;
+        const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
+        showDetails,openDetailDrawer,closeDetailDrawer,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie}=actions;
         
         const{DrawerModalOpenState}=loadingReducer;
         let token= localStorage.getItem('user');
         let username = localStorage.getItem('username')
         return<>{ 
-        (token&&username?<>
+        (token&&username?
+        <>
             <Header>
-                <MenuComponent getUsername={getUsername}
-                 setValueAutocomplete={setValueAutocomplete}
-                 getTopRatedMovie={getTopRatedMovie}
-                 handleLogout={handleLogout}
-                />
-               
+            <MenuComponent 
+                getUsername={getUsername}
+                setValueAutocomplete={setValueAutocomplete}
+                getTopRatedMovie={getTopRatedMovie}
+                handleLogout={handleLogout}/>
             </Header>
 
-            <FlistSection getMovieyoutube={getMovieyoutube}
-            handleDeleteMovie={handleDeleteMovie}
-            openFlist={openFlist}
-        openDetailDrawer={openDetailDrawer}closeDetailDrawer={closeDetailDrawer}
-        DrawerModalOpenState={DrawerModalOpenState}
-        deleteFlist={deleteFlist}
-        handleExpandFlist={handleExpandFlist}
-        FlistReducer={FlistReducer}
-            getFlist={getFlist}
-            setUpdateList={setUpdateList}
-            showDetails={showDetails}
+            <FlistSection
+                getMovieyoutube={getMovieyoutube}
+                handleDeleteMovie={handleDeleteMovie}
+                openFlist={openFlist}
+                openDetailDrawer={openDetailDrawer}
+                closeDetailDrawer={closeDetailDrawer}
+                DrawerModalOpenState={DrawerModalOpenState}
+                deleteFlist={deleteFlist}
+                handleExpandFlist={handleExpandFlist}
+                FlistReducer={FlistReducer}
+                getFlist={getFlist}
+                setUpdateList={setUpdateList}
+                showDetails={showDetails}
             />
            
             
@@ -54,7 +55,6 @@ class FlistContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        authState:state.AuthReducer,
         loadingReducer:state.loadingReducer,
         FlistReducer:state.FlistReducer
     }

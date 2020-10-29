@@ -11,7 +11,8 @@ import {
 import { Routes } from './Routes';
 import "./App.css";
 
-import TrailerModalContainer from './redux/container/TrailerModalContainer';
+import Modal from './redux/container/ModalContainer';
+import GlobalLoadingContainer from './redux/container/GlobalLoadingContainer';
 function App() {
   return (
     <div >
@@ -27,7 +28,7 @@ function App() {
       }
      
       </Switch>
-      <TrailerModalContainer/>
+      <GlobalLoadingContainer/>
       <ToastContainer/>
       </Router>
      

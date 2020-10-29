@@ -12,7 +12,6 @@ import TopPopularMovies from '../../component/HomePage/TopPopularMovies';
 import * as actions from "../action";
 import "../../App.css";
 import { bindActionCreators } from 'redux';
-import { CircularProgress } from '@material-ui/core';
  class HomeContainer extends Component {
      componentDidMount(){
          const {actions,MovieReducer}=this.props;

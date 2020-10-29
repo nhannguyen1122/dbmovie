@@ -83,10 +83,9 @@ const useStyles = makeStyles(theme=>({
 const FlistModal=props=>{
  
     const {FlistOpenState,closeFlist,flistModalType,addNewFlist,updateList,handleUpdateList,getFlist,list,addMovieToFlist,MovieDetails}=props;
-    console.log(list);
     
+    console.log(list);
     useEffect(()=>{
-      
       getFlist();
     },[])
     const addToFlist={

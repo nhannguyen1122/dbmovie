@@ -36,7 +36,6 @@ const useStyles =makeStyles(theme=>({
         left:'1%',
         boxShadow: '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
         zIndex:100,
-        
         borderRadius:'0.3rem',
         backgroundColor:'white',
         paddingLeft:'2px',
@@ -44,7 +43,7 @@ const useStyles =makeStyles(theme=>({
         width:'100%',
     },
     LIContent:{
-        marginLeft:'2%',
+        paddingLeft:'2%',
         fontSize:'20px',
       
         listStyle:'none',
@@ -79,9 +78,6 @@ const useStyles =makeStyles(theme=>({
 const AutoCompleteComponent=props=>{
     const classes=useStyles();
     const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete,render}=props;
-    // const[render,setRender]=React.useState(false)
-  
-
     let persistRef=useRef(null);
     
     

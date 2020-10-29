@@ -18,7 +18,6 @@ export function* getKeyWordSaga(){
 function* getDetailCastSaga(action){
    try {
       const res=yield call(GetDetailCastAxios,action.payload);
-      console.log(res);
       const {data}=res;
       yield put(actions.getDetailCastOk(data));
    } catch (error) {
@@ -47,9 +46,8 @@ function* getCastsSaga(action){
     
     try {
         if(action.payload){
-       const apicall= yield call(SearchWithKeyWord,action.payload);
-       console.log(apicall);
-       const {results}=apicall.data;
+       const res= yield call(SearchWithKeyWord,action.payload);
+       const {results}=res.data;
        if(results.length>0){
        yield put(actions.SearchSuccess(results));
        yield put(actions.setRender(true));
@@ -69,8 +67,8 @@ function* getCastsSaga(action){
 }
  function* getTotalPagesaga(){
     try {
-        const apicall=yield call(GetPageAPI);
-        const{total_pages}=apicall.data;
+        const res=yield call(GetPageAPI);
+        const{total_pages}=res.data;
         yield put(actions.getTotalPage(total_pages));
     }
     catch(err){
@@ -79,9 +77,9 @@ function* getCastsSaga(action){
 }
  function* getTopRatedMoviesaga(){
     try{
-        const apicall=yield call(SearchTopRated);
+        const res=yield call(SearchTopRated);
     
-        const {results}=apicall.data;
+        const {results}=res.data;
         yield put(actions.getTopRatedMovieSuccess(results));
     }
     catch(error){
@@ -91,8 +89,8 @@ function* getCastsSaga(action){
  function* SearchWithKeyWordsaga(action){
     try{
         yield put(actions.handleOpenBackdrop(true));
-        const apicall=yield call(SearchWithKeyWord,action.payload);   
-        const {results}=apicall.data;
+        const res=yield call(SearchWithKeyWord,action.payload);   
+        const {results}=res.data;
         yield put(actions.handleOpenBackdrop(false));
         yield put(actions.SearchWithKeyWordSuccess(results));
     }

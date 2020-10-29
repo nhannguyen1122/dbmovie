@@ -76,7 +76,7 @@ const FlistSection=props=>{
       // const [listLoading,displayListLoading]=React.useState(true)
     const{list}=FlistReducer;
     
-    console.log(list);
+    console.log("flist");
    
     const classes = useStyles();
     useEffect(()=>{

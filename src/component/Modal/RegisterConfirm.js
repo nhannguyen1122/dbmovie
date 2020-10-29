@@ -68,10 +68,10 @@ const ResgisterConfirm=props=>{
                  <br/>
                
         <Grid container spacing={2}>
-            <Grid xs={6}>
+            <Grid item xs={6}>
                 <Button variant="contained" size="small" color="primary" type='reset' onClick={handleOpenRegisterForm}>Yes</Button>
             </Grid>
-            <Grid xs={6}>
+            <Grid  item xs={6}>
                 <Button variant="contained" size="small" color="primary" onClick={()=>handleCloseRegisterConfirmModal()}>cancel</Button>
             </Grid>
         </Grid>

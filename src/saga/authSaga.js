@@ -63,7 +63,6 @@ function * handleLoginSaga(action) {
     const {payload} = action;
     console.log(payload)
     const res = yield call(axiosCall.loginAxios, payload);
-    console.log(res);
     const {token, msg} = res.data;
     yield put(actions.handleLoginOk(token));
     Toast.success(msg);
@@ -73,9 +72,7 @@ function * handleLoginSaga(action) {
 
     yield put(actions.handleCloseLeftLoading());
   } catch (err) {
-    console.log(err);
     const errorsMessage = err.response.data;
-    console.log(errorsMessage);
     Toast.error(errorsMessage.msg);
     yield delay(2000);
 
