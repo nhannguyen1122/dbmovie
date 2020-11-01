@@ -1,4 +1,5 @@
-import { Button, CircularProgress, Collapse, Container, Divider, Fab, Fade, Grid, Grow, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Slide, Tooltip } from "@material-ui/core";
+import {  Collapse, Container, Fab, Fade,Hidden, 
+  IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Tooltip } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import React from "react";
 import AddIcon from '@material-ui/icons/Add';
@@ -6,6 +7,7 @@ import DetailsIcon from '@material-ui/icons/Details';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import UpdateIcon from '@material-ui/icons/Update';
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 const useStyles = makeStyles((theme)=>({
     root:{
         backgroundColor:'#403f4d',
@@ -87,16 +89,14 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 const FlistSection=props=>{
-    const{getMovieyoutube,openDetailDrawer,FlistReducer,
-      getFlist,deleteFlist,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie,showDetails  }=props;
+    const{getMovieyoutube,openDetailDrawer,FlistReducer,getFlist,deleteFlist,
+    openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie,showDetails  }=props;
       // const [listLoading,displayListLoading]=React.useState(true)
     const{list}=FlistReducer;
-    
-    console.log("flist");
-   
     const classes = useStyles();
     useEffect(()=>{
       getFlist();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleClick=(item)=>{
         
@@ -191,17 +191,23 @@ const FlistSection=props=>{
        </ListItem>}
       
     </Collapse>
-    
-
-    
       </List>
         </React.Fragment>
         }):<h1 className={classes.title}>No List</h1>}
-
-    
-
         </div>
         </Fade>
     </Container>
 }
 export default FlistSection;
+FlistSection.propTypes = {
+  getMovieyoutube:PropTypes.func,
+  openDetailDrawer:PropTypes.func,
+  FlistReducer:PropTypes.object,
+  getFlist:PropTypes.func,
+  deleteFlist:PropTypes.func,
+  openFlist:PropTypes.func,
+  handleExpandFlist:PropTypes.func,
+  setUpdateList:PropTypes.func,
+  handleDeleteMovie:PropTypes.func,
+  showDetails:PropTypes.func,
+}

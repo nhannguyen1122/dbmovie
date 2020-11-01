@@ -46,7 +46,8 @@ import { bindActionCreators } from 'redux';
                   getTopRatedMovie={getTopRatedMovie}
                   setCurrentTopRatePage={setCurrentTopRatePage}>
                   {results.map((item,index)=>{
-                  return <Movie key={index} item={item}
+                  return <Movie key={index} 
+                  item={item}
                   showDetails={showDetails}
                   getMovieyoutube={getMovieyoutube}
                   openModal={OpenVideoTrailerModal}
@@ -92,3 +93,40 @@ const mapDispatchToProps =dispatch=>{
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
 
+HomeContainer.propTypes={
+    MovieReducer:PropTypes.shape({
+        SearchResult:PropTypes.array,
+        Movies:PropTypes.shape({
+            title:PropTypes.bool,
+            results:PropTypes.array
+        }),
+        TopRatedMovie:PropTypes.shape({
+            results:PropTypes.array,
+            total:PropTypes.number,
+            current:PropTypes.number,
+        }),
+        MovieDetails:PropTypes.object,
+        DetailsInfor:PropTypes.shape({
+            casts:PropTypes.array,
+            personalCast:PropTypes.object
+    
+        }),
+        TrailerOpen:PropTypes.shape({
+            openstate:PropTypes.bool,
+            MovieTrailer:PropTypes.string
+        }),
+        topPopularMovie:PropTypes.array,
+        upComingMovies:PropTypes.array,
+    }),
+    actions:PropTypes.object,
+    AutoCompleteReducer:PropTypes.shape({
+        formValue:PropTypes.string,
+        render:PropTypes.bool,
+        
+    }),
+    authState:PropTypes.shape({
+        loginFormOpenState:PropTypes.bool,
+        registerFormOpenState:PropTypes.bool,
+        isLogin:PropTypes.bool
+      }),
+}

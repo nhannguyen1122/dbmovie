@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Grid, makeStyles,   IconButton, Grow, Tooltip  } from "@material-ui/core";
 import PropTypes from "prop-types";
-
 import DetailsIcon from "@material-ui/icons/Details";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import Skeleton from '@material-ui/lab/Skeleton';
-
 import { Link } from "react-router-dom";
 import ToastConfig from "../../Api/toast";
 let Toast=new ToastConfig();
@@ -131,19 +128,12 @@ const Movie=props=>{
 
     const classes = useStyles();
     const{item,openModal,showDetails,getMovieyoutube,openFlist}=props;
-    
     const params=id=>{
       return `/details/${id}`
     }
-    const[delay,setTime]=useState(false);
     const [checked, setChecked] = useState(false);
     useEffect(()=>{
       setChecked((prev) => !prev);
-      let setTimeske=setTimeout(() => {
-        setTime(true);
-      }, 2000);
-
-      return()=> clearTimeout(setTimeske);
     },[]);
     const handleOpen=(item)=>{
         //dispatch action open modal video
@@ -261,7 +251,8 @@ const Movie=props=>{
 export default Movie;
 Movie.propsTypes = {
   item: PropTypes.object,
-  openModal:PropTypes.object,
-  showDetails:PropTypes.object,
-  getMovieyoutube:PropTypes.object,
+  openModal:PropTypes.func,
+  showDetails:PropTypes.func,
+  getMovieyoutube:PropTypes.func,
+  openFlist:PropTypes.func
 }

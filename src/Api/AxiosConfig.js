@@ -5,7 +5,6 @@ class AxiosConfig{
        this.flistInstance=axios.create();
        //handleling before make a request
        this.flistInstance.interceptors.request.use(function (config) {
-           console.log('config:',config);
         let token=JSON.parse(localStorage.getItem('user'));
         if(token&&config.url.includes(`https://backendapinodejs.herokuapp.com`)){
              config.headers.common['Authorization']=`Bearer ${token}`

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
-import {  Button, makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText, Tooltip, Collapse } from '@material-ui/core';
+import {   makeStyles, Grid, IconButton, Container, Drawer, Divider, ListItem, ListItemIcon, ListItemText, Tooltip, Collapse } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import HomeIcon from '@material-ui/icons/Home';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import List from '@material-ui/core/List';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import StarBorder from '@material-ui/icons/StarBorder';
-
 const useStyles=makeStyles(theme=>({
   Icon1:{
     fontSize:'40px',
@@ -20,7 +19,6 @@ const useStyles=makeStyles(theme=>({
     "&:hover":{
       color:'yellow'
   }
-  
 },
 IconMobile:{
   fontSize:'20px',
@@ -64,29 +62,28 @@ menuName:{
 }))
 
 const MenuComponent=props=>{
-  const {getUsername,getTopRatedMovie,setValueAutocomplete,handleLogout}=props;
-  const[openDrawer,setStateDrawer]=useState(false)
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [expandOpen,setExpandOpen] = useState(false);
-  const open = Boolean(anchorEl);
-  const classes=useStyles();
+    const {getUsername,setValueAutocomplete,handleLogout,getTopRatedMovie}=props;
+    const[openDrawer,setStateDrawer]=useState(false)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [expandOpen,setExpandOpen] = useState(false);
+    const open = Boolean(anchorEl);
+    const classes=useStyles();
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
     useEffect(()=>{
       getUsername();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleClose = () => {
       setAnchorEl(null);
     };
     const handleGoHome1=()=>{
       setStateDrawer(false);
-      getTopRatedMovie();
     }
-  
     const handleGoHome=()=>{
-      setValueAutocomplete('');
       getTopRatedMovie();
+      setValueAutocomplete('');
     }
     const setDrawerClose=()=>{
       setStateDrawer(false);
@@ -114,7 +111,7 @@ const MenuComponent=props=>{
             </Link>
         </Grid>
       <Grid item md={6}>
-        {localStorage.getItem('username')?<><span style={{color:'white'}}>hi {JSON.parse(localStorage.getItem('username'))}</span> 
+        {localStorage.getItem('username')?<><span style={{color:'white'}}>hi {JSON.parse(localStorage.getItem('username'))}!</span> 
         <IconButton   onClick={handleClick}>
             <ExitToAppIcon  className={classes.Icon1} />
         </IconButton>
@@ -126,7 +123,8 @@ const MenuComponent=props=>{
         onClose={handleClose}
         TransitionComponent={Fade}
       > 
-        <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} className={classes.LinkIcon}><MenuItem onClick={handleFlist}>Your List</MenuItem></Link>
+        <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} 
+        className={classes.LinkIcon}><MenuItem onClick={handleFlist}>Your List</MenuItem></Link>
         <MenuItem onClick={handleLogoutUser}>Log out</MenuItem>
       </Menu>
       </>:<>
@@ -142,8 +140,6 @@ const MenuComponent=props=>{
     </Grid>
       </>
     }
-
-
     const mobileMode=()=>{
       return<> <Container className={classes.mobileContainer}>
             <IconButton  className={classes.MenuIconButton} onClick={handleOpenDrawer}>
@@ -220,5 +216,8 @@ const MenuComponent=props=>{
 }
 export default MenuComponent;
 MenuComponent.propTypes={
-    
+  getUsername:PropTypes.func,
+  setValueAutocomplete:PropTypes.func,
+  handleLogout:PropTypes.func,
+  getTopRatedMovie:PropTypes.func,
 }

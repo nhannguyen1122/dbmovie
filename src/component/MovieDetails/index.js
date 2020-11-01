@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-import { Grid, makeStyles, Button, Tooltip, GridList, GridListTile, GridListTileBar, IconButton, Hidden } from "@material-ui/core";
+import { Grid, makeStyles, Button, Tooltip,Hidden } from "@material-ui/core";
 import YouTubeIcon from '@material-ui/icons/YouTube';
-
 import PropTypes from 'prop-types';
 import Carousel from 'react-elastic-carousel';
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import toast from "../../Api/toast";
-
 const Toast=new toast();
-
-
-   
    const useStyles = makeStyles((theme) => ({
       root: {
         backgroundImage:
@@ -20,8 +15,6 @@ const Toast=new toast();
         backgroundColor: "rgb(0,0,0.5)",
         margin:0,
        padding:'30px 0 30px 0'
-        
-        
       },
       contentSection: {
         boxShadow: `5px 5px 40px -10px black`,
@@ -130,8 +123,6 @@ const Toast=new toast();
          width:'100%',
          zIndex:110,
          transform:'scale(0,0)'
-        
-        
       }
      
     }));
@@ -142,9 +133,6 @@ const config=[{
 const MovieDetails=props=>{
    const classes=useStyles();
    const {Details,openTrailer,getMovieyoutube,match,getCasts,casts,openFlist,openDetailDrawer,getDetailCast}=props;
-   
-   
-   let imgPath=`https://image.tmdb.org/t/p/w500${Details.poster_path}`;
    const handleopenModal=(item)=>{
       openTrailer(item);
       getMovieyoutube(item.id);
@@ -165,9 +153,7 @@ const MovieDetails=props=>{
    useEffect(() => {
       
       getCasts(match.params.id);
-      return () => {
-         
-      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
    const handleOpenInfor=id=>{
     openDetailDrawer(1);
@@ -251,7 +237,7 @@ const MovieDetails=props=>{
             <Grid item sx={12} md={6}>
               <img
                 className={classes.img}
-                src={`https://image.tmdb.org/t/p/w500/${Details.poster_path}`}
+                src={Details.poster_path?`https://image.tmdb.org/t/p/w500/${Details.poster_path}`:`https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg`}
                 alt="img"
               />
               
@@ -277,14 +263,17 @@ const MovieDetails=props=>{
        </div>
       </div>
     );
-
-
-   
-   
 }
 export default MovieDetails;
 MovieDetails.propsTypes = {
    Details: PropTypes.object,
-   openTrailer:PropTypes.object,
-   getMovieyoutube:PropTypes.object
+   getMovieyoutube:PropTypes.func,
+   openTrailer:PropTypes.func,
+   match:PropTypes.object,
+   getCasts:PropTypes.func,
+   casts:PropTypes.array,
+   openFlist:PropTypes.func,
+   openDetailDrawer:PropTypes.func,
+   getDetailCast:PropTypes.func
+
 }

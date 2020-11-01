@@ -21,7 +21,7 @@ const findIndex=(id,list)=>{
         case constants.handleDeleteMovie:
         return {...state}
         case constants.handleDeleteMovieOk:
-        console.log(action.payload); //playlistid-movieid
+        //playlistid-movieid
         //find index of playlist
         // filter id array
         let arrId=action.payload.split('-');
@@ -38,7 +38,6 @@ const findIndex=(id,list)=>{
         return {...state}
         case constants.handleUpdateListOk: 
        let updateIndex=findIndex(action.payload._id,state.list);
-       console.log(action.payload);
        return {...state,list:[...state.list.slice(0,updateIndex),
         {...state.list[updateIndex],
         name:action.payload.name,
@@ -47,7 +46,6 @@ const findIndex=(id,list)=>{
         ,...state.list.slice(updateIndex+1)]}
         case constants.handleExpandFlist: 
         let index=findIndex(action.payload,state.list)
-        console.log(index);
         return {...state,list:[...state.list.slice(0,index),
             {
                 ...state.list[index],
@@ -69,9 +67,7 @@ const findIndex=(id,list)=>{
         case constants.deleteFlist: 
        return {...state}
         case constants.deleteFlistOk:
-            console.log(action.payload);
             state.list=state.list.filter(item=>item._id!==action.payload);
-            console.log(state.list);
         return {...state}
         
         default:

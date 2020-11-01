@@ -1,4 +1,4 @@
-import { Fade, Grid, makeStyles, Tooltip } from "@material-ui/core";
+import { Fade, Grid, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import DetailsIcon from '@material-ui/icons/Details';
@@ -6,7 +6,7 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import { Link } from "react-router-dom";
 import Skeleton from "@material-ui/lab/Skeleton";
 import toast from "../../Api/toast";
-
+import PropTypes from "prop-types";
 const useStyles = makeStyles({
     root:{
         position:'relative',
@@ -31,8 +31,6 @@ const useStyles = makeStyles({
         '&:hover':{
            opacity:1
         }
-       
-
     },
     button:{
         position:'absolute',
@@ -93,6 +91,7 @@ const TopRatedMovie=props=>{
                 setChecked((prev) => !prev);
             },2000);
             return ()=>clearTimeout(skeletontimeout);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const classes=useStyles();
     const params=id=>{
@@ -126,7 +125,7 @@ const TopRatedMovie=props=>{
         <Fade   in={checked} >
         <div className={classes.root}>
         
-       <img alt="img" className={classes.img} src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}/>
+       <img alt="img" className={classes.img} src={item.poster_path?`https://image.tmdb.org/t/p/w500/${item.poster_path}`:`https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg`}/>
         <div className={classes.contentSection}>
          <div><YouTubeIcon className={classes.button} onClick={()=>handleOpen(item)} /> </div>
          <div> <Link to={params(item.id)}><DetailsIcon className={classes.button1} onClick={()=>handleOpenDetails(item)} /></Link></div>
@@ -143,3 +142,10 @@ const TopRatedMovie=props=>{
     </Grid>
 }
 export default TopRatedMovie;
+TopRatedMovie.propTypes = {
+    item:PropTypes.object,
+    openModal:PropTypes.func,
+    getMovieyoutube:PropTypes.func,
+    showDetails:PropTypes.func,
+    openFlist:PropTypes.func,
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import * as constants from "../constant";
 let init={
     loginFormOpenState:true,

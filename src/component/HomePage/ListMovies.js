@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Grid, Container, Button, makeStyles, CircularProgress } from "@material-ui/core";
+import { Grid, Container, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 const useStyles=makeStyles({
     button:{
         float: 'right',
@@ -22,6 +22,7 @@ const ListMovie=props=>{
     const{title,setCurrentTopRatePage,getTopRatedMovie}=props;
     useEffect(()=>{
         getTopRatedMovie();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleOpenTopRated=()=>{
         setCurrentTopRatePage(1);
@@ -37,3 +38,8 @@ const ListMovie=props=>{
         ;
 }
 export default ListMovie;
+ListMovie.propTypes = {
+    title:PropTypes.bool,
+    setCurrentTopRatePage:PropTypes.func,
+    getTopRatedMovie:PropTypes.func,
+}

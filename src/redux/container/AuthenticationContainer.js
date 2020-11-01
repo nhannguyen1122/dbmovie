@@ -6,12 +6,12 @@ import Authenticationn from '../../component/Authentication';
 import LoadingComponent from '../../component/Authentication/formLoading';
 import LoginForm from '../../component/Authentication/LoginForm';
 import * as actions from "../action/index";
+import PropTypes from 'prop-types'; // ES6
 
 class AuthenticationContainer extends Component {
 
   render() {
     const {authState, actions, loadingReducer} = this.props;
-    console.log('authentication render');
     const {loginFormOpenState, registerFormOpenState} = authState;
     const {
       openLoginForm,
@@ -71,3 +71,25 @@ const mapDispatchToProps = dispatch => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps, null, {forwardRef: true})(AuthenticationContainer);
+
+AuthenticationContainer.propsTypes={
+  authState:PropTypes.shape({
+    loginFormOpenState:PropTypes.bool,
+    registerFormOpenState:PropTypes.bool,
+    isLogin:PropTypes.bool
+  }),
+  loadingReducer:PropTypes.shape({
+    leftLoading:PropTypes.bool,
+    rightLoading:PropTypes.bool,
+    confirmModalOpenState:PropTypes.bool,
+    registerConfirOpenState:PropTypes.bool,
+    resetFormState:PropTypes.bool,
+    FlistOpenState:PropTypes.bool,
+    DrawerModalOpenState:PropTypes.bool,
+    flistModalType:PropTypes.number,
+    backdropOpenState:PropTypes.bool,
+    drawerModalContent:PropTypes.any,
+    loginMobileLoading:PropTypes.bool,
+  }),
+  actions:PropTypes.object
+}

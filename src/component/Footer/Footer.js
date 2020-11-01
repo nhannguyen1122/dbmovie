@@ -69,10 +69,9 @@ const Footer=props=>{
             </Grid>
             <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
             <h2 className={classes.h2}> About this Project</h2>
-            <div>This project has two part.In the front end, it is included react  combined with redux, redux-saga, formik,axios, React Router , Material UI,etc...
-                In the back end , i am using nodejs-express-jwtoken to build a user favorite list  </div>
-           
-
+            <div>This project has two part.In the front end, 
+                it is included react,redux, redux-saga, formik,axios, React Router , Material UI,etc...
+                In the back end , i am using nodejs-express-jwtoken,etc... to build a user favorite list  </div>
             </Grid>
            <Grid  item sm={6} md={3} xs={12}className={classes.footerContent}>
             <h2 className={classes.h2}> More Infor</h2>

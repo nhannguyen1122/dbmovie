@@ -1,8 +1,6 @@
 import AxiosConfig from "./AxiosConfig";
-
-
 const url='https://backendapinodejs.herokuapp.com/playlist';
-const localUrl=`http://localhost:2000/playlist`
+// const localUrl=`http://localhost:2000/playlist`
 
 export const getFlistAxios=()=>{
     return AxiosConfig.get(`${url}`);
@@ -18,7 +16,6 @@ export const updateFlistAxios=(data)=>{
 }
 
 export const addMovieToFlistAxios=data=>{
-    console.log(data.name);
     return AxiosConfig.patch(`${url}/addmovie/${data.name}`,{movie:data.movie})
 }
 export const handleDeleteMovieAxios=id=>{

@@ -28,7 +28,7 @@ export const Routes=[
 {
     path:"/topratemovie",
     exact:true,
-    component:()=><><TopRatedMovieContainer/><ModalContainer/></>
+    component:({history})=><><TopRatedMovieContainer history={history}/><ModalContainer/></>
 }
 ,
 {

@@ -8,29 +8,26 @@ import ListTopRatedMovie from '../../component/TopRatedMovie/ListTopRatedMovie';
 import TopRatedMovie from '../../component/TopRatedMovie/TopratedMovies';
 import * as actions from "../action/index";
 import  "../../App.css";
+import PropTypes from "prop-types";
 import MenuComponent from '../../component/Header/Menu';
 class TopRatedMovieContainer extends React.Component {
-    componentDidMount(){
-        const{actions}=this.props;
-        const{getPage}=actions;
-        getPage();
-        
-    }
 
     render(){
         const{totalpage,data,actions,current}=this.props;
         const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
-        getUsername,getMovieyoutube,showDetails,getTopRatedMovie,
-        setValueAutocomplete,openFlist}=actions;
-      
+        getUsername,getMovieyoutube,showDetails,getTopRatedMovie,handleLogout,
+        setValueAutocomplete,openFlist,getPage}=actions;
         return <>
             <Container>
-            <MenuComponent getTopRatedMovie={getTopRatedMovie}
+            <MenuComponent 
+            getTopRatedMovie={getTopRatedMovie}
             getUsername={getUsername}
             setValueAutocomplete={setValueAutocomplete}
+            handleLogout={handleLogout}
             />
         
             <ListTopRatedMovie
+             getPage={getPage}
             current={current}
             getTopRatePage={getTopRatePage}
             >
@@ -41,12 +38,15 @@ class TopRatedMovieContainer extends React.Component {
             getMovieyoutube={getMovieyoutube}
             showDetails={showDetails}
             openFlist={openFlist}
-            item={item} key={index}/></React.Fragment>
+            item={item} key={index}/>
+            </React.Fragment>
             })}
             </ListTopRatedMovie>
             <br/>
-            <div> <PaginationComponent totalpage={totalpage} 
-            getTopRatePage={getTopRatePage}
+            <div> 
+            <PaginationComponent 
+            // history={history}
+            totalpage={totalpage} 
             setCurrentTopRatePage={setCurrentTopRatePage}
             current={current}
             /></div>
@@ -72,3 +72,9 @@ const mapDispatchToProps=dispatch=>{
      }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TopRatedMovieContainer)
+TopRatedMovieContainer.propTypes = {
+    totalpage:PropTypes.number,
+    data:PropTypes.array,
+    actions:PropTypes.object,
+    current:PropTypes.number
+}

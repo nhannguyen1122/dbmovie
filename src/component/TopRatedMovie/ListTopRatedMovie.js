@@ -1,5 +1,6 @@
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 const useStyles = makeStyles(theme=>({
         h1:{
                 float:'left',
@@ -9,11 +10,13 @@ const useStyles = makeStyles(theme=>({
 }))
 const ListTopRatedMovie=props=>{
         const classes= useStyles();
-        const{getTopRatePage,current}=props;
+        const{getTopRatePage,current,getPage}=props;
         useEffect(()=>{
                 getTopRatePage(current);
-                console.log('current change');
+                getPage();
+                // eslint-disable-next-line react-hooks/exhaustive-deps
         },[current])
+        
 return <><h1 className={classes.h1}>Top Rated Movie</h1>
         <Grid container spacing={1} >
         {props.children}
@@ -22,3 +25,8 @@ return <><h1 className={classes.h1}>Top Rated Movie</h1>
 }
 
 export default ListTopRatedMovie;
+ListTopRatedMovie.propTypes = {
+        getTopRatePage:PropTypes.func,
+        current:PropTypes.number,
+        getPage:PropTypes.func,
+}

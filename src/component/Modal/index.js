@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, Modal, Backdrop, Fade, Hidden } from "@material-ui/core";
 import PropTypes from "prop-types";
 import YouTube from "react-youtube";
-
 const useStyles = makeStyles((theme) => ({
     modal: {
       display: 'flex',
@@ -17,16 +16,11 @@ const useStyles = makeStyles((theme) => ({
       outline:'none',
       boxShadow: theme.shadows[5],
       padding:0,
-      
-      
-     
     },
   }));
 const VideoModal=props=>{
-
        const classes=useStyles();
        const {TrailerOpen,closeModal,MovieTrailerid}=props;
-       console.log(MovieTrailerid);
             const handleClose = () => {
               closeModal();
             };
@@ -72,5 +66,7 @@ const VideoModal=props=>{
 }
 export default VideoModal;
 VideoModal.propTypes={
- 
+  TrailerOpen:PropTypes.bool,
+  closeModal:PropTypes.func,
+  MovieTrailerid:PropTypes.string
 }

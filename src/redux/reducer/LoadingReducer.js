@@ -10,7 +10,8 @@ let init={
     flistModalType:0,
     backdropOpenState:false,
     drawerModalContent:null,
-    loginMobileLoading:false
+    loginMobileLoading:false,
+  
     
     
    

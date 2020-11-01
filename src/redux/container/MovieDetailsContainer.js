@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import MovieDetails from '../../component/MovieDetails';
-import PropsTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as actions from "../action";
 import { bindActionCreators } from 'redux';
 import MenuComponent from '../../component/Header/Menu';
 import Footer from '../../component/Footer/Footer';
 class MovieDetailsContainer extends Component {
-  
-  componentDidMount(){
-  
-  
-  }
   render() {
     const{MovieReducer,match,actions,authState}=this.props;
     const{DetailsInfor}=MovieReducer;
@@ -22,7 +17,8 @@ class MovieDetailsContainer extends Component {
    
     return (
       < >
-        <MenuComponent getTopRatedMovie={getTopRatedMovie}
+        <MenuComponent 
+        getTopRatedMovie={getTopRatedMovie}
         getUsername={getUsername}
         handleLogout={handleLogout}
         authState={authState}
@@ -39,9 +35,6 @@ class MovieDetailsContainer extends Component {
        getMovieyoutube={getMovieyoutube}
        openDetailDrawer={openDetailDrawer}
        getDetailCast={getDetailCast}
-       
-       
-       
        />:""}
         <Footer/>
       </>
@@ -62,6 +55,35 @@ const mapDispatchToProps = dispatch => {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsContainer)
 MovieDetailsContainer.propsTypes={
-  // MovieDetails:PropsTypes.object,
-  // actions:PropsTypes.object,
+    match:PropTypes.object,
+    authState:PropTypes.shape({
+      loginFormOpenState:PropTypes.bool,
+      registerFormOpenState:PropTypes.bool,
+      isLogin:PropTypes.bool
+    }),
+    actions:PropTypes.object,
+    MovieReducer:PropTypes.shape({
+        SearchResult:PropTypes.array,
+        Movies:PropTypes.shape({
+            title:PropTypes.bool,
+            results:PropTypes.array
+        }),
+        TopRatedMovie:PropTypes.shape({
+            results:PropTypes.array,
+            total:PropTypes.number,
+            current:PropTypes.number,
+        }),
+        MovieDetails:PropTypes.object,
+        DetailsInfor:PropTypes.shape({
+            casts:PropTypes.array,
+            personalCast:PropTypes.object
+    
+        }),
+        TrailerOpen:PropTypes.shape({
+            openstate:PropTypes.bool,
+            MovieTrailer:PropTypes.string
+        }),
+        topPopularMovie:PropTypes.array,
+        upComingMovies:PropTypes.array,
+    })
 }

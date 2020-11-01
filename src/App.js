@@ -1,7 +1,6 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,8 +9,6 @@ import {
 } from "react-router-dom";
 import { Routes } from './Routes';
 import "./App.css";
-
-import Modal from './redux/container/ModalContainer';
 import GlobalLoadingContainer from './redux/container/GlobalLoadingContainer';
 function App() {
   return (

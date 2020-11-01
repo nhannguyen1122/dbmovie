@@ -1,10 +1,13 @@
-import { AppBar, Button, Checkbox, Divider, Fab, FormControl, FormControlLabel, FormGroup, FormLabel, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, Radio, RadioGroup, TextField, Tooltip } from "@material-ui/core";
+import { AppBar, Button
+  , Divider, Fab, FormControl, FormControlLabel,
+   FormLabel, makeStyles, Modal, Radio, RadioGroup, 
+   TextField, Tooltip } from "@material-ui/core";
 import { FastField, Form, Formik } from "formik";
 import React, { useEffect } from "react";
 import AddIcon from '@material-ui/icons/Add';
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 const useStyles = makeStyles(theme=>({
     root:{
       display:'flex',
@@ -13,17 +16,13 @@ const useStyles = makeStyles(theme=>({
         witdh:'40px', 
     },
     contentSection:{
-      
       backgroundColor:'white',
       border:'none', outline:'none',
       borderRadius:'0.5rem',
       overflow:'hidden',
      [theme.breakpoints.up('md')]:{
       width:'400px',
-     
-     
      }
-      
     },
     AppBar:{
       padding:'10px',
@@ -64,7 +63,6 @@ const useStyles = makeStyles(theme=>({
      borderRadius:'50%',
      color:'white',
      outline:'none',
-
      '&:hover':{
        color:'yellow',
        cursor:'pointer',
@@ -73,20 +71,14 @@ const useStyles = makeStyles(theme=>({
       color:'black',
       cursor:'pointer',
     }
-     
    }
 }));
-
-
-
-
 const FlistModal=props=>{
- 
-    const {FlistOpenState,closeFlist,flistModalType,addNewFlist,updateList,handleUpdateList,getFlist,list,addMovieToFlist,MovieDetails}=props;
-    
-    console.log(list);
+    const {FlistOpenState,closeFlist,flistModalType,addNewFlist,updateList,
+      handleUpdateList,getFlist,list,addMovieToFlist,MovieDetails}=props;
     useEffect(()=>{
       getFlist();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const addToFlist={
      movie:MovieDetails,
@@ -95,8 +87,6 @@ const FlistModal=props=>{
       movie:Yup.object(),
       name:Yup.string().required()
     }),
-     
-    
     }
     const addNew={
       AppBar:'Add new list',
@@ -109,8 +99,6 @@ const FlistModal=props=>{
           list:Yup.string().min(6,'at least 6 characters').required()
         }),
         button:"Add"
-      
-    
     }
     const Update={
       AppBar:'Update this List',
@@ -124,18 +112,16 @@ const FlistModal=props=>{
         updatelist:Yup.string().min(6,'at least 6 characters').required()
       }),
       button:'Update'
-      
     }
     const classes=useStyles();
-    
     const renderAddToFlistModal=()=>{
-      
       return <>
-       <AppBar position="relative"  className={classes.AppBar}> <div>Choose your list to add</div>
-      <button className={classes.xButton} onClick={()=>closeFlist()}> x</button>
-       </AppBar>
+        <AppBar position="relative"  
+        className={classes.AppBar}> <div>Choose your list to add</div>
+        <button className={classes.xButton} onClick={()=>closeFlist()}> x</button>
+         </AppBar>
         <div className={classes.content}>
-    <h1 className={classes.h1}>Movie:{MovieDetails.title}</h1>
+        <h1 className={classes.h1}>Movie:{MovieDetails.title}</h1>
         <br/>
         <br/>
         <FormLabel component="legend">Your List</FormLabel>
@@ -159,33 +145,29 @@ const FlistModal=props=>{
                     label={item.name} />
                  }):<React.Fragment><div>You dont have any list yet</div>
                  <br/>
-                <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} className={classes.LinkButton}><Button variant="contained"className={classes.buttonFlist} onClick={()=>closeFlist()} size="small">Mange your list</Button></Link>
+                <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} 
+                className={classes.LinkButton}><Button variant="contained"
+                className={classes.buttonFlist} onClick={()=>closeFlist()} 
+                size="small">Mange your list</Button></Link>
                 <br/>
                  </React.Fragment>}
                   </RadioGroup>
-          </FormControl>
-          <br/>
-          <Divider/>
-          <br/>
-        <div className={classes.fabButton}>
-        <Tooltip title="add "  >
-       <Fab className={classes.buttonFlist} aria-label="add"  type='submit'
-        size="small"
-        >
-        <AddIcon />
-        </Fab>
-        </Tooltip>
-        </div>  
-                 
-                </Form>
-            }}
-            
-            
-        </Formik>
-        
-      
-        
-      
+                </FormControl>
+                <br/>
+                <Divider/>
+                <br/>
+              <div className={classes.fabButton}>
+              <Tooltip title="add "  >
+            <Fab className={classes.buttonFlist} aria-label="add"  type='submit'
+              size="small"
+              >
+              <AddIcon />
+              </Fab>
+              </Tooltip>
+              </div>      
+                      </Form>
+                  }}
+            </Formik>
         </div>
       </>
     }
@@ -200,7 +182,6 @@ const FlistModal=props=>{
         <button className={classes.xButton} onClick={()=>closeFlist()}> x</button>
         </AppBar>
         <div className={classes.content}>
-      
         <Formik
         initialValues={obj.initialValues}
         validationSchema={obj.validationSchema}
@@ -237,16 +218,11 @@ const FlistModal=props=>{
                         >
                         {obj.button}
                         </Button>
-                    </Tooltip>
-                   
+                    </Tooltip>               
                   </div>
                 </Form>
             }}
         </Formik>
-        
-      
-        
-      
         </div>
       </>
       
@@ -267,3 +243,15 @@ const FlistModal=props=>{
     </Modal>
 }
 export default FlistModal;
+FlistModal.propTypes = {
+  FlistOpenState:PropTypes.bool,
+  closeFlist:PropTypes.func,
+  flistModalType:PropTypes.number,
+  addNewFlist:PropTypes.func,
+  updateList:PropTypes.object,
+  handleUpdateList:PropTypes.func,
+  getFlist:PropTypes.func,
+  list:PropTypes.array,
+  addMovieToFlist:PropTypes.func,
+  MovieDetails:PropTypes.object
+}

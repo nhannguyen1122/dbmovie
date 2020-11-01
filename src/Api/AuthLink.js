@@ -1,8 +1,6 @@
 import AxiosConfig from "./AxiosConfig";
-
-
 const url='https://backendapinodejs.herokuapp.com';
-const localUrl=`http://localhost:2000`
+// const localUrl=`http://localhost:2000`
 
 export const testAxios=()=>{
     return AxiosConfig.get(`${url}/test`);

@@ -1,8 +1,9 @@
-import { takeLatest, call, put, takeEvery } from "redux-saga/effects";
+import { takeLatest, call, put, takeEvery, delay } from "redux-saga/effects";
 import * as constants from "../redux/constant";
 import { SearchWithKeyWord,GetCastAxios, SearchTopRated, GetYoutubevideoAxios,GetTopRateByPage,GetUpcomingtMovie,GetTopPopularMovies,GetPageAPI, GetDetailCastAxios } from "../Api/ApiLink";
 import * as actions from "../redux/action";
-import { func } from "prop-types";
+import toast from "../Api/toast";
+let Toast=new toast();
 export function* getKeyWordSaga(){
    yield takeLatest(constants.SearchForKeyWord,SearchSaga);
    yield takeLatest(constants.getTopRatedMovie,getTopRatedMoviesaga);
@@ -21,7 +22,10 @@ function* getDetailCastSaga(action){
       const {data}=res;
       yield put(actions.getDetailCastOk(data));
    } catch (error) {
-       console.log(error);
+    const errorsMessage = error.response.data;
+    Toast.error(errorsMessage.msg);
+    yield delay(1000);
+    yield put(actions.handleOpenBackdrop(false));
    }
 }
 function* getCastsSaga(action){
@@ -38,7 +42,10 @@ function* getCastsSaga(action){
         }
         
     } catch (error) {
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
         window.location.href=`/notfound`
     }
 }
@@ -62,7 +69,10 @@ function* getCastsSaga(action){
 
         }
     } catch (error) {
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
  function* getTotalPagesaga(){
@@ -72,7 +82,10 @@ function* getCastsSaga(action){
         yield put(actions.getTotalPage(total_pages));
     }
     catch(err){
-        console.log(err);
+        const errorsMessage = err.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
  function* getTopRatedMoviesaga(){
@@ -83,7 +96,10 @@ function* getCastsSaga(action){
         yield put(actions.getTopRatedMovieSuccess(results));
     }
     catch(error){
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
  function* SearchWithKeyWordsaga(action){
@@ -95,19 +111,24 @@ function* getCastsSaga(action){
         yield put(actions.SearchWithKeyWordSuccess(results));
     }
     catch(error){
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
   function* getMovieyoutubeSaga(action){
     try {
         yield true;
         const res=yield call(GetYoutubevideoAxios,action.payload);
-        console.log(res);
         const {key}=res.data.results[0];
-       console.log(key);
         yield put(actions.getMovieyoutubeSuccess(key));
     } catch (error) {
-        console.log(error);
+        // const errorsMessage = error.response.data;
+        // Toast.error(errorsMessage.msg);
+        // yield delay(1000);
+        // yield put(actions.handleOpenBackdrop(false));
+        throw(error);
     }
 
 }
@@ -118,24 +139,35 @@ function* getCastsSaga(action){
         yield put(actions.getUpcomingMovieSuccess(results));
     }
     catch(error){
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
  function* getTopPopularMovieSaga(){
     try{
         const res=yield call(GetTopPopularMovies);
-        console.log(res);
         const {results}=res.data;
 
         yield put(actions.getTopPopularMovieSuccess(results));
     }
     catch(error){
-        console.log(error);
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
     }
 }
   function* getTopRatePageSaga(action){
-    
+    try{
     const callapi=yield call(GetTopRateByPage,action.payload);
     const {results}=callapi.data;
     yield put(actions.getTopRatePageSuccess(results));
+    } catch (error) {
+        const errorsMessage = error.response.data;
+        Toast.error(errorsMessage.msg);
+        yield delay(1000);
+        yield put(actions.handleOpenBackdrop(false));
+    }
 }

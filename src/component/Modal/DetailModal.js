@@ -1,6 +1,6 @@
 import { Drawer, Hidden, makeStyles } from '@material-ui/core';
 import YouTube from "react-youtube";
-
+import PropTypes from "prop-types";
 import React from 'react';
     const useStyles = makeStyles(theme=>({
         root:{
@@ -10,7 +10,6 @@ import React from 'react';
                 rgba(30,27,38, 0.95), 
                 rgba(30,27,38, 0.95))`,
             color:'grey',
-           
         },
         loading:{
             width:'45vh',
@@ -55,8 +54,6 @@ import React from 'react';
                 color:'black',
                 
             }
-
-
         },
         xButtonLeft:{
             marginLeft:'90%',
@@ -78,8 +75,14 @@ import React from 'react';
         },
         //cast
         img:{
+           [theme.breakpoints.up('md')]:{
             width:'200px',
             height:'200px',
+           },
+           [theme.breakpoints.down('sm')]:{
+            width:'100px',
+            height:'100px',
+           },
             borderRadius:'50%',
             boxShadow: `5px 5px 40px -10px black`,
         },
@@ -103,20 +106,20 @@ import React from 'react';
         }
     }))
 const DetailsModal=props=>{
-    const{DrawerModalOpenState,closeDetailDrawer,MovieDetails,drawerModalContent,personalCast,MovieTrailerid}=props;
-   
+    const{DrawerModalOpenState,closeDetailDrawer,MovieDetails,
+        drawerModalContent,personalCast,MovieTrailerid}=props;
     const _onReady=(e)=>{
         e.target.pauseVideo();
       }
-const opts1 = {
-    height: '190px',
-    width: '230px',
-  
-};
-const opts={
-    height: '150px',
-    width:'200px',
-}
+    const opts1 = {
+        height: '190px',
+        width: '230px',
+    
+    };
+    const opts={
+        height: '150px',
+        width:'200px',
+    }
     const classes=useStyles();
    
     const handleClose = () => {
@@ -165,21 +168,15 @@ const opts={
           <div> <span className={classes.spanCast}>Sex: </span>{personalCast.gender===1?'woman':'man'}</div>
           <div> <span className={classes.spanCast}>Dob: </span>{personalCast.birthday?personalCast.birthday.split('-').reverse().join('-'):'Not update yet'}</div>
           <div> <span className={classes.spanCast}>Career: </span>{personalCast.known_for_department}</div>
-
           <div> <span className={classes.spanCast}>Biography: </span>{personalCast.biography?personalCast.biography:'Not update yet'}</div>
-          </div>
-          
-         
+          </div>   
      </div>
         </>
-       
-        
       }
     }
     return <>
-    <Drawer  open={DrawerModalOpenState} anchor={drawerModalContent===0?'right':'left'} onClose={handleClose} >
-    
-     
+    <Drawer  open={DrawerModalOpenState} 
+    anchor={drawerModalContent===0?'right':'left'} onClose={handleClose} >
          {renderModal(drawerModalContent)}
    
     </Drawer>
@@ -187,3 +184,11 @@ const opts={
 }
 
 export default DetailsModal;
+DetailsModal.propTypes = {
+    DrawerModalOpenState:PropTypes.bool,
+    closeDetailDrawer:PropTypes.func,
+    MovieDetails:PropTypes.object,
+    drawerModalContent:PropTypes.any,
+    personalCast:PropTypes.object,
+    MovieTrailerid:PropTypes.string
+}

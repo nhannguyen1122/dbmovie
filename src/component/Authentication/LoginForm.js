@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {
   TextField,
   makeStyles,
   Button,
-  Modal,
   Grid,
   Fade,
   Zoom,
@@ -20,9 +20,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import {Link} from "react-router-dom";
 import ResgisterConfirm from "../Modal/RegisterConfirm";
 const useStyles = makeStyles((theme) => ({
-  
   root: {
-    
     textAlign: 'center',
     position: 'relative',
     top: '1rem',
@@ -45,14 +43,12 @@ const useStyles = makeStyles((theme) => ({
   },
   formContainer: {
     margin:'3rem'
-
   },
   loginForm: {
     width: '100%',
     height: '80vh',
     backgroundColor: 'white'
   },
-  
   inputSection: {
     width: '80%',
     margin: '0 auto'
@@ -77,13 +73,9 @@ const useStyles = makeStyles((theme) => ({
   //mobileMode
   root1:{
     position:'relative',
-   
     boxShadow: `5px 5px 40px -10px black`,
     textAlign:'center',
     margin:'10%',
-   
-    
-    
   },
   loginContainer:{
     borderRadius:'1rem',
@@ -99,38 +91,30 @@ const useStyles = makeStyles((theme) => ({
     position:'absolute',
     top:0,
     width:'100%',
-    
     backgroundColor: 'white',
   }
 }))
 
 const LoginForm = props => {
-  const {openRegisterForm, openLoginForm, loginFormOpenState, registerFormOpenState,
-    handleLogin,handleRegister,loadingReducer,handleOpenConfirmModal,
-    handleOpenRegisterConfirmModal,handleCloseRegisterConfirmModal,handleCloseConfirmModal} = props;
+  const {openRegisterForm, openLoginForm, loginFormOpenState,registerFormOpenState,
+  handleLogin,handleRegister,loadingReducer,handleOpenConfirmModal,handleOpenRegisterConfirmModal
+  ,handleCloseRegisterConfirmModal,handleCloseConfirmModal} = props;
   const {confirmModalOpenState,registerConfirOpenState}=loadingReducer;
- 
-
   const classes = useStyles();
   const handleSubmitLoginForm = async(value, action) => {
     action.setSubmitting(true);
     await handleLogin(value);
     action.setSubmitting(false);
-    action.resetForm();
   }
   const handleSubmitRegisterForm = async({email,username,password,repassword,...value}, action) => {
     action.setSubmitting(true);
     // setSubmit(true);
-    
     await handleRegister({email:email,username:username,password:password});
-    
     action.resetForm();
     action.setSubmitting(false);
-    
   }
   const handleOpenLoginForm=props=>{
       const {touched}=props;
-     
       if(touched.username||touched.password||touched.email||touched.repassword){
         handleOpenRegisterConfirmModal();
       }
@@ -139,8 +123,6 @@ const LoginForm = props => {
       }
   }
   const handleOpenModal=(props)=>{
-  
-    
     const{touched}=props;
     if(touched.username||touched.password){
     handleOpenConfirmModal();
@@ -152,7 +134,6 @@ const LoginForm = props => {
   }
   const renderRegistrationForm=()=>{
     return  <>
-
     <h1 className={classes.h1}>Register form</h1>
     <Formik
       initialValues={{
@@ -181,8 +162,8 @@ const LoginForm = props => {
           .oneOf([
             Yup.ref('password'),
             null
-          ], 'Passwords must match').
-          required('required')
+          ], 'Passwords must match')
+          .required('required')
       })}
       onSubmit={(value, actions) => handleSubmitRegisterForm(value, actions)}>
       {(props) => {
@@ -263,7 +244,8 @@ const LoginForm = props => {
           </Button>
           <br/>
           <br/>
-          <div className={classes.aHref} onClick={handleOpenLoginForm.bind(null,props)}><CreateIcon className={classes.CreateIcon}/>
+          <div className={classes.aHref} onClick={handleOpenLoginForm.bind(null,props)}>
+            <CreateIcon className={classes.CreateIcon}/>
             Already have an account?</div>
           <br/>
           <div className={classes.inputSection}>
@@ -366,7 +348,9 @@ const LoginForm = props => {
             </Grid>
             <ConfirmModal
             openRegisterForm={openRegisterForm}
-            confirmModalOpenState={confirmModalOpenState} handleCloseConfirmModal={handleCloseConfirmModal} formProps={props}/>
+            confirmModalOpenState={confirmModalOpenState} 
+            handleCloseConfirmModal={handleCloseConfirmModal}
+           formProps={props}/>
         </Form>
       }}
     </Formik>
@@ -394,23 +378,32 @@ const LoginForm = props => {
         </Fade>
       </Grid>
      
-    </div>
-    
+    </div>   
   </Zoom>
   </Hidden>
   <Hidden mdUp>
     <Zoom  in={true}>
     <div className={classes.root1} >
-      <Fade in={loginFormOpenState}><div className={classes.loginContainer}>{renderLoginForm()}</div></Fade>
-      <Fade in={registerFormOpenState}><div className={classes.registerContainer}>{renderRegistrationForm()}</div></Fade>
-
+      <Fade in={loginFormOpenState}>
+        <div className={classes.loginContainer}>{renderLoginForm()}</div></Fade>
+      <Fade in={registerFormOpenState}>
+        <div className={classes.registerContainer}>{renderRegistrationForm()}</div></Fade>
     </div>
     </Zoom>
   </Hidden>
-
- 
   </>
-  
-
 }
 export default LoginForm;
+LoginForm.propTypes = {
+  openRegisterForm:PropTypes.func,
+  openLoginForm:PropTypes.func,
+  loginFormOpenState:PropTypes.bool,
+  registerFormOpenState:PropTypes.bool,
+  handleLogin:PropTypes.func,
+  handleRegister:PropTypes.func,
+  loadingReducer:PropTypes.object,
+  handleOpenConfirmModal:PropTypes.func,
+  handleOpenRegisterConfirmModal:PropTypes.func,
+  handleCloseRegisterConfirmModal:PropTypes.func,
+  handleCloseConfirmModal:PropTypes.func
+}

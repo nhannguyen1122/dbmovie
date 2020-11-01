@@ -22,7 +22,7 @@ const BackdropModal = (props) => {
 
 
 BackdropModal.propTypes = {
-
+    backdropOpenState:PropTypes.bool
 };
 
 

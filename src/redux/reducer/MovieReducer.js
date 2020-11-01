@@ -99,7 +99,6 @@ const MovieReducer =(state=init,action)=>{
             return{...state};
         case actions.getTotalPage:
             state= {...state,TopRatedMovie:{...state.TopRatedMovie,total:action.payload}}
-            console.log(state);
             return {...state};
         case actions.getTopRatePage: 
             return{...state}
@@ -115,3 +114,4 @@ const MovieReducer =(state=init,action)=>{
 
 
 export default persistReducer(persistConfig,MovieReducer);
+// export default MovieReducer;

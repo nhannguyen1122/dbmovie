@@ -1,4 +1,3 @@
-import React from "react";
 import * as constants from '../constant';
 let init={
     formValue:'',
@@ -14,7 +13,6 @@ const AutoCompleteReducer=(state=init,action)=>{
             return {...state,formValue:action.payload}
         
         default:
-            console.log(state);
             return state;
     }
 }

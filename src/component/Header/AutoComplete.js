@@ -1,9 +1,9 @@
-import { CircularProgress, makeStyles } from "@material-ui/core";
-import React, { useState, useRef, useEffect } from "react";
+import {  makeStyles } from "@material-ui/core";
+import React, { useRef } from "react";
 import SearchIcon from '@material-ui/icons/Search';
+import PropTypes from "prop-types";
 
 const useStyles =makeStyles(theme=>({
-
     root:{
         height:'50px'   
     },
@@ -79,8 +79,6 @@ const AutoCompleteComponent=props=>{
     const classes=useStyles();
     const {SearchResult,SearchForKeyWord,SearchWithKeyWord,formValue,setValueAutocomplete,render}=props;
     let persistRef=useRef(null);
-    
-    
     const handleChange=e=>{
         const {value}=e.target;
         setValueAutocomplete(value);
@@ -136,12 +134,14 @@ const AutoCompleteComponent=props=>{
         <SearchIcon className={classes.searchIconDiv} onClick={handleSubmit}/> 
            {renderUl()}
           </div>
-           
-          
-          
-         
-
-    
     </div>
 }
 export default AutoCompleteComponent;
+AutoCompleteComponent.propTypes = {
+    SearchResult:PropTypes.array,
+    SearchForKeyWord:PropTypes.func,
+    SearchWithKeyWord:PropTypes.func,
+    formValue:PropTypes.string,
+    setValueAutocomplete:PropTypes.func,
+    render:PropTypes.bool,
+}

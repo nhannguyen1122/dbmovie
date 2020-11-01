@@ -4,10 +4,9 @@ import {
   CircularProgress,
   Hidden,
   makeStyles,
- 
 } from "@material-ui/core";
 import icon from "../../img/loading.gif"
-
+import PropTypes from "prop-types";
 const useStyles = makeStyles((theme) => ({
   backdrop:{zIndex:2000},
   loginLoadingLeft:{
@@ -48,13 +47,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoadingComponent = props => {
-    const{loadingReducer} = props;
-    const{leftLoading,rightLoading,loginMobileLoading}=loadingReducer;
+  const{loadingReducer} = props;
+  const{leftLoading,rightLoading,loginMobileLoading}=loadingReducer;
   const classes = useStyles();
   return<div>
-    <Hidden smDown> {leftLoading?<div className={classes.loginLoadingLeft}><img src={icon} alt="loading" className={classes.img}/></div>:null}
-     {rightLoading?<div className={classes.loginLoadingRight}><img src={icon} alt="loading"className={classes.img}/></div>:null}</Hidden>
-     <Hidden mdUp><Backdrop className={classes.backdrop} open={loginMobileLoading}>
+    <Hidden smDown> {leftLoading?<div className={classes.loginLoadingLeft}><img src={icon} alt="loading" 
+    className={classes.img}/></div>:null}
+    {rightLoading?<div className={classes.loginLoadingRight}><img src={icon} alt="loading"
+    className={classes.img}/></div>:null}</Hidden>
+    <Hidden mdUp><Backdrop className={classes.backdrop} open={loginMobileLoading}>
   <CircularProgress color="primary" />
 </Backdrop></Hidden>
   </div>
@@ -62,3 +63,6 @@ const LoadingComponent = props => {
 
 }
 export default LoadingComponent;
+LoadingComponent.propTypes = {
+  LoadingReducer:PropTypes.object,
+}

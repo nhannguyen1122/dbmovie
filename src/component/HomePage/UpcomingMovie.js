@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import { Container, Menu, MenuItem, Grid, Button, Hidden } from "@material-ui/core";
+import { Container, Menu, MenuItem, Grid, Hidden } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import toast from "../../Api/toast";
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -13,7 +13,6 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import DetailsIcon from '@material-ui/icons/Details';
 import { Link } from "react-router-dom";
 import Skeleton from "@material-ui/lab/Skeleton";
-
 const useStyles = makeStyles((theme) => ({
        
   gridList: {
@@ -62,6 +61,10 @@ const useStyles = makeStyles((theme) => ({
     userSelect:'none',
 
     float:'left',
+  },
+  Skeletonimg:{
+    width:'100%',
+    height:'100%',
   }
   
   
@@ -79,8 +82,10 @@ const UpcomingMovie=props=>{
     let settimeoutskeletons=setTimeout(() => {
       setTime(true);
     },2000);
+    
     getUpcomingMovie();
     return ()=>clearTimeout(settimeoutskeletons);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
     
       const handleOpen=(item)=>{
@@ -122,7 +127,7 @@ const UpcomingMovie=props=>{
         return<> <GridList className={classes.gridList} cols={numb}>
         {results.map((tile,index) => (
           <GridListTile key={index}>
-            <img src={`https://image.tmdb.org/t/p/w500/${tile.poster_path}`} alt={tile.title}  />
+            <img src={tile.poster_path?`https://image.tmdb.org/t/p/w500/${tile.poster_path}`:`https://i.ibb.co/FDGqCmM/papers-co-ag74-interstellar-wide-space-film-movie-art-33-iphone6-wallpaper.jpg`} alt={tile.title}  />
             <GridListTileBar
               title={tile.title}
               classes={{
@@ -218,8 +223,9 @@ const UpcomingMovie=props=>{
 export default UpcomingMovie;
 
 UpcomingMovie.propsTypes={
-    latestMovie:PropTypes.array,
-    openModal:PropTypes.object,
-    showDetails:PropTypes.object,
-    getMovieyoutube:PropTypes.object
+  getUpcomingMovie:PropTypes.func,
+    openModal:PropTypes.func,
+    showDetails:PropTypes.func,
+    getMovieyoutube:PropTypes.func,
+    openFlist:PropTypes.func,
 }
