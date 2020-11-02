@@ -13,7 +13,7 @@ import MenuComponent from '../../component/Header/Menu';
 class TopRatedMovieContainer extends React.Component {
 
     render(){
-        const{totalpage,data,actions,current}=this.props;
+        const{totalpage,data,actions,current,authState}=this.props;
         const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
         getUsername,getMovieyoutube,showDetails,getTopRatedMovie,handleLogout,
         setValueAutocomplete,openFlist,getPage}=actions;
@@ -22,8 +22,9 @@ class TopRatedMovieContainer extends React.Component {
             <MenuComponent 
             getTopRatedMovie={getTopRatedMovie}
             getUsername={getUsername}
-            setValueAutocomplete={setValueAutocomplete}
             handleLogout={handleLogout}
+            authState={authState}
+            setValueAutocomplete={setValueAutocomplete}
             />
         
             <ListTopRatedMovie
@@ -62,7 +63,9 @@ const mapStateToProps=state=>{
     return {
         totalpage:state.MovieReducer.TopRatedMovie.total,
         data:state.MovieReducer.TopRatedMovie.results,
-        current:state.MovieReducer.TopRatedMovie.current
+        current:state.MovieReducer.TopRatedMovie.current,
+        authState:state.AuthReducer
+
      }
 }
 const mapDispatchToProps=dispatch=>{
@@ -73,6 +76,11 @@ const mapDispatchToProps=dispatch=>{
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TopRatedMovieContainer)
 TopRatedMovieContainer.propTypes = {
+    authState:PropTypes.shape({
+        loginFormOpenState:PropTypes.bool,
+        registerFormOpenState:PropTypes.bool,
+        isLogin:PropTypes.bool
+      }),
     totalpage:PropTypes.number,
     data:PropTypes.array,
     actions:PropTypes.object,

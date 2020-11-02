@@ -82,8 +82,8 @@ const MenuComponent=props=>{
       setStateDrawer(false);
     }
     const handleGoHome=()=>{
-      getTopRatedMovie();
       setValueAutocomplete('');
+      getTopRatedMovie();
     }
     const setDrawerClose=()=>{
       setStateDrawer(false);
