@@ -7,6 +7,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import materialui from "../../img/materialui.png";
 import reacticon from "../../img/react.gif";
 import nodejsicon from "../../img/node1.png";
+import CopyrightIcon from '@material-ui/icons/Copyright';
 const useStyles = makeStyles(theme=>({
     root:{
         backgroundColor:'white',
@@ -56,7 +57,10 @@ const useStyles = makeStyles(theme=>({
     [theme.breakpoints.down('sm')]:{
         marginLeft:'5%'
     }
-}
+},
+    CopyRightIcon  :{
+        fontSize:'15px'
+    }
 }))
 const Footer=props=>{
     const classes = useStyles();
@@ -90,9 +94,6 @@ const Footer=props=>{
 
             </Grid>
 
-           
-
-
         </Grid>
        
      <hr/></Container>
@@ -102,7 +103,7 @@ const Footer=props=>{
             <div><img src={nodejsicon} alt="material" className={classes.FooterIcon}/></div>
 
        </div>
-        <div className={classes.CopyRight}>Copy Right@2020-Nhân nguyễn</div>
+        <div className={classes.CopyRight}>Copyright<CopyrightIcon className={classes.CopyRightIcon}/>2020 MovieProject</div>
         <br/>
         
     </div>

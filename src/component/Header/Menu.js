@@ -80,6 +80,8 @@ const MenuComponent=props=>{
     };
     const handleGoHome1=()=>{
       setStateDrawer(false);
+      setValueAutocomplete('');
+      getTopRatedMovie();
     }
     const handleGoHome=()=>{
       setValueAutocomplete('');
