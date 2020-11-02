@@ -277,3 +277,6 @@ export const handleDeleteMovieOk=res=>{
     return {type:constants.handleDeleteMovieOk,
     payload:res}
 }
+export const clearResults=()=>{
+    return {type:constants.clearResults}
+}

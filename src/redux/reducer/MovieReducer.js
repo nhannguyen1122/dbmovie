@@ -30,12 +30,14 @@ let init={
 const persistConfig={
     key:'movie',
     storage,
-    whitelist:['MovieDetails','TopRatedMovie'],
+    whitelist:['MovieDetails','TopRatedMovie','Movies'],
     StateReconciler: autoMergeLevel2
 
 }
 const MovieReducer =(state=init,action)=>{
     switch(action.type){
+        case actions.clearResults: 
+            return {...state,Movies:{...state.Movies,results:[]}}
         case actions.closeDetailDrawer:
             return{...state,DetailsInfor:{...state.DetailsInfor,personalCast:{}}}
         case actions.OpenVideoTrailerModal:

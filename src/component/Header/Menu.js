@@ -62,7 +62,7 @@ menuName:{
 }))
 
 const MenuComponent=props=>{
-    const {getUsername,setValueAutocomplete,handleLogout,getTopRatedMovie}=props;
+    const {getUsername,handleLogout,getTopRatedMovie}=props;
     const[openDrawer,setStateDrawer]=useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [expandOpen,setExpandOpen] = useState(false);
@@ -78,13 +78,8 @@ const MenuComponent=props=>{
     const handleClose = () => {
       setAnchorEl(null);
     };
-    const handleGoHome1=()=>{
-      setStateDrawer(false);
-      setValueAutocomplete('');
-      getTopRatedMovie();
-    }
     const handleGoHome=()=>{
-      setValueAutocomplete('');
+      setStateDrawer(false);
       getTopRatedMovie();
     }
     const setDrawerClose=()=>{
@@ -96,9 +91,6 @@ const MenuComponent=props=>{
     const handleLogoutUser=()=>{
       handleLogout();
     }
-    const handleFlist=()=>{
-      
-    }
     const handleClickOpenExpand=()=>{
       setExpandOpen(!expandOpen);
     }
@@ -107,10 +99,13 @@ const MenuComponent=props=>{
       <Grid container spacing={0} className={classes.menuContainer}>
         <Grid item md={6}>
             <Link to='/homepage' >
+            <Tooltip title="Homepage">
             <IconButton onClick={handleGoHome} >
                 <HomeIcon   className={classes.Icon1} />
             </IconButton>
+            </Tooltip>
             </Link>
+          
         </Grid>
       <Grid item md={6}>
         {localStorage.getItem('username')?<><span style={{color:'white'}}>hi {JSON.parse(localStorage.getItem('username'))}!</span> 
@@ -126,7 +121,7 @@ const MenuComponent=props=>{
         TransitionComponent={Fade}
       > 
         <Link to={`/flist/${JSON.parse(localStorage.getItem('username'))}`} 
-        className={classes.LinkIcon}><MenuItem onClick={handleFlist}>Your List</MenuItem></Link>
+        className={classes.LinkIcon}><MenuItem>Your List</MenuItem></Link>
         <MenuItem onClick={handleLogoutUser}>Log out</MenuItem>
       </Menu>
       </>:<>
@@ -159,7 +154,7 @@ const MenuComponent=props=>{
           
            <React.Fragment >
             <Link to='/homepage'  className={classes.menuName}  >
-            <ListItem button onClick={handleGoHome1}>
+            <ListItem button onClick={handleGoHome}>
             
             <ListItemIcon>
             <HomeIcon className={classes.IconMobile} />
@@ -219,7 +214,6 @@ const MenuComponent=props=>{
 export default MenuComponent;
 MenuComponent.propTypes={
   getUsername:PropTypes.func,
-  setValueAutocomplete:PropTypes.func,
   handleLogout:PropTypes.func,
   getTopRatedMovie:PropTypes.func,
 }

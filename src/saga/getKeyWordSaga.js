@@ -90,8 +90,9 @@ function* getCastsSaga(action){
 }
  function* getTopRatedMoviesaga(){
     try{
+        yield put(actions.clearResults());
+        yield put(actions.setValueAutocomplete(''))
         const res=yield call(SearchTopRated);
-    
         const {results}=res.data;
         yield put(actions.getTopRatedMovieSuccess(results));
     }

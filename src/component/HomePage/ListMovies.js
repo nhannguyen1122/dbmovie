@@ -19,9 +19,10 @@ const useStyles=makeStyles({
 
 const ListMovie=props=>{
     const classes= useStyles();
-    const{title,setCurrentTopRatePage,getTopRatedMovie}=props;
+    const{title,setCurrentTopRatePage,getTopRatedMovie,results}=props;
     useEffect(()=>{
-        getTopRatedMovie();
+        if(results.length<=0){
+        getTopRatedMovie();}
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleOpenTopRated=()=>{
@@ -42,4 +43,5 @@ ListMovie.propTypes = {
     title:PropTypes.bool,
     setCurrentTopRatePage:PropTypes.func,
     getTopRatedMovie:PropTypes.func,
+    results:PropTypes.array
 }

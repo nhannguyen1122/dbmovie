@@ -12,7 +12,7 @@ class MovieDetailsContainer extends Component {
     const{DetailsInfor}=MovieReducer;
     const Details=MovieReducer.MovieDetails;
     const {casts}=DetailsInfor;
-    const {OpenVideoTrailerModal,getMovieyoutube,setValueAutocomplete,handleLogout,
+    const {OpenVideoTrailerModal,getMovieyoutube,handleLogout,
     getUsername,getTopRatedMovie,getCasts,openFlist,openDetailDrawer,getDetailCast}=actions;
    
     return (
@@ -22,8 +22,6 @@ class MovieDetailsContainer extends Component {
         getUsername={getUsername}
         handleLogout={handleLogout}
         authState={authState}
-        setValueAutocomplete={setValueAutocomplete}
-        
         />
        {Details? <MovieDetails
        openFlist={openFlist}

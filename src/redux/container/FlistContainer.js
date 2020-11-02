@@ -12,7 +12,7 @@ class FlistContainer extends Component {
     
     render() {
             const {actions,loadingReducer,FlistReducer}=this.props;
-            const {getUsername,setValueAutocomplete,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
+            const {getUsername,getTopRatedMovie,getMovieyoutube,getFlist,handleLogout,deleteFlist,
             showDetails,openDetailDrawer,closeDetailDrawer,openFlist,handleExpandFlist,setUpdateList,handleDeleteMovie}=actions;
             const{DrawerModalOpenState}=loadingReducer;
             let token= localStorage.getItem('user');
@@ -23,7 +23,6 @@ class FlistContainer extends Component {
             <Header>
             <MenuComponent 
                 getUsername={getUsername}
-                setValueAutocomplete={setValueAutocomplete}
                 getTopRatedMovie={getTopRatedMovie}
                 handleLogout={handleLogout}/>
             </Header>

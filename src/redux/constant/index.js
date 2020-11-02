@@ -26,6 +26,8 @@ export const getUpcomingMovieSuccess=`getUpcomingMovieSuccess`;
 //get topPopularMovie
 export const getTopPopularMovie=`getTopPopularMovie`;
 export const getTopPopularMovieSuccess=`getTopPopularMovieSuccess`;
+//clear results
+export const clearResults=`clearResults`;
 // get total page
 export const getPage=`getPage`;
 export const getTotalPage=`getTotalPage`;

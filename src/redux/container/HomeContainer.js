@@ -24,10 +24,10 @@ import { bindActionCreators } from 'redux';
         return (
             <div >
                <Header>
-                   <MenuComponent handleLogout={handleLogout}
+                   <MenuComponent 
+                   handleLogout={handleLogout}
                    getUsername={getUsername}
                    authState={authState}
-                   setValueAutocomplete={setValueAutocomplete}
                    getTopRatedMovie={getTopRatedMovie} />
                    
                    <AutoCompleteComponent
@@ -42,6 +42,7 @@ import { bindActionCreators } from 'redux';
                    
                </Header>
                 <ListMovie 
+                  results={results}
                   title={title}
                   getTopRatedMovie={getTopRatedMovie}
                   setCurrentTopRatePage={setCurrentTopRatePage}>

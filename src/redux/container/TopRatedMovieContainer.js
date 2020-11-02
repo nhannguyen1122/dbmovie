@@ -16,7 +16,7 @@ class TopRatedMovieContainer extends React.Component {
         const{totalpage,data,actions,current,authState}=this.props;
         const{getTopRatePage,setCurrentTopRatePage,OpenVideoTrailerModal,
         getUsername,getMovieyoutube,showDetails,getTopRatedMovie,handleLogout,
-        setValueAutocomplete,openFlist,getPage}=actions;
+        openFlist,getPage}=actions;
         return <>
             <Container>
             <MenuComponent 
@@ -24,7 +24,6 @@ class TopRatedMovieContainer extends React.Component {
             getUsername={getUsername}
             handleLogout={handleLogout}
             authState={authState}
-            setValueAutocomplete={setValueAutocomplete}
             />
         
             <ListTopRatedMovie
